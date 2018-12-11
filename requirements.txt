@@ -1,2 +1,2 @@
-discord.py==0.16.6
+discord.py==1.0.0a
 requests==2.18.4
