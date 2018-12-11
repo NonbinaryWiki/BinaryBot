@@ -1,2 +1,2 @@
-discord.py==1.0.0a
-requests==2.18.4
+git+https://github.com/Rapptz/discord.py@rewrite
+requests==2.20.0
