@@ -89,10 +89,10 @@ async def pinfo(ctx, *, arg):
 
 ### SOCIAL STUFF ###
 tumblr = pytumblr.TumblrRestClient(
-    os.environ['TUMBLR-CONS-KEY'],
-    os.environ['TUMBLR-CONS-SEC'],
-    os.environ['TUMBLR-OAUTH-TOK'],
-    os.environ['TUMBLR-OAUTH-SEC']
+    os.environ['TUMBLRCONSKEY'],
+    os.environ['TUMBLRCONSSEC'],
+    os.environ['TUMBLROAUTHTOK'],
+    os.environ['TUMBLROAUTHSEC']
 )
 
 @bot.command()
