@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import urllib, json, requests, os
-
+import pytumblr
 import logging
 
 logger = logging.getLogger('discord')
@@ -87,4 +87,20 @@ async def pinfo(ctx, *, arg):
         "Maybe the specified page doesn't exist. Check your spelling!")
         raise
 
+### SOCIAL STUFF ###
+tumblr = pytumblr.TumblrRestClient(
+    os.environ['TUMBLR-CONS-KEY'],
+    os.environ['TUMBLR-CONS-SEC'],
+    os.environ['TUMBLR-OAUTH-TOK'],
+    os.environ['TUMBLR-OAUTH-SEC']
+)
+
+@bot.command()
+async def submissions(ctx):
+    list = tumblr.submissions('nonbinarywiki')['posts']
+    await ctx.sent("{0} submissions awaiting approval/answer".format(len(list)))
+        
+    
+
+        
 bot.run(os.environ['TOKEN'])
