@@ -97,7 +97,9 @@ tumblr = pytumblr.TumblrRestClient(
 
 @bot.command()
 async def submissions(ctx):
-    list = tumblr.submission('nonbinarywiki')['posts']
+    list = tumblr.submission('nonbinarywiki')
+    print(list)
+    reallist(list['posts'])
     await ctx.sent("{0} submissions awaiting approval/answer".format(len(list)))
         
 bot.run(os.environ['TOKEN'])
