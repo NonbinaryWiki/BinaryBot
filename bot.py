@@ -120,7 +120,7 @@ async def flag(ctx, *, arg):
     }
     identity = arg
     extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&format=json".format(identity))
-    extract = next (iter (extract_link.json()['query']['pages'].values()['extract']))
+    extract = next (iter (extract_link.json()['query']['pages'].values()))
     if identity in images:
         prideflag = images[identity]
     else:
@@ -134,7 +134,7 @@ async def flag(ctx, *, arg):
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
         else:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
-        embed = discord.Embed(title='{0} flags'.format(identity.title()), description=extract, url=link)
+        embed = discord.Embed(title='{0} flags'.format(identity.title()), description=extract['extract'], url=link)
         embed.set_thumbnail(url=prideflag)
         embed.set_footer(text="Use !identity for more information about this identity (coming soon).")
 
