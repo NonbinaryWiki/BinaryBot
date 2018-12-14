@@ -132,7 +132,7 @@ async def flag(ctx, *, arg):
         else:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
         embed = discord.Embed(title='{0} flags'.format(identity), description="Identity definition here", url=link)
-        embed.set_image(url=prideflag)
+        embed.set_thumbnail(url=prideflag)
         embed.set_footer(text="Use !identity for more information about this identity (coming soon)")
 
         await ctx.send(embed=embed)
