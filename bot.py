@@ -94,6 +94,7 @@ async def link(ctx):
 
 @bot.command()
 async def flag(ctx, *, arg):
+    """ Returns a link to the Pride Gallery of the specified identity. """
     images = {
         'agender': 'https://static.miraheze.org/nonbinarywiki/thumb/8/83/Agender.png/300px-Agender.png',
         'androgyne': 'https://static.miraheze.org/nonbinarywiki/thumb/7/73/Androgyne.png/300px-Androgyne.png',
@@ -118,12 +119,14 @@ async def flag(ctx, *, arg):
         'trigender': 'https://static.miraheze.org/nonbinarywiki/thumb/4/40/Trigender.png/300px-Trigender.png'
     }
     identity = arg
+    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&format=json".format(identity))
+    extract = next (iter (extract_link.json()['query']['pages'].values()['extract']))
     if identity in images:
         prideflag = images[identity]
     else:
         prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
     if not identity:
-        await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery')
+        await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery - You can also specify an identity after the command.')
     else:
         if 'demi' in identity:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Demigender"
@@ -131,9 +134,9 @@ async def flag(ctx, *, arg):
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
         else:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
-        embed = discord.Embed(title='{0} flags'.format(identity), description="Identity definition here", url=link)
+        embed = discord.Embed(title='{0} flags'.format(identity.title()), description=extract, url=link)
         embed.set_thumbnail(url=prideflag)
-        embed.set_footer(text="Use !identity for more information about this identity (coming soon)")
+        embed.set_footer(text="Use !identity for more information about this identity (coming soon).")
 
         await ctx.send(embed=embed)
 
