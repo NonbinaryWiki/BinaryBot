@@ -38,7 +38,6 @@ async def commands(ctx):
 async def pinfo(ctx, *, arg):
     """ Gives some useful information about a wiki page: number of contributors, categories, protection level and useful links. """
     page = arg
-    print(page)
     try:
         # Use the MediaWiki API to get the information in json format:
         protection_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=info&inprop=protection&format=json".format(page))
@@ -86,6 +85,57 @@ async def pinfo(ctx, *, arg):
         await ctx.send(":bug: There was an error. " + \
         "Maybe the specified page doesn't exist. Check your spelling!")
         raise
+        
+### QUICK LINKS ###
+@bot.group(pass_context=True)
+async def link(ctx):
+    if ctx.invoked_subcommand is None:
+        await bot.say(':bug: Command not found!')
+
+@bot.command()
+async def flag(ctx, *, arg):
+    images = {
+        'agender': 'https://static.miraheze.org/nonbinarywiki/thumb/8/83/Agender.png/300px-Agender.png',
+        'androgyne': 'https://static.miraheze.org/nonbinarywiki/thumb/7/73/Androgyne.png/300px-Androgyne.png',
+        'bigender': 'https://static.miraheze.org/nonbinarywiki/thumb/f/f2/Bigender.png/300px-Bigender.png',
+        'demigender': 'https://static.miraheze.org/nonbinarywiki/thumb/e/ee/Deminonbinary.png/300px-Deminonbinary.png',
+        'demiboy': 'https://static.miraheze.org/nonbinarywiki/thumb/5/5c/Demiboy.png/300px-Demiboy.png',
+        'demigirl': 'https://static.miraheze.org/nonbinarywiki/thumb/8/80/Demigirl.png/300px-Demigirl.png',
+        'deminonbinary': 'https://static.miraheze.org/nonbinarywiki/thumb/e/ee/Deminonbinary.png/300px-Deminonbinary.png',
+        'demifluid': 'https://static.miraheze.org/nonbinarywiki/thumb/1/1f/Demifluid.png/300px-Demifluid.png',
+        'demiflux': 'https://static.miraheze.org/nonbinarywiki/thumb/f/f3/Demiflux.png/300px-Demiflux.png,
+        'genderfluid': 'https://static.miraheze.org/nonbinarywiki/thumb/1/12/Genderfluid.png/300px-Genderfluid.png,
+        'genderflux': 'https://static.miraheze.org/nonbinarywiki/thumb/a/ae/Genderflux.png/300px-Genderflux.png',
+        'fluidflux': 'https://static.miraheze.org/nonbinarywiki/thumb/5/51/Fluidflux.png/300px-Fluidflux.png',
+        'genderqueer': 'https://static.miraheze.org/nonbinarywiki/thumb/b/b5/Genderqueer.png/300px-Genderqueer.png',
+        'intergender': 'https://static.miraheze.org/nonbinarywiki/thumb/d/d3/Intergender.png/300px-Intergender.png',
+        'maverique': 'https://static.miraheze.org/nonbinarywiki/thumb/e/e2/Maverique.png/300px-Maverique.png',
+        'neutrois': 'https://static.miraheze.org/nonbinarywiki/thumb/c/c1/Neutrois.png/300px-Neutrois.png',
+        'nonbinary': 'https://static.miraheze.org/nonbinarywiki/thumb/c/c0/Nonbinary.png/300px-Nonbinary.png',
+        'non-binary': 'https://static.miraheze.org/nonbinarywiki/thumb/c/c0/Nonbinary.png/300px-Nonbinary.png',
+        'pangender': 'https://static.miraheze.org/nonbinarywiki/thumb/b/bd/Pangender.png/300px-Pangender.png',
+        'polygender': 'https://static.miraheze.org/nonbinarywiki/thumb/8/87/Polygender.png/300px-Polygender.png',
+        'trigender': 'https://static.miraheze.org/nonbinarywiki/thumb/4/40/Trigender.png/300px-Trigender.png'
+    }
+    identity = arg
+    if identity in images:
+        prideflag = images[identity]
+    else:
+        prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
+    if not identity:
+        await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery')
+    else:
+        if 'demi' in identity:
+            link = "https://nonbinary.wiki/wiki/Pride_Gallery/Demigender"
+        elif 'fluid' in identity or 'flux' in identity:
+            link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
+        else:
+            link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
+        embed = discord.Embed(title='{0} flags'.format(identity), description="Identity definition here",
+                              url=link, image=prideflag)
+        embed.set_footer(text="Use !identity for more information about this identity (coming soon)")
+
+        await ctx.send(embed=embed)
 
 ### SOCIAL STUFF ###
 tumblr = pytumblr.TumblrRestClient(
