@@ -1,1 +1,3 @@
 language: python
+versions:
+  - "3.6"
