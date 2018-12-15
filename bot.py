@@ -86,12 +86,6 @@ async def pinfo(ctx, *, arg):
         "Maybe the specified page doesn't exist. Check your spelling!")
         raise
         
-### QUICK LINKS ###
-@bot.group(pass_context=True)
-async def link(ctx):
-    if ctx.invoked_subcommand is None:
-        await bot.say(':bug: Command not found!')
-
 @bot.command()
 async def flag(ctx, *, arg):
     """ Returns a link to the Pride Gallery of the specified identity. """
@@ -120,26 +114,54 @@ async def flag(ctx, *, arg):
     }
     identity = arg
     extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&format=json".format(identity))
-    extract = next (iter (extract_link.json()['query']['pages'].values()))
+    extract = next(iter(extract_link.json()['query']['pages'].values()))
     if identity in images:
         prideflag = images[identity]
     else:
+        # This should be improved (automatic image)
         prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
     if not identity:
         await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery - You can also specify an identity after the command.')
     else:
+        # Special cases
         if 'demi' in identity:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Demigender"
         elif 'fluid' in identity or 'flux' in identity:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
         else:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
+            
+        # Set embed
         embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link)
         embed.set_thumbnail(url=prideflag)
         embed.set_footer(text="Use !identity for more information about this identity (coming soon).")
 
         await ctx.send(embed=embed)
 
+@bot.command()
+async def identity(ctx, *, arg):
+    """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
+    article = arg
+    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&format=json".format(article))
+    extract = next(iter(extract_link.json()['query']['pages'].values()))
+    
+    # Get flag name of the identity
+    image_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=images&titles={0}&format=json".format(article))
+    images_list = next(iter(image_link.json()['query']['pages'].values()))['images']
+    for file in images_list:
+        if article in file['title']:
+            flag_name = file['title']
+    # Get flag url
+    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format(flag_name))
+    flag = next(iter(flag_link.json()['query']['pages'].values()))['imageinfo'][0]['url']
+    
+    # Set embed
+    embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
+                          url="https://nonbinary.wiki/wiki/{0}".format(article))
+    embed.set_thumbnail(url=flag)
+    
+    await ctx.send(embed=embed)
+        
 ### SOCIAL STUFF ###
 tumblr = pytumblr.TumblrRestClient(
     os.environ['TUMBLRCONSKEY'],
