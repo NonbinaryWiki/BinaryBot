@@ -3,4 +3,4 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.log
-users.tx
+users.txt
