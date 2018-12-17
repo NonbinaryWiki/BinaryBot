@@ -163,6 +163,20 @@ async def identity(ctx, *, arg):
     embed.set_thumbnail(url=flag)
     
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def iam(ctx, *, arg):
+    username = arg
+    with open("users.txt", "w+") as f:
+        users = f.readlines()
+        for user in users:
+            udiscord = user.split(',')[0]
+            uwiki = user.split(',')[1]
+            if username in user:
+                await ctx.send(":bug: {0} is already set as {1}'s account!".format(uwiki, udiscord))
+                return
+        users.append("{0},{1}".format(ctx.message.author, username))
+        f.write("\n".join(users))
         
 ### SOCIAL STUFF ###
 tumblr = pytumblr.TumblrRestClient(
