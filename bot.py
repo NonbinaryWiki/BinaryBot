@@ -169,7 +169,7 @@ async def iam(ctx, *, arg):
     username = arg
     with open("users.txt", "w+") as f:
         content = f.read()
-        users = f.readlines()
+        users = content.split("\n")
         if username in content:
             for user in users:
                 udiscord = user.split(',')[0]
@@ -188,7 +188,7 @@ async def whois(ctx, *, arg):
     with open("users.txt", "r") as f:
         content = f.read()
         if username in content:
-            lines = f.readlines()
+            lines = content.split("\n")
             for user in lines:
                 if username in user:
                     udiscord = user.split(",")[0]
