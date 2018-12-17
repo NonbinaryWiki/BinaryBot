@@ -168,15 +168,34 @@ async def identity(ctx, *, arg):
 async def iam(ctx, *, arg):
     username = arg
     with open("users.txt", "w+") as f:
+        content = f.read()
         users = f.readlines()
-        for user in users:
-            udiscord = user.split(',')[0]
-            uwiki = user.split(',')[1]
-            if username in user:
-                await ctx.send(":bug: {0} is already set as {1}'s account!".format(uwiki, udiscord))
-                return
-        users.append("{0},{1}".format(ctx.message.author, username))
-        f.write("\n".join(users))
+        if username in content:
+            for user in users:
+                udiscord = user.split(',')[0]
+                uwiki = user.split(',')[1]
+                if username in user:
+                    await ctx.send(":bug: {0} is already set as {1}'s account!".format(uwiki, udiscord))
+                    return
+        else:
+            users.append("{0},{1}".format(ctx.message.author, username))
+            f.write("\n".join(users))
+    awat ctx.send("{0} has been set as {1}'s wiki account".format(username, ctx.message.author))
+    
+@bot.command()
+async def whois(ctx, *, arg):
+    username = arg
+    with open("users.txt", "r") as f:
+        content = f.read()
+        if username in content:
+            lines = f.readlines()
+            for user in lines:
+                if username in user:
+                    udiscord = user.split(",")[0]
+                    await ctx.send("{0}'s wiki user is {1}".format(ctx.message.author, username))
+        else:
+            await ctx.send("{0} does not have an associated Discord account.".format(username))
+        
         
 ### SOCIAL STUFF ###
 tumblr = pytumblr.TumblrRestClient(
