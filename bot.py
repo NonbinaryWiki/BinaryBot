@@ -180,7 +180,7 @@ async def iam(ctx, *, arg):
         else:
             users.append("{0},{1}".format(ctx.message.author, username))
             f.write("\n".join(users))
-    awat ctx.send("{0} has been set as {1}'s wiki account".format(username, ctx.message.author))
+    await ctx.send("{0} has been set as {1}'s wiki account".format(username, ctx.message.author))
     
 @bot.command()
 async def whois(ctx, *, arg):
