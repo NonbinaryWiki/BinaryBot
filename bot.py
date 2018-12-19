@@ -157,7 +157,7 @@ async def identity(ctx, *, arg):
     flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format(flag_name))
     flagdict = next(iter(flag_link.json()['query']['pages'].values()))
     if flagdict == "-1":
-        flag = 'File:Wikilogo new.png'
+        flag = 'File:Wikilogo_new.png'
     else:
         flag = flagdict['imageinfo'][0]['url']
     
