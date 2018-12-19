@@ -148,11 +148,11 @@ async def identity(ctx, *, arg):
     # Get flag name of the identity
     image_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=images&titles={0}&format=json".format(article))
     images_list = next(iter(image_link.json()['query']['pages'].values()))['images']
+    flag_name = 'File:Wikilogo new.png' # Will have to be replaced for actual flag eventually.
     for file in images_list:
         if article in file['title']:
             flag_name = file['title']
-    if flag_name == None:
-        flag_name = "File:Wikilogo new.png" # This will have to be replaced for the actual identity flag
+            break
     # Get flag url
     flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format(flag_name))
     flag = next(iter(flag_link.json()['query']['pages'].values()))['imageinfo'][0]['url']
