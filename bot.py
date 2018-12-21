@@ -167,7 +167,8 @@ async def identity(ctx, *, arg):
     embed.set_thumbnail(url=flag)
     
     await ctx.send(embed=embed)
-    
+
+## DOESN'T WORK. TODO
 @bot.command()
 async def iam(ctx, *, arg):
     username = arg
@@ -199,21 +200,5 @@ async def whois(ctx, *, arg):
                     await ctx.send("{0}'s wiki user is {1}".format(ctx.message.author, username))
         else:
             await ctx.send("{0} does not have an associated Discord account.".format(username))
-        
-        
-### SOCIAL STUFF ###
-tumblr = pytumblr.TumblrRestClient(
-    os.environ['TUMBLRCONSKEY'],
-    os.environ['TUMBLRCONSSEC'],
-    os.environ['TUMBLROAUTHTOK'],
-    os.environ['TUMBLROAUTHSEC']
-)
-
-@bot.command()
-async def submissions(ctx):
-    list = tumblr.submission('nonbinarywiki')
-    print(list)
-    print(list['posts'])
-    await ctx.sent("{0} submissions awaiting approval/answer".format(len(list)))
         
 bot.run(os.environ['TOKEN'])
