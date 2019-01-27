@@ -178,7 +178,7 @@ async def identity(ctx, *, arg):
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(popularity))
     embed.add_field(name="Pride Gallery", value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery))
-    
+    embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
 
 ## DOESN'T WORK. TODO
