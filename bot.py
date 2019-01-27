@@ -136,7 +136,7 @@ async def flag(ctx, *, arg):
         # Set embed
         embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link)
         embed.set_thumbnail(url=prideflag)
-        embed.set_footer(text="Use !identity for more information about this identity (coming soon).")
+        embed.set_footer(text="Use !identity for more information about this identity.")
 
         await ctx.send(embed=embed)
 
