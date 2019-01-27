@@ -170,7 +170,7 @@ async def identity(ctx, *, arg):
     print("TEMPLATES:")
     print(templates)
     for template in templates:
-        if template.name == "infobox identity":
+        if template.name == "infobox identity\n":
             popularity = template.get("percentage")
             gallery = template.get("gallery_link")
     print(popularity)
