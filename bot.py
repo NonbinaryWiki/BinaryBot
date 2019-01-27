@@ -169,8 +169,8 @@ async def identity(ctx, *, arg):
     templates = wikitext.filter_templates()
     for template in templates:
         if template.name == "infobox identity\n":
-            popularity = template.get("percentage").value
-            gallery = template.get("gallery_link").value
+            popularity = template.get("percentage").value.replace("\n", "")
+            gallery = template.get("gallery_link").value.replace("\n", "")
 
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
