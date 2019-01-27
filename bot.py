@@ -167,11 +167,14 @@ async def identity(ctx, *, arg):
     raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
     wikitext = mwparserfromhell.parse(raw_article.text)
     templates = wikitext.filter_templates()
+    print("TEMPLATES:")
+    print(templates)
     for template in templates:
         if template.name == "infobox identity":
             popularity = template.get("percentage")
             gallery = template.get("gallery_link")
-    
+    print(popularity)
+    print(gallery)
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
                           url="https://nonbinary.wiki/wiki/{0}".format(article))
