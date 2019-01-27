@@ -3,6 +3,7 @@ from discord.ext import commands
 import urllib, json, requests, os
 import pytumblr
 import logging
+import mwparserfromhell
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -162,10 +163,20 @@ async def identity(ctx, *, arg):
     else:
         flag = flagdict['imageinfo'][0]['url']
     
+    # Get infobox data
+    raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
+    templates = raw_article.filter_templates()
+    for template in templates:
+        if template.name == "infobox identity":
+            popularity = template.get("percentage")
+            gallery = template.get("gallery_link")
+    
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
                           url="https://nonbinary.wiki/wiki/{0}".format(article))
     embed.set_thumbnail(url=flag)
+    embed.add_field(name="Gender Census", value="{0}% of respondents".format(popularity))
+    embed.add_field(name="Pride Gallery", value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery))
     
     await ctx.send(embed=embed)
 
