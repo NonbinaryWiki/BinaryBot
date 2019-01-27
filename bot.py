@@ -165,7 +165,8 @@ async def identity(ctx, *, arg):
     
     # Get infobox data
     raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
-    templates = raw_article.filter_templates()
+    wikitext = mwparserfromhell.parse(raw_article)
+    templates = wikitext.filter_templates()
     for template in templates:
         if template.name == "infobox identity":
             popularity = template.get("percentage")
