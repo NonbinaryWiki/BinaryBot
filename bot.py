@@ -115,7 +115,7 @@ async def flag(ctx, *, arg):
         'trigender': 'https://static.miraheze.org/nonbinarywiki/thumb/4/40/Trigender.png/300px-Trigender.png'
     }
     identity = arg
-    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&format=json".format(identity))
+    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&redirects&format=json".format(identity))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
     if identity in images:
         prideflag = images[identity]
@@ -144,7 +144,7 @@ async def flag(ctx, *, arg):
 async def identity(ctx, *, arg):
     """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
     article = arg
-    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&format=json".format(article))
+    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(article))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
     
     # Get flag name of the identity
