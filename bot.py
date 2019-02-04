@@ -148,7 +148,7 @@ async def identity(ctx, *, arg):
     extract = next(iter(extract_link.json()['query']['pages'].values()))
     
     # Get flag name of the identity
-    image_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=images&titles={0}&format=json".format(article))
+    image_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=images&titles={0}&redirects&format=json".format(article))
     images_list = next(iter(image_link.json()['query']['pages'].values()))['images']
     flag_name = 'File:{0}.png'.format(article) # Will have to be replaced for actual flag eventually.
     #for file in images_list:
