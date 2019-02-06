@@ -156,8 +156,10 @@ async def identity(ctx, *, arg):
             popularity = template.get("percentage").value.replace("\n", "")
             gallery = template.get("gallery_link").value.replace("\n", "")
             flag = template.get("flag").value.replace("\n","")
-    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format("File:"+flag))
+    print("THE FLAG NAME IS {0}".format(flag))
+    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles=File:{0}&prop=imageinfo&iiprop=url&format=json".format(flag))
     flagdict = next(iter(flag_link.json()['query']['pages'].values()))
+    print(str(flagdict))
     if flagdict == "-1":
         flag = 'File:Wikilogo_new.png'
     else:
