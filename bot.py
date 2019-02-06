@@ -146,23 +146,7 @@ async def identity(ctx, *, arg):
     article = arg
     extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(article))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
-    
-    # Get flag name of the identity
-    image_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=images&titles={0}&redirects&format=json".format(article))
-    images_list = next(iter(image_link.json()['query']['pages'].values()))['images']
-    flag_name = 'File:{0}.png'.format(article) # Will have to be replaced for actual flag eventually.
-    #for file in images_list:
-    #    if article in file['title']:
-    #        flag_name = file['title']
-    #        break
-    # Get flag url
-    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format(flag_name))
-    flagdict = next(iter(flag_link.json()['query']['pages'].values()))
-    if flagdict == "-1":
-        flag = 'File:Wikilogo_new.png'
-    else:
-        flag = flagdict['imageinfo'][0]['url']
-    
+        
     # Get infobox data
     raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
     wikitext = mwparserfromhell.parse(raw_article.text)
@@ -171,6 +155,13 @@ async def identity(ctx, *, arg):
         if template.name == "infobox identity\n":
             popularity = template.get("percentage").value.replace("\n", "")
             gallery = template.get("gallery_link").value.replace("\n", "")
+            flag = template.get("flag").value.replace("\n","")
+    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=imageinfo&iiprop=url&format=json".format("File:"+flag))
+    flagdict = next(iter(flag_link.json()['query']['pages'].values()))
+    if flagdict == "-1":
+        flag = 'File:Wikilogo_new.png'
+    else:
+        flag = flagdict['imageinfo'][0]['url']
 
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
