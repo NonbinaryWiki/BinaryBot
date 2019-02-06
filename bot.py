@@ -152,6 +152,7 @@ async def identity(ctx, *, arg):
     wikitext = mwparserfromhell.parse(raw_article.text)
     templates = wikitext.filter_templates()
     for template in templates:
+        print(template)
         if template.name == "infobox identity\n":
             popularity = template.get("percentage").value.replace("\n", "")
             gallery = template.get("gallery_link").value.replace("\n", "")
