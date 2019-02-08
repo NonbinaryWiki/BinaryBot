@@ -146,7 +146,7 @@ async def identity(ctx, *, arg):
     article = arg
     extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(article))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
-        
+    article = extract['title'] # handle redirects 
     # Get infobox data
     raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
     wikitext = mwparserfromhell.parse(raw_article.text)
