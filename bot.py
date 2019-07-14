@@ -135,9 +135,10 @@ async def flag(ctx, *, arg):
     templates = wikitext.filter_templates()
     for template in templates:
         if template.name == "gallery page\n":
-            color = template.get(" colour ").value.strip()
+            hexcolor = template.get(" colour ").value.strip()
+            embedcolor = '0x' + hexcolor.split('#')[0]
     # Set embed
-    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=color)
+    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=embedcolor)
     embed.set_thumbnail(url=prideflag)
     embed.set_footer(text="Use !identity for more information about this identity.")
 
