@@ -136,9 +136,9 @@ async def flag(ctx, *, arg):
     for template in templates:
         if template.name == "gallery page\n":
             hexcolor = template.get(" colour ").value.strip()
-            embedcolor = hexcolor.replace('#', '0x')
+            embedcolor = int(hexcolor.replace('#', '0x'))
     # Set embed
-    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=discord.Color(int(embedcolor)))
+    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=embedcolor)
     embed.set_thumbnail(url=prideflag)
     embed.set_footer(text="Use !identity for more information about this identity.")
 
