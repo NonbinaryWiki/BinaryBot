@@ -132,7 +132,7 @@ async def flag(ctx, *, arg):
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
         else:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity.capitalize()
-    raw_article = requests.get(url=link)
+    raw_article = requests.get(url=link + "?action=raw")
     wikitext = mwparserfromhell.parse(raw_article.text)
     print(wikitext)
     templates = wikitext.filter_templates()
