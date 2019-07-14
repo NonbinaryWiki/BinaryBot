@@ -138,7 +138,7 @@ async def flag(ctx, *, arg):
     templates = wikitext.filter_templates()
     print(templates)
     for template in templates:
-        print("TEMPLATEEEEEEEEE IT'S THIS ONE " + template.name)
+        print("TEMPLATEEEEEEEEE IT'S THIS ONE " + str(template.name))
         if template.name == "gallery page\n":
             hexcolor = template.get(" colour ").value.strip()
             embedcolor = int(hexcolor.replace('#', '0x'))
