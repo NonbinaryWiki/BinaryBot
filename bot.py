@@ -118,7 +118,7 @@ async def flag(ctx, *, arg):
     extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&redirects&format=json".format(identity))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
     if identity in images:
-        prideflag = images[identity]
+        prideflag = images[identity.lowercase()]
     else:
         # TODO: This should be improved (automatic image)
         prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
