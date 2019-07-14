@@ -141,7 +141,7 @@ async def flag(ctx, *, arg):
         print("TEMPLATEEEEEEEEE IT'S THIS ONE " + str(template.name))
         if template.name == "gallery page\n":
             hexcolor = template.get(" colour ").value.strip()
-            embedcolor = int(hexcolor.replace('#', '0x'))
+            embedcolor = discord.Color(hexcolor.replace('#', '0x'))
             print(str(embedcolor))
     # Set embed
     embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=embedcolor)
