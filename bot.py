@@ -134,7 +134,9 @@ async def flag(ctx, *, arg):
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity.capitalize()
     raw_article = requests.get(url=link)
     wikitext = mwparserfromhell.parse(raw_article.text)
+    print(wikitext)
     templates = wikitext.filter_templates()
+    print(templates)
     for template in templates:
         print("TEMPLATEEEEEEEEE IT'S THIS ONE " + template.name)
         if template.name == "gallery page\n":
