@@ -120,7 +120,7 @@ async def flag(ctx, *, arg):
     if identity in images:
         prideflag = images[identity]
     else:
-        # This should be improved (automatic image)
+        # TODO: This should be improved (automatic image)
         prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
     if not identity:
         await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery - You can also specify an identity after the command.')
@@ -131,14 +131,17 @@ async def flag(ctx, *, arg):
         elif 'fluid' in identity or 'flux' in identity:
             link = "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
         else:
-            link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity
-            
-        # Set embed
-        embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link)
-        embed.set_thumbnail(url=prideflag)
-        embed.set_footer(text="Use !identity for more information about this identity.")
+            link = "https://nonbinary.wiki/wiki/Pride_Gallery/" + identity.capitalize()
+    templates = wikitext.filter_templates()
+    for template in templates:
+        if template.name == "gallery page\n":
+            color = template.get(" colour ").value.strip()
+    # Set embed
+    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=color)
+    embed.set_thumbnail(url=prideflag)
+    embed.set_footer(text="Use !identity for more information about this identity.")
 
-        await ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def identity(ctx, *, arg):
@@ -174,38 +177,5 @@ async def identity(ctx, *, arg):
     embed.add_field(name="Pride Gallery", value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ","_")))
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
-
-## DOESN'T WORK. TODO
-@bot.command()
-async def iam(ctx, *, arg):
-    username = arg
-    with open("users.txt", "w+") as f:
-        content = f.read()
-        users = content.split("\n")
-        if username in content:
-            for user in users:
-                udiscord = user.split(',')[0]
-                uwiki = user.split(',')[1]
-                if username in user:
-                    await ctx.send(":bug: {0} is already set as {1}'s account!".format(uwiki, udiscord))
-                    return
-        else:
-            users.append("{0},{1}".format(ctx.message.author, username))
-            f.write("\n".join(users))
-    await ctx.send("{0} has been set as {1}'s wiki account".format(username, ctx.message.author))
-    
-@bot.command()
-async def whois(ctx, *, arg):
-    username = arg
-    with open("users.txt", "r") as f:
-        content = f.read()
-        if username in content:
-            lines = content.split("\n")
-            for user in lines:
-                if username in user:
-                    udiscord = user.split(",")[0]
-                    await ctx.send("{0}'s wiki user is {1}".format(ctx.message.author, username))
-        else:
-            await ctx.send("{0} does not have an associated Discord account.".format(username))
         
 bot.run(os.environ['TOKEN'])
