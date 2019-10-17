@@ -4,6 +4,10 @@ import urllib, json, requests, os
 import pytumblr
 import logging
 import mwparserfromhell
+import csv
+
+pronouns = read_csv("Pronoun Doc.csv")
+lenpronouns = len(pronouns)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -184,5 +188,86 @@ async def identity(ctx, *, arg):
     embed.add_field(name="Pride Gallery", value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ","_")))
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
+    mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
+    await ctx.send(mystory)
+
+@bot.command()
+def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
+    mystory1 = "placeholder"
+    mystory2 = "placeholder"
+    mystory3 = "placeholder"
+    mystory4 = "placeholder"
+
+    if str.lower(conj) == "singular":
+        mystory1 = "This is " + name +". " + subj.capitalize() + " is a " + gender + " " + species + ". "
+        mystory2 = "When " + subj + " went on a walk today, " + pdet + " pet started chasing a squirrel. "
+        mystory3 = "That pet of " + ppron + " is always getting " + obj + " into trouble! "
+        mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " is in. "
+    if str.lower(conj) == "plural":
+        mystory1 = "This is " + name + ". " + subj.capitalize() + " are a " + gender + " " + species + ". "
+        mystory2 = "When " + subj + " went on a walk today, " + pdet + " pet started chasing a squirrel. "
+        mystory3 = "That pet of " + ppron + " is always getting " + obj + " into trouble! "
+        mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " are in. "
+    return mystory1 + mystory2 + mystory3 + mystory4
+
+async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
+    mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
+    await ctx.send(mystory)
+
+@bot.command()
+async def pronoun(ctx, args):
+    conj = "x"
+    subj = "x"
+    obj = "x"
+    pdet = "x"
+    ppron = "x"
+    ref = "x"
+    j = 0
+    print(pronouns[1][0]+" "+args)
+    while pronouns[j][0] != str.lower(args):
+        j = j+1
+        if j >= lenpronouns:
+            await ctx.send("This pronoun isn't in my database! Please ping @sirtetris#8537 to add it!")
+            break
+
+    conj = pronouns[j][1]
+    subj = pronouns[j][2]
+    obj = pronouns[j][3]
+    pdet = pronouns[j][4]
+    ppron = pronouns[j][5]
+    ref = pronouns[j][6]
+    embed = discord.Embed(title="Facts about " + args, description = "This is how to use the pronoun "+ args)
+    embed.add_field(name="Conjugation", value = conj, inline = True)
+    embed.add_field(name="Subjective", value= subj, inline=True)
+    embed.add_field(name="Objective", value= obj, inline=True)
+    embed.add_field(name="Possessive Determiner", value = pdet, inline = True)
+    embed.add_field(name="Possessive Pronoun", value = ppron, inline = True)
+    embed.add_field(name="Reflexive", value= ref, inline=True)
+    embed.set_footer(text="Remember! If you are not sure, just ask!")
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def helpbot(ctx, mycommand):
+    if str.lower(mycommand) == "pronoun":
+        await ctx.send("Type !pronoun, followed by a pronoun in the format \"he/him\" or \"they/them\"!")
+    if str.lower(mycommand) == "experiment":
+        str1 = "Type !pronoun, followed by the following arguments (if you're entering more than one word, please enter them in quotes \"like this.\""
+        str2 = "\nName: Your name. If you want to enter a space, please enter your text \"like this.\""
+        str3 = "\nType/Species: Whether you're a girl, boy, or otherkin, input what you identify as. Again, enter multiple words \"like this.\""
+        str4 = "\nGender: Input your gender identity. Same rule with multiple words as above:"
+        str5 = "\nSingular or Plural: Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\")"
+        str6 = "\nThe Subjective Case: Example: \"He is a good friend.\" or \"They are a good friend.\""
+        str7 = "\nThe Objective Case: Example: \"Please take this to him\" or \"Please take this to them.\""
+        str8 = "\nThe Possessive Determiner: Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\""
+        str9 = "\nThe Possessive Pronoun: Example: \"That book is his.\" or \"That book is theirs.\""
+        str10 = "\nThe Reflexive Case: Example: \"He is taking care of himself.\" or \"They are taking care of themself.\""
+        str11 = "\nFor example, this bot's creator's pronouns are file/files. You would type:"
+        str12 = "\n!experiment \"Fractal Hassan\" database \"digigender and demiboy\" singular file file files files fileself"
+        await ctx.send(str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12)
+    if str.lower(mycommand) == "help":
+        await ctx.send("Available commands: !experiment, !pronoun. Type !helpbot + a command (without the command's exclamation point) to learn how to use it.")
         
 bot.run(os.environ['TOKEN'])
