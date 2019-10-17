@@ -253,7 +253,7 @@ async def helpbot(ctx, mycommand):
     if str.lower(mycommand) == "pronoun":
         await ctx.send("Type !pronoun, followed by a pronoun in the format \"he/him\" or \"they/them\"!")
     if str.lower(mycommand) == "experiment":
-        str1 = "Type !pronoun, followed by the following arguments (if you're entering more than one word, please enter them in quotes \"like this.\""
+        str1 = "Type !experiment, followed by the following arguments (if you're entering more than one word, please enter them in quotes \"like this.\""
         str2 = "\nName: Your name. If you want to enter a space, please enter your text \"like this.\""
         str3 = "\nType/Species: Whether you're a girl, boy, or otherkin, input what you identify as. Again, enter multiple words \"like this.\""
         str4 = "\nGender: Input your gender identity. Same rule with multiple words as above:"
