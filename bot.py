@@ -6,9 +6,6 @@ import logging
 import mwparserfromhell
 import csv
 
-pronouns = read_csv("Pronoun Doc.csv")
-lenpronouns = len(pronouns)
-
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
@@ -224,6 +221,8 @@ async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, r
 
 @bot.command()
 async def pronoun(ctx, args):
+    pronouns = read_csv("Pronoun Doc.csv")
+    lenpronouns = len(pronouns)
     conj = "x"
     subj = "x"
     obj = "x"
