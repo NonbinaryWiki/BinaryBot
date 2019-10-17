@@ -19,6 +19,11 @@ logger.addHandler(handler)
 
 bot = commands.Bot(command_prefix='!')
 
+def read_csv(csvfile):
+    with open(csvfile) as csv_file:
+        mylist = list(csv.reader(csv_file))
+    return mylist
+
 @bot.event
 async def on_ready():
     print('Logged in as')
