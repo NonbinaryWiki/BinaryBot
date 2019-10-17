@@ -191,11 +191,6 @@ async def identity(ctx, *, arg):
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
     
-@bot.command()
-async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
-    mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
-    await ctx.send(mystory)
-
 def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory1 = "placeholder"
     mystory2 = "placeholder"
