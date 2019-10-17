@@ -263,8 +263,8 @@ async def helpbot(ctx, mycommand):
         str8 = "\nThe Possessive Determiner: Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\""
         str9 = "\nThe Possessive Pronoun: Example: \"That book is his.\" or \"That book is theirs.\""
         str10 = "\nThe Reflexive Case: Example: \"He is taking care of himself.\" or \"They are taking care of themself.\""
-        str11 = "\nFor example, this bot's creator's pronouns are file/files. You would type:"
-        str12 = "\n!experiment \"Fractal Hassan\" database \"digigender and demiboy\" singular file file files files fileself"
+        str11 = "\nFor example, for someone whose pronouns are they/them, you would type:"
+        str12 = "\n!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself"
         await ctx.send(str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12)
     if str.lower(mycommand) == "help":
         await ctx.send("Available commands: !experiment, !pronoun. Type !helpbot + a command (without the command's exclamation point) to learn how to use it.")
