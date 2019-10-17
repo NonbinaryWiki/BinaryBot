@@ -196,7 +196,6 @@ async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, r
     mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
     await ctx.send(mystory)
 
-@bot.command()
 def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory1 = "placeholder"
     mystory2 = "placeholder"
@@ -215,6 +214,7 @@ def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
         mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " are in. "
     return mystory1 + mystory2 + mystory3 + mystory4
 
+@bot.command()
 async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
     await ctx.send(mystory)
