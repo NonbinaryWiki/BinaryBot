@@ -244,10 +244,10 @@ async def pronoun(ctx, args):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def help(ctx, mycommand):
-    if str.lower(mycommand) == "pronoun":
+async def help(ctx, command="list"):
+    if str.lower(command) == "pronoun":
         await ctx.send("Type !pronoun, followed by a pronoun in the format \"he/him\" or \"they/them\"!")
-    if str.lower(mycommand) == "experiment":
+    if str.lower(command) == "experiment":
         str1 = "Type !experiment, followed by the following arguments (if you're entering more than one word, please enter them in quotes \"like this.\""
         str2 = "\nName: Your name. If you want to enter a space, please enter your text \"like this.\""
         str3 = "\nType/Species: Whether you're a girl, boy, or otherkin, input what you identify as. Again, enter multiple words \"like this.\""
