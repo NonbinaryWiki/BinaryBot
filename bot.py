@@ -15,6 +15,7 @@ logger.addHandler(handler)
 ### Commands:
 
 bot = commands.Bot(command_prefix='!')
+bot.remove_command('help')
 
 def read_csv(csvfile):
     with open(csvfile) as csv_file:
@@ -270,5 +271,6 @@ async def help(ctx, mycommand):
         embed.add_field(name="!ping", value ="Use this command to check if the bot is listening and can talk in the curent channel.")
         embed.add_field(name="!pronoun <pronoun set>", value ="Gives some useful information about the specified pronoun set.")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
+        await ctx.send(embed=embed)
         
 bot.run(os.environ['TOKEN'])
