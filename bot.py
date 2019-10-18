@@ -33,12 +33,6 @@ async def ping(ctx):
     """ Pongs (and confirms that the bot is listening). """
     await ctx.send("Pong! :ping_pong:")
 
-@bot.command()
-async def commands(ctx):
-    embed = discord.Embed(title="Help", color=discord.Colour.yellow())
-
-    await ctx.send(embed=embed)
-
 ### WIKI-RELATED COMMANDS ###
 
 @bot.command()
@@ -249,7 +243,7 @@ async def pronoun(ctx, args):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def helpbot(ctx, mycommand):
+async def help(ctx, mycommand):
     if str.lower(mycommand) == "pronoun":
         await ctx.send("Type !pronoun, followed by a pronoun in the format \"he/him\" or \"they/them\"!")
     if str.lower(mycommand) == "experiment":
@@ -266,7 +260,15 @@ async def helpbot(ctx, mycommand):
         str11 = "\nFor example, for someone whose pronouns are they/them, you would type:"
         str12 = "\n!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself"
         await ctx.send(str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12)
-    if str.lower(mycommand) == "help":
-        await ctx.send("Available commands: !experiment, !pronoun. Type !helpbot + a command (without the command's exclamation point) to learn how to use it.")
+    else:
+        embed = discord.Embed(title=':grey_question: Help', color=discord.Colour.purple())
+        embed.add_field(name="!experiment <name> <gender> <kin> <pronoun conjugation> <pronouns (in all forms)>", value ="Tests the given data in a predefined sentence (this command is WIP).")
+        embed.add_field(name="!flag <identity>", value ="Returns the most common pride flag for the identity and a short description.")
+        embed.add_field(name="!help [command]", value ="This message!")
+        embed.add_field(name="!identity <identity>", value ="Gets some information about the specified identity from the Nonbinary Wiki.")
+        embed.add_field(name="!pinfo <page>", value ="Returns useful technical information about the specified wiki page.")
+        embed.add_field(name="!ping", value ="Use this command to check if the bot is listening and can talk in the curent channel.")
+        embed.add_field(name="!pronoun <pronoun set>", value ="Gives some useful information about the specified pronoun set.")
+        embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         
 bot.run(os.environ['TOKEN'])
