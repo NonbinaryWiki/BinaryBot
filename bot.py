@@ -255,15 +255,15 @@ async def help(ctx, command="list"):
         embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
                               description= "!experiment, followed by the following arguments (if you're entering \
                               more than one word, please enter them in quotes \"like this.\"")
-        embed.add_field(name="Name", value="Your name.")
-        embed.add_field(name="Type/Species", value="Whether you're a girl, boy, or otherkin, input what you identify as.")
-        embed.add_field(name="Gender", value="Input your gender identity.")
-        embed.add_field(name="Number", value="Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\").")
-        embed.add_field(name="Subject pronoun", value="Example: \"He is a good friend.\" or \"They are a good friend.\"")
-        embed.add_field(name="Objective pronoun", value="Example: \"Please take this to him\" or \"Please take this to them.\"")
-        embed.add_field(name="Possessive determiner", value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"")
-        embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"")
-        embed.add_field(name="Reflexive pronoun", value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"")
+        embed.add_field(name="Name", value="Your name.", inline=True)
+        embed.add_field(name="Type/Species", value="Whether you're a girl, boy, or otherkin, input what you identify as.", inline=True)
+        embed.add_field(name="Gender", value="Input your gender identity.", inline=True)
+        embed.add_field(name="Number", value="Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\").", inline=True)
+        embed.add_field(name="Subject pronoun", value="Example: \"He is a good friend.\" or \"They are a good friend.\"", inline=True)
+        embed.add_field(name="Objective pronoun", value="Example: \"Please take this to him\" or \"Please take this to them.\"", inline=True)
+        embed.add_field(name="Possessive determiner", value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"", inline=True)
+        embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"", inline=True)
+        embed.add_field(name="Reflexive pronoun", value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"", inline=True)
         embed.add_field(name="Example", value="!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
         embed.set_footer(text="Please note that this command is still work in progress!")
         await ctx.send(embed=embed)
@@ -289,7 +289,7 @@ async def help(ctx, command="list"):
         await ctx.send(embed=embed)
     elif str.lower(command) == "ping":
         embed = discord.Embed(title=':grey_question: !ping', color=discord.Colour.purple(),
-                             description= "Ping?.")
+                             description= "Ping?")
         embed.add_field(name="Example", value="!ping")
         embed.set_footer(text="(pong.)")
         await ctx.send(embed=embed)
