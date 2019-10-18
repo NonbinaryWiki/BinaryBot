@@ -205,7 +205,7 @@ def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
     return mystory1 + mystory2 + mystory3 + mystory4
 
 @bot.command()
-async def experiment(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
+async def pronountest(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
     await ctx.send(mystory)
 
@@ -251,9 +251,9 @@ async def help(ctx, command="list"):
                         Please, give the bot the first two pronouns of the set only")
         embed.add_field(name="Example", value="!pronoun they/them")
         await ctx.send(embed=embed)
-    elif str.lower(command) == "experiment":
-        embed = discord.Embed(title=':grey_question: !experiment <name> <gender> <kin> <singular/plural> <subjective> <objective> <possessive determiner> <possessive> <reflexive>', color=discord.Colour.purple(),
-                              description= "!experiment, followed by the following arguments (if you're entering \
+    elif str.lower(command) == "pronountest":
+        embed = discord.Embed(title=':grey_question: !pronountest <name> <gender> <kin> <singular/plural> <subjective> <objective> <possessive determiner> <possessive> <reflexive>', color=discord.Colour.purple(),
+                              description= "!pronountest, followed by the following arguments (if you're entering \
                               more than one word, please enter them in quotes \"like this.\"")
         embed.add_field(name="Name", value="Your name.", inline=True)
         embed.add_field(name="Type/Species", value="Whether you're a girl, boy, or otherkin, input what you identify as.", inline=True)
@@ -264,7 +264,7 @@ async def help(ctx, command="list"):
         embed.add_field(name="Possessive determiner", value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"", inline=True)
         embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"", inline=True)
         embed.add_field(name="Reflexive pronoun", value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"", inline=True)
-        embed.add_field(name="Example", value="!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
+        embed.add_field(name="Example", value="!pronountest \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
         embed.set_footer(text="Please note that this command is still work in progress!")
         await ctx.send(embed=embed)
     elif str.lower(command) == "pinfo":
@@ -301,13 +301,13 @@ async def help(ctx, command="list"):
         await ctx.send(embed=embed)
     else:
         embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
-        embed.add_field(name="!experiment <name> <gender> <kin> <singular/plural> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
         embed.add_field(name="!flag <identity>", value ="Returns the most common pride flag for the identity and a short description.")
         embed.add_field(name="!help [command]", value ="This message!")
         embed.add_field(name="!identity <identity>", value ="Gets some information about the specified identity from the Nonbinary Wiki.")
         embed.add_field(name="!pinfo <page>", value ="Returns useful technical information about the specified wiki page.")
         embed.add_field(name="!ping", value ="Use this command to check if the bot is listening and can talk in the curent channel.")
         embed.add_field(name="!pronoun <pronoun set>", value ="Gives some useful information about the specified pronoun set.")
+        embed.add_field(name="!pronountest <name> <gender> <kin> <singular/plural> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
         
