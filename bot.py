@@ -246,24 +246,62 @@ async def pronoun(ctx, args):
 @bot.command()
 async def help(ctx, command="list"):
     if str.lower(command) == "pronoun":
-        await ctx.send("Type !pronoun, followed by a pronoun in the format \"he/him\" or \"they/them\"!")
-    if str.lower(command) == "experiment":
-        str1 = "Type !experiment, followed by the following arguments (if you're entering more than one word, please enter them in quotes \"like this.\""
-        str2 = "\nName: Your name. If you want to enter a space, please enter your text \"like this.\""
-        str3 = "\nType/Species: Whether you're a girl, boy, or otherkin, input what you identify as. Again, enter multiple words \"like this.\""
-        str4 = "\nGender: Input your gender identity. Same rule with multiple words as above:"
-        str5 = "\nSingular or Plural: Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\")"
-        str6 = "\nThe Subjective Case: Example: \"He is a good friend.\" or \"They are a good friend.\""
-        str7 = "\nThe Objective Case: Example: \"Please take this to him\" or \"Please take this to them.\""
-        str8 = "\nThe Possessive Determiner: Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\""
-        str9 = "\nThe Possessive Pronoun: Example: \"That book is his.\" or \"That book is theirs.\""
-        str10 = "\nThe Reflexive Case: Example: \"He is taking care of himself.\" or \"They are taking care of themself.\""
-        str11 = "\nFor example, for someone whose pronouns are they/them, you would type:"
-        str12 = "\n!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself"
-        await ctx.send(str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12)
+        embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
+                             description= "Type !pronoun followed by a pronoun set to get some information about the given pronouns. \
+                        Please, give the bot the first two pronouns of the set only")
+        embed.add_field(name="Example", value="!pronoun they/them")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "experiment":
+        embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
+                              description= "!experiment, followed by the following arguments (if you're entering \
+                              more than one word, please enter them in quotes \"like this.\"")
+        embed.add_field(name="Name", value="Your name.")
+        embed.add_field(name="Type/Species", value="Whether you're a girl, boy, or otherkin, input what you identify as.")
+        embed.add_field(name="Gender", value="Input your gender identity.")
+        embed.add_field(name="Number", value="Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\").")
+        embed.add_field(name="Subject pronoun", value="Example: \"He is a good friend.\" or \"They are a good friend.\"")
+        embed.add_field(name="Objective pronoun", value="Example: \"Please take this to him\" or \"Please take this to them.\"")
+        embed.add_field(name="Possessive determiner", value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"")
+        embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"")
+        embed.add_field(name="Reflexive pronoun", value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"")
+        embed.add_field(name="Example", value="!experiment \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
+        embed.set_footer(text="Please note that this command is still work in progress!")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "pinfo":
+        embed = discord.Embed(title=':grey_question: !pinfo <page>', color=discord.Colour.purple(),
+                             description= "Type !pinfo followed by the name of an existing Nonbinary Wiki page to get some useful \
+                             technical information about the page, such as the amount of contributors, protection status and categorization.")
+        embed.add_field(name="Example", value="!pinfo nonbinary")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "flag":
+        embed = discord.Embed(title=':grey_question: !flag <identity>', color=discord.Colour.purple(),
+                             description= "Type !flag followed by a nonbinary identity to get its most common pride flag and a short \
+                             description of the identity. You will also get a link to the pride gallery for that identity, so that you \
+                             can see alternative flags for your identity.")
+        embed.add_field(name="Example", value="!flag nonbinary")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "identity":
+        embed = discord.Embed(title=':grey_question: !identity <identity>', color=discord.Colour.purple(),
+                             description= "Type !identity followed by a nonbinary identity to get a short description of the identity \
+                             as well as some useful data, such as its popularity in the Gender Census. You will also get a link to the \
+                             wiki page about this identity.")
+        embed.add_field(name="Example", value="!identity nonbinary")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "ping":
+        embed = discord.Embed(title=':grey_question: !ping', color=discord.Colour.purple(),
+                             description= "Ping?.")
+        embed.add_field(name="Example", value="!ping")
+        embed.set_footer(text="(pong.)")
+        await ctx.send(embed=embed)
+    elif str.lower(command) == "help":
+        embed = discord.Embed(title=':grey_question: !help [command]', color=discord.Colour.purple(),
+                             description= "Sends a list of all available commands from the bot. You can specify a command as a parameter \
+                             to get more information on it, as well as an example.")
+        embed.add_field(name="Example", value="!help ping")
+        await ctx.send(embed=embed)
     else:
-        embed = discord.Embed(title=':grey_question: Help', color=discord.Colour.purple())
-        embed.add_field(name="!experiment <name> <gender> <kin> <pronoun conjugation> <pronouns (in all forms)>", value ="Tests the given data in a predefined sentence (this command is WIP).")
+        embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
+        embed.add_field(name="!experiment <name> <gender> <kin> <pronoun conjugation> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
         embed.add_field(name="!flag <identity>", value ="Returns the most common pride flag for the identity and a short description.")
         embed.add_field(name="!help [command]", value ="This message!")
         embed.add_field(name="!identity <identity>", value ="Gets some information about the specified identity from the Nonbinary Wiki.")
