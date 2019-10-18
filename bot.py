@@ -252,7 +252,7 @@ async def help(ctx, command="list"):
         embed.add_field(name="Example", value="!pronoun they/them")
         await ctx.send(embed=embed)
     elif str.lower(command) == "experiment":
-        embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
+        embed = discord.Embed(title=':grey_question: !experiment <name> <gender> <kin> <singular/plural> <subjective> <objective> <possessive determiner> <possessive> <reflexive>', color=discord.Colour.purple(),
                               description= "!experiment, followed by the following arguments (if you're entering \
                               more than one word, please enter them in quotes \"like this.\"")
         embed.add_field(name="Name", value="Your name.", inline=True)
@@ -301,7 +301,7 @@ async def help(ctx, command="list"):
         await ctx.send(embed=embed)
     else:
         embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
-        embed.add_field(name="!experiment <name> <gender> <kin> <pronoun conjugation> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
+        embed.add_field(name="!experiment <name> <gender> <kin> <singular/plural> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
         embed.add_field(name="!flag <identity>", value ="Returns the most common pride flag for the identity and a short description.")
         embed.add_field(name="!help [command]", value ="This message!")
         embed.add_field(name="!identity <identity>", value ="Gets some information about the specified identity from the Nonbinary Wiki.")
