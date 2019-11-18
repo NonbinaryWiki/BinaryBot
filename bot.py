@@ -17,10 +17,12 @@ logger.addHandler(handler)
 bot = commands.Bot(command_prefix='!')
 bot.remove_command('help')
 
+
 def read_csv(csvfile):
     with open(csvfile) as csv_file:
         mylist = list(csv.reader(csv_file))
     return mylist
+
 
 @bot.event
 async def on_ready():
@@ -29,10 +31,12 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
+
 @bot.command()
 async def ping(ctx):
     """ Pongs (and confirms that the bot is listening). """
     await ctx.send("Pong! :ping_pong:")
+
 
 ### WIKI-RELATED COMMANDS ###
 
@@ -42,52 +46,59 @@ async def pinfo(ctx, *, arg):
     page = arg
     try:
         # Use the MediaWiki API to get the information in json format:
-        protection_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=info&inprop=protection&format=json".format(page))
-        protection_info = next (iter (protection_link.json()['query']['pages'].values()))
+        protection_link = requests.get(
+            url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=info&inprop=protection&format=json".format(
+                page))
+        protection_info = next(iter(protection_link.json()['query']['pages'].values()))
 
-        contribs_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=contributors&format=json".format(page))
-        contribs_info = next (iter (contribs_link.json()['query']['pages'].values()))
+        contribs_link = requests.get(
+            url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=contributors&format=json".format(page))
+        contribs_info = next(iter(contribs_link.json()['query']['pages'].values()))
         if not 'anoncontributors' in contribs_info:
             anon_contribs = 0
         else:
             anon_contribs = contribs_info['anoncontributors']
         user_contribs = len(contribs_info['contributors'])
 
-        cats_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=categories&format=json".format(page))
-        cats_info = next (iter (cats_link.json()['query']['pages'].values()))
+        cats_link = requests.get(
+            url="https://nonbinary.wiki/w/api.php?action=query&titles={0}&prop=categories&format=json".format(page))
+        cats_info = next(iter(cats_link.json()['query']['pages'].values()))
         if 'categories' in cats_info:
             raw_cats = cats_info['categories']
             cats = []
             for cat in raw_cats:
-                cats.append(cat['title']) # Make a list of categories
-        else: # For pages without categories
+                cats.append(cat['title'])  # Make a list of categories
+        else:  # For pages without categories
             cats = ["Uncategorized page"]
 
         # Get protection information:
         if protection_info['protection'] == []:
-            protected = False # If page is not protected, the value is an empty list
+            protected = False  # If page is not protected, the value is an empty list
             protect_value = ":unlock: Not protected"
         else:
             edit_protected = protection_info['protection'][0]['level'] + \
-            ' (' + protection_info['protection'][0]['expiry'] + ')'
+                             ' (' + protection_info['protection'][0]['expiry'] + ')'
             move_protected = protection_info['protection'][1]['level'] + \
-            ' (' + protection_info['protection'][1]['expiry'] + ')'
+                             ' (' + protection_info['protection'][1]['expiry'] + ')'
             protect_value = ":lock: Edit: {0}; Move: {1}".format(edit_protected, move_protected)
 
         # Let's create the embed with the information:
         embed = discord.Embed(title=':page_facing_up: {0}'.format(page),
-        description=":link: [Article](https://nonbinary.wiki/wiki/{0}) - [Talk page](https://nonbinary.wiki/wiki/Talk:{0}) - [History](https://nonbinary.wiki/w/index.php?title={0}&action=history)".format(page.replace(' ', '_')),
-        color=discord.Colour.purple())
-        embed.add_field(name=":busts_in_silhouette: Contributors", value="Anonymous: {0}; Registered: {1}.".format(anon_contribs, user_contribs))
+                              description=":link: [Article](https://nonbinary.wiki/wiki/{0}) - [Talk page](https://nonbinary.wiki/wiki/Talk:{0}) - [History](https://nonbinary.wiki/w/index.php?title={0}&action=history)".format(
+                                  page.replace(' ', '_')),
+                              color=discord.Colour.purple())
+        embed.add_field(name=":busts_in_silhouette: Contributors",
+                        value="Anonymous: {0}; Registered: {1}.".format(anon_contribs, user_contribs))
         embed.add_field(name=":key: Protection", value=protect_value)
         embed.add_field(name=":chains: Categories", value="{0}".format(', '.join(cats)), inline=False)
 
         await ctx.send(embed=embed)
-    except: # In case there's an unwanted error, send this message:
+    except:  # In case there's an unwanted error, send this message:
         await ctx.send(":bug: There was an error. " + \
-        "Maybe the specified page doesn't exist. Check your spelling!")
+                       "Maybe the specified page doesn't exist. Check your spelling!")
         raise
-        
+
+
 @bot.command()
 async def flag(ctx, *, arg):
     """ Returns a link to the Pride Gallery of the specified identity. """
@@ -116,7 +127,9 @@ async def flag(ctx, *, arg):
         'trigender': 'https://static.miraheze.org/nonbinarywiki/thumb/4/40/Trigender.png/300px-Trigender.png'
     }
     identity = arg
-    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&redirects&format=json".format(identity))
+    extract_link = requests.get(
+        url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=1&titles={0}&redirects&format=json".format(
+            identity))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
     if identity in images:
         prideflag = images[identity.lower()]
@@ -124,7 +137,8 @@ async def flag(ctx, *, arg):
         # TODO: This should be improved (automatic image)
         prideflag = 'https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png'
     if not identity:
-        await bot.say('Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery - You can also specify an identity after the command.')
+        await bot.say(
+            'Take a look at our Pride Gallery! https://nonbinary.wiki/wiki/Pride_Gallery - You can also specify an identity after the command.')
     else:
         # Special cases
         if 'demi' in identity:
@@ -145,19 +159,23 @@ async def flag(ctx, *, arg):
             embedcolor = discord.Color(int(hexcolor.replace('#', '0x'), 0))
             print(str(embedcolor))
     # Set embed
-    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'], url=link, color=embedcolor)
+    embed = discord.Embed(title=':link: {0} Pride Gallery'.format(identity.title()), description=extract['extract'],
+                          url=link, color=embedcolor)
     embed.set_thumbnail(url=prideflag)
     embed.set_footer(text="Use !identity for more information about this identity.")
 
     await ctx.send(embed=embed)
 
+
 @bot.command()
 async def identity(ctx, *, arg):
     """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
     article = arg
-    extract_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(article))
+    extract_link = requests.get(
+        url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(
+            article))
     extract = next(iter(extract_link.json()['query']['pages'].values()))
-    article = extract['title'] # handle redirects 
+    article = extract['title']  # handle redirects
     # Get infobox data
     raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
     wikitext = mwparserfromhell.parse(raw_article.text)
@@ -169,7 +187,9 @@ async def identity(ctx, *, arg):
             gallery = template.get(" gallery_link ").value.strip()
             flag = template.get(" flag ").value.strip()
     print("THE FLAG NAME IS {0}".format(flag))
-    flag_link = requests.get(url="https://nonbinary.wiki/w/api.php?action=query&titles=File:{0}&prop=imageinfo&iiprop=url&format=json".format(flag))
+    flag_link = requests.get(
+        url="https://nonbinary.wiki/w/api.php?action=query&titles=File:{0}&prop=imageinfo&iiprop=url&format=json".format(
+            flag))
     flagdict = next(iter(flag_link.json()['query']['pages'].values()))
     print(str(flagdict))
     if flagdict == "-1":
@@ -182,10 +202,12 @@ async def identity(ctx, *, arg):
                           url="https://nonbinary.wiki/wiki/{0}".format(article))
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(popularity))
-    embed.add_field(name="Pride Gallery", value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ","_")))
+    embed.add_field(name="Pride Gallery",
+                    value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ", "_")))
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
-    
+
+
 def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory1 = "placeholder"
     mystory2 = "placeholder"
@@ -193,7 +215,7 @@ def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory4 = "placeholder"
 
     if str.lower(conj) == "singular":
-        mystory1 = "This is " + name +". " + subj.capitalize() + " is a " + gender + " " + species + ". "
+        mystory1 = "This is " + name + ". " + subj.capitalize() + " is a " + gender + " " + species + ". "
         mystory2 = "When " + subj + " went on a walk today, " + pdet + " pet started chasing a squirrel. "
         mystory3 = "That pet of " + ppron + " is always getting " + obj + " into trouble! "
         mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " is in. "
@@ -204,10 +226,12 @@ def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
         mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " are in. "
     return mystory1 + mystory2 + mystory3 + mystory4
 
+
 @bot.command()
 async def pronountest(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
     mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
     await ctx.send(mystory)
+
 
 @bot.command()
 async def pronoun(ctx, args):
@@ -220,9 +244,9 @@ async def pronoun(ctx, args):
     ppron = "x"
     ref = "x"
     j = 0
-    print(pronouns[1][0]+" "+args)
+    print(pronouns[1][0] + " " + args)
     while pronouns[j][0] != str.lower(args):
-        j = j+1
+        j = j + 1
         if j >= lenpronouns:
             await ctx.send("This pronoun isn't in my database! Please ping @sirtetris#8537 to add it!")
             break
@@ -233,82 +257,255 @@ async def pronoun(ctx, args):
     pdet = pronouns[j][4]
     ppron = pronouns[j][5]
     ref = pronouns[j][6]
-    embed = discord.Embed(title="Facts about " + args, description = "This is how to use the pronoun "+ args)
-    embed.add_field(name="Conjugation", value = conj, inline = True)
-    embed.add_field(name="Subjective", value= subj, inline=True)
-    embed.add_field(name="Objective", value= obj, inline=True)
-    embed.add_field(name="Possessive Determiner", value = pdet, inline = True)
-    embed.add_field(name="Possessive Pronoun", value = ppron, inline = True)
-    embed.add_field(name="Reflexive", value= ref, inline=True)
+    embed = discord.Embed(title="Facts about " + args, description="This is how to use the pronoun " + args)
+    embed.add_field(name="Conjugation", value=conj, inline=True)
+    embed.add_field(name="Subjective", value=subj, inline=True)
+    embed.add_field(name="Objective", value=obj, inline=True)
+    embed.add_field(name="Possessive Determiner", value=pdet, inline=True)
+    embed.add_field(name="Possessive Pronoun", value=ppron, inline=True)
+    embed.add_field(name="Reflexive", value=ref, inline=True)
     embed.set_footer(text="Remember! If you are not sure, just ask!")
     await ctx.send(embed=embed)
+
 
 @bot.command()
 async def help(ctx, command="list"):
     if str.lower(command) == "pronoun":
         embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
-                             description= "Type !pronoun followed by a pronoun set to get some information about the given pronouns. \
+                              description="Type !pronoun followed by a pronoun set to get some information about the given pronouns. \
                         Please, give the bot the first two pronouns of the set only")
         embed.add_field(name="Example", value="!pronoun they/them")
         await ctx.send(embed=embed)
     elif str.lower(command) == "pronountest":
-        embed = discord.Embed(title=':grey_question: !pronountest <name> <gender> <kin> <singular/plural> <subjective> <objective> <possessive determiner> <possessive> <reflexive>', color=discord.Colour.purple(),
-                              description= "!pronountest, followed by the following arguments (if you're entering \
+        embed = discord.Embed(
+            title=':grey_question: !pronountest <name> <gender> <kin> <singular/plural> <subjective> <objective> <possessive determiner> <possessive> <reflexive>',
+            color=discord.Colour.purple(),
+            description="!pronountest, followed by the following arguments (if you're entering \
                               more than one word, please enter them in quotes \"like this.\"")
         embed.add_field(name="Name", value="Your name.", inline=True)
-        embed.add_field(name="Type/Species", value="Whether you're a girl, boy, or otherkin, input what you identify as.", inline=True)
+        embed.add_field(name="Type/Species",
+                        value="Whether you're a girl, boy, or otherkin, input what you identify as.", inline=True)
         embed.add_field(name="Gender", value="Input your gender identity.", inline=True)
-        embed.add_field(name="Number", value="Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\").", inline=True)
-        embed.add_field(name="Subject pronoun", value="Example: \"He is a good friend.\" or \"They are a good friend.\"", inline=True)
-        embed.add_field(name="Objective pronoun", value="Example: \"Please take this to him\" or \"Please take this to them.\"", inline=True)
-        embed.add_field(name="Possessive determiner", value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"", inline=True)
-        embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"", inline=True)
-        embed.add_field(name="Reflexive pronoun", value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"", inline=True)
-        embed.add_field(name="Example", value="!pronountest \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
+        embed.add_field(name="Number",
+                        value="Is your pronoun conjugated like he (i.e. \"he is\") or they (i.e. \"they are?\").",
+                        inline=True)
+        embed.add_field(name="Subject pronoun",
+                        value="Example: \"He is a good friend.\" or \"They are a good friend.\"", inline=True)
+        embed.add_field(name="Objective pronoun",
+                        value="Example: \"Please take this to him\" or \"Please take this to them.\"", inline=True)
+        embed.add_field(name="Possessive determiner",
+                        value="Example: \"His favorite color is blue.\" or \"Their favorite color is blue.\"",
+                        inline=True)
+        embed.add_field(name="Possessive pronoun", value="Example: \"That book is his.\" or \"That book is theirs.\"",
+                        inline=True)
+        embed.add_field(name="Reflexive pronoun",
+                        value="Example: \"He is taking care of himself.\" or \"They are taking care of themself.\"",
+                        inline=True)
+        embed.add_field(name="Example",
+                        value="!pronountest \"Jon Smith\" person \"nonbinary\" singular they them theirs themself themself")
         embed.set_footer(text="Please note that this command is still work in progress!")
         await ctx.send(embed=embed)
     elif str.lower(command) == "pinfo":
         embed = discord.Embed(title=':grey_question: !pinfo <page>', color=discord.Colour.purple(),
-                             description= "Type !pinfo followed by the name of an existing Nonbinary Wiki page to get some useful \
+                              description="Type !pinfo followed by the name of an existing Nonbinary Wiki page to get some useful \
                              technical information about the page, such as the amount of contributors, protection status and categorization.")
         embed.add_field(name="Example", value="!pinfo nonbinary")
         await ctx.send(embed=embed)
     elif str.lower(command) == "flag":
         embed = discord.Embed(title=':grey_question: !flag <identity>', color=discord.Colour.purple(),
-                             description= "Type !flag followed by a nonbinary identity to get its most common pride flag and a short \
+                              description="Type !flag followed by a nonbinary identity to get its most common pride flag and a short \
                              description of the identity. You will also get a link to the pride gallery for that identity, so that you \
                              can see alternative flags for your identity.")
         embed.add_field(name="Example", value="!flag nonbinary")
         await ctx.send(embed=embed)
     elif str.lower(command) == "identity":
         embed = discord.Embed(title=':grey_question: !identity <identity>', color=discord.Colour.purple(),
-                             description= "Type !identity followed by a nonbinary identity to get a short description of the identity \
+                              description="Type !identity followed by a nonbinary identity to get a short description of the identity \
                              as well as some useful data, such as its popularity in the Gender Census. You will also get a link to the \
                              wiki page about this identity.")
         embed.add_field(name="Example", value="!identity nonbinary")
         await ctx.send(embed=embed)
     elif str.lower(command) == "ping":
         embed = discord.Embed(title=':grey_question: !ping', color=discord.Colour.purple(),
-                             description= "Ping?")
+                              description="Ping?")
         embed.add_field(name="Example", value="!ping")
         embed.set_footer(text="(pong.)")
         await ctx.send(embed=embed)
     elif str.lower(command) == "help":
         embed = discord.Embed(title=':grey_question: !help [command]', color=discord.Colour.purple(),
-                             description= "Sends a list of all available commands from the bot. You can specify a command as a parameter \
+                              description="Sends a list of all available commands from the bot. You can specify a command as a parameter \
                              to get more information on it, as well as an example.")
         embed.add_field(name="Example", value="!help ping")
         await ctx.send(embed=embed)
     else:
         embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
-        embed.add_field(name="!flag <identity>", value ="Returns the most common pride flag for the identity and a short description.")
-        embed.add_field(name="!help [command]", value ="This message!")
-        embed.add_field(name="!identity <identity>", value ="Gets some information about the specified identity from the Nonbinary Wiki.")
-        embed.add_field(name="!pinfo <page>", value ="Returns useful technical information about the specified wiki page.")
-        embed.add_field(name="!ping", value ="Use this command to check if the bot is listening and can talk in the curent channel.")
-        embed.add_field(name="!pronoun <pronoun set>", value ="Gives some useful information about the specified pronoun set.")
-        embed.add_field(name="!pronountest <name> <gender> <kin> <singular/plural> <pronouns>", value ="Tests the given data in a predefined sentence (this command is WIP).")
+        embed.add_field(name="!flag <identity>",
+                        value="Returns the most common pride flag for the identity and a short description.")
+        embed.add_field(name="!help [command]", value="This message!")
+        embed.add_field(name="!identity <identity>",
+                        value="Gets some information about the specified identity from the Nonbinary Wiki.")
+        embed.add_field(name="!pinfo <page>",
+                        value="Returns useful technical information about the specified wiki page.")
+        embed.add_field(name="!ping",
+                        value="Use this command to check if the bot is listening and can talk in the curent channel.")
+        embed.add_field(name="!pronoun <pronoun set>",
+                        value="Gives some useful information about the specified pronoun set.")
+        embed.add_field(name="!pronountest <name> <gender> <kin> <singular/plural> <pronouns>",
+                        value="Tests the given data in a predefined sentence (this command is WIP).")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
-        
+def getdataheader(arg):
+    article = arg
+    extract_link = requests.get(
+        url="https://data.nonbinary.wiki/w/api.php?action=wbsearchentities&search={0}&language=en&format=json".format(
+            article))
+    jsonresponse = extract_link.json()
+    return jsonresponse
+def getdatabody(arg):
+    article = arg
+    extract_link = requests.get(
+        url="https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids={0}&format=json".format(article))
+    jsonresponse = extract_link.json()
+    return jsonresponse
+
+def stripstring(arg):
+    #arg = str(arg).strip("['")
+    #arg = str(arg).strip(",']")
+
+    #return arg
+    if arg != None:
+       return arg[0]
+    else:
+        return None
+
+def getjsonresponse(arg):
+    # Gets the header information.
+    myjson = getdataheader(arg)
+    # Uses a class for easier nested searching.
+    # Stripstring gets rid of excess chars.
+    json_id = stripstring(dh.DictQuery(myjson).get("search/id"))
+    json_title = stripstring(dh.DictQuery(myjson).get("search/title"))
+    json_desc = stripstring(dh.DictQuery(myjson).get("search/description"))
+
+    # Gets the actual information for that item
+    myjsonbody = getdatabody(json_id)
+    json_conj = dh.DictQuery(myjsonbody).get("entities/{0}/claims/P4/mainsnak/datavalue/value".format(json_id))
+    #json_conj2 = stripstring2(dh.DictQuery(myjsonbody).get("entities/{0}/claims/P4/mainsnak/datavalue/value".format(json_id)))
+
+    json_sub = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P5/mainsnak/datavalue/value".format(json_id)))
+    json_obj = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P6/mainsnak/datavalue/value".format(json_id)))
+    json_posad = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P7/mainsnak/datavalue/value".format(json_id)))
+    json_pos = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P8/mainsnak/datavalue/value".format(json_id)))
+    json_ref = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P9/mainsnak/datavalue/value".format(json_id)))
+    json_freq = stripstring(
+        dh.DictQuery(myjsonbody).get("entities/{0}/claims/P11/mainsnak/datavalue/value".format(json_id)))
+    if (json_conj == None):
+        json_conj = "[unknown]"
+    if (json_sub == None):
+        json_sub = "[unknown]"
+    if (json_obj == None):
+        json_obj = "[unknown]"
+    if (json_posad == None):
+        json_posad = "[unknown]"
+    if (json_pos == None):
+        json_pos = "[unknown]"
+    if (json_ref == None):
+        json_ref = "[unknown]"
+    if (json_freq == None):
+        json_freq = "[unknown]"
+    return json_title, json_desc, json_conj, json_sub, json_obj, json_posad, json_pos, json_ref, json_freq
+
+@bot.command()
+
+async def getid(ctx, arg):
+    message = await ctx.send("Give me a moment. I will search the NBDb...")
+    try:
+        title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
+    except:
+        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+
+    embed = discord.Embed(title="Information about the " + sub + "/" + obj + " pronoun.", description=desc)
+    try:
+        embed.add_field(name="Conjugation", value=con[0] + " or " + con[1], inline=True)
+    except:
+        embed.add_field(name="Conjugation", value=con[0], inline=True)
+
+    embed.add_field(name="Subjective", value=sub, inline=True)
+    embed.add_field(name="Objective", value=obj, inline=True)
+    embed.add_field(name="Possessive Determiner", value=posad, inline=True)
+    embed.add_field(name="Possessive Pronoun", value=pos, inline=True)
+    embed.add_field(name="Reflexive", value=ref, inline=True)
+    embed.add_field(name="Frequency", value=freq, inline=True)
+    embed.set_footer(text="Remember! If you are not sure, just ask!")
+
+    await discord.Message.delete(message)
+    await ctx.send(embed=embed)
+
+
+@bot.command()
+
+async def testpronoun(ctx, name, arg):
+    message = await ctx.send("Give me a moment. I will search the NBDb...")
+    try:
+        title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
+
+    except:
+        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+        await discord.Message.delete(message)
+    try:
+        con1 = con[0]
+        con2 = con[1]
+    except:
+        con1 = con[0]
+        con2 = "Null"
+
+    mystory1 = ""
+    mystory2 = ""
+
+    await discord.Message.delete(message)
+    if(con1 == "Plural" or con2 == "Plural"):
+        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
+            name, sub, obj, posad, pos, ref) + sub.capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(name,sub,obj,posad,pos,ref)
+    if(con1 == "Singular" or con2 == "Singular"):
+        mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
+            name, sub, obj, posad, pos, ref) + sub.capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, sub, obj, posad, pos, ref)
+    if(con == "[unknown]"):
+        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
+            name, sub, obj, posad, pos,
+            ref) + sub.capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, sub, obj, posad, pos, ref)
+        mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
+            name, sub, obj, posad, pos,
+            ref) + sub.capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, sub, obj, posad, pos, ref)
+    try:
+        await ctx.send(mystory1 + "\n\n" + mystory2)
+    except:
+        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+
+class DictQuery(dict):
+    def get(self, path, default = None):
+        keys = path.split("/")
+        val = None
+
+        for key in keys:
+            if val:
+                if isinstance(val, list):
+                    val = [ v.get(key, default) if v else None for v in val]
+                else:
+                    val = val.get(key, default)
+            else:
+                val = dict.get(self, key, default)
+
+            if not val:
+                break;
+
+        return val
+
 bot.run(os.environ['TOKEN'])
