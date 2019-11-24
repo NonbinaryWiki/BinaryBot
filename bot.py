@@ -207,67 +207,6 @@ async def identity(ctx, *, arg):
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
 
-
-def story1(name, species, gender, conj, subj, obj, pdet, ppron, ref):
-    mystory1 = "placeholder"
-    mystory2 = "placeholder"
-    mystory3 = "placeholder"
-    mystory4 = "placeholder"
-
-    if str.lower(conj) == "singular":
-        mystory1 = "This is " + name + ". " + subj.capitalize() + " is a " + gender + " " + species + ". "
-        mystory2 = "When " + subj + " went on a walk today, " + pdet + " pet started chasing a squirrel. "
-        mystory3 = "That pet of " + ppron + " is always getting " + obj + " into trouble! "
-        mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " is in. "
-    if str.lower(conj) == "plural":
-        mystory1 = "This is " + name + ". " + subj.capitalize() + " are a " + gender + " " + species + ". "
-        mystory2 = "When " + subj + " went on a walk today, " + pdet + " pet started chasing a squirrel. "
-        mystory3 = "That pet of " + ppron + " is always getting " + obj + " into trouble! "
-        mystory4 = "And that's how " + subj + " found " + ref + " in the deep mess " + subj + " are in. "
-    return mystory1 + mystory2 + mystory3 + mystory4
-
-
-@bot.command()
-async def pronountest(ctx, name, species, gender, conj, subj, obj, pdet, ppron, ref):
-    mystory = story1(name, species, gender, conj, subj, obj, pdet, ppron, ref)
-    await ctx.send(mystory)
-
-
-@bot.command()
-async def pronoun(ctx, args):
-    pronouns = read_csv("Pronoun Doc.csv")
-    lenpronouns = len(pronouns)
-    conj = "x"
-    subj = "x"
-    obj = "x"
-    pdet = "x"
-    ppron = "x"
-    ref = "x"
-    j = 0
-    print(pronouns[1][0] + " " + args)
-    while pronouns[j][0] != str.lower(args):
-        j = j + 1
-        if j >= lenpronouns:
-            await ctx.send("This pronoun isn't in my database! Please ping @sirtetris#8537 to add it!")
-            break
-
-    conj = pronouns[j][1]
-    subj = pronouns[j][2]
-    obj = pronouns[j][3]
-    pdet = pronouns[j][4]
-    ppron = pronouns[j][5]
-    ref = pronouns[j][6]
-    embed = discord.Embed(title="Facts about " + args, description="This is how to use the pronoun " + args)
-    embed.add_field(name="Conjugation", value=conj, inline=True)
-    embed.add_field(name="Subjective", value=subj, inline=True)
-    embed.add_field(name="Objective", value=obj, inline=True)
-    embed.add_field(name="Possessive Determiner", value=pdet, inline=True)
-    embed.add_field(name="Possessive Pronoun", value=ppron, inline=True)
-    embed.add_field(name="Reflexive", value=ref, inline=True)
-    embed.set_footer(text="Remember! If you are not sure, just ask!")
-    await ctx.send(embed=embed)
-
-
 @bot.command()
 async def help(ctx, command="list"):
     if str.lower(command) == "pronoun":
