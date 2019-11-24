@@ -421,8 +421,7 @@ def getjsonresponse(arg):
     return json_title, json_desc, json_conj, json_sub, json_obj, json_posad, json_pos, json_ref, json_freq
 
 @bot.command()
-
-async def getid(ctx, arg):
+async def pronoun(ctx, arg):
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
@@ -448,8 +447,7 @@ async def getid(ctx, arg):
 
 
 @bot.command()
-
-async def testpronoun(ctx, name, arg):
+async def pronountest(ctx, name, arg):
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
