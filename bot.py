@@ -370,11 +370,10 @@ async def pronoun(ctx, arg = None):
 
 
 @bot.command()
-async def pronountest(ctx, name = None, arg = None):
+async def pronountest(ctx, name, arg = None):
     if arg == None:
-        await ctx.send(":warning: You need to specify a pronoun! Example: `!pronountest John she/her`")
-    if name == None:
-        await ctx.send(":warning: You need to specify a name! Example: `!pronountest John she/her`")
+        await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
+        return
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
