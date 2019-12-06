@@ -341,7 +341,7 @@ def getjsonresponse(arg):
     return json_title, json_desc, json_conj, json_sub, json_obj, json_posad, json_pos, json_ref, json_freq
 
 @bot.command()
-async def pronoun(ctx, arg):
+async def pronoun(ctx, arg = None):
     if arg == None:
         await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
         return
@@ -370,9 +370,11 @@ async def pronoun(ctx, arg):
 
 
 @bot.command()
-async def pronountest(ctx, name, arg):
+async def pronountest(ctx, name = None, arg = None):
     if arg == None:
-        await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
+        await ctx.send(":warning: You need to specify a pronoun! Example: `!pronountest John she/her`")
+    if name == None:
+        await ctx.send(":warning: You need to specify a name! Example: `!pronountest John she/her`")
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
