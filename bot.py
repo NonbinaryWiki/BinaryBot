@@ -342,6 +342,9 @@ def getjsonresponse(arg):
 
 @bot.command()
 async def pronoun(ctx, arg):
+    if arg == None:
+        await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
+        return
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
@@ -368,6 +371,8 @@ async def pronoun(ctx, arg):
 
 @bot.command()
 async def pronountest(ctx, name, arg):
+    if arg == None:
+        await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     try:
         title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
