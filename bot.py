@@ -338,12 +338,12 @@ async def pronoun(ctx, arg = None):
     title = ''.join(data[0])
     desc = ''.join(data[1])
     freq = ''.join(data[8])
-    num = ' or '.join(data[2]) # a pronoun set can have multiple grammatical numbers
-    subj = ' or '.join(data[3])
-    obj = ' or '.join(data[4])
-    posad = ' or '.join(data[5])
-    pos= ' or '.join(data[6])
-    ref = ' or '.join(data[7])
+    num = '/'.join(data[2]) # a pronoun set can have multiple grammatical numbers
+    subj = '/'.join(data[3])
+    obj = '/'.join(data[4])
+    posad = '/'.join(data[5])
+    pos= '/'.join(data[6])
+    ref = '/'.join(data[7])
     
     embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
     embed.add_field(name="Conjugation", value=num, inline=True)
@@ -381,34 +381,25 @@ async def pronountest(ctx, name, arg = None):
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
         await discord.Message.delete(message)
-    try:
-        con1 = data[2][0]
-        con2 = data[2][1]
-    except:
-        con1 = data[2][0]
-        con2 = "Null"
+    title = ''.join(data[0])
+    desc = ''.join(data[1])
+    freq = ''.join(data[8])
+    num = '/'.join(data[2]) # a pronoun set can have multiple grammatical numbers
+    subj = '/'.join(data[3])
+    obj = '/'.join(data[4])
+    posad = '/'.join(data[5])
+    pos= '/'.join(data[6])
+    ref = '/'.join(data[7])
 
-    mystory1 = ""
-    mystory2 = ""
+    story = "It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format( 
+            name, subj, obj, posad, pos, ref) + subj.capitalize() + " were trying to open a bottle \
+            of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful \
+            clothes of {4} and the rest of {5}!".format(name, subj, obj, posad, pos, ref)
 
     await discord.Message.delete(message)
-    if(con1 == "Plural" or con2 == "Plural"):
-        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format( 
-            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(name,data[3],data[4],data[5],data[6],data[7])
-    if(con1 == "Singular" or con2 == "Singular"):
-        mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, data[3], data[4], data[5], data[6], data[7])
-        
-    if(con == "[unknown]"):
-        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, data[3], data[4], data[5], data[6], data[7])
-        mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, data[3], data[4], data[5], data[6], data[7])
+
     try:
-        await ctx.send(mystory1 + "\n\n" + mystory2)
+        await ctx.send(story)
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
 
