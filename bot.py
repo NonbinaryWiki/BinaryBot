@@ -359,7 +359,7 @@ async def pronoun(ctx, arg = None):
 
     embed.add_field(name="Subjective", value="**{}** ate the cake.".format(sub.capitalize()), inline=True)
     embed.add_field(name="Objective", value="I like **{}**.".format(obj), inline=True)
-    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(posad), inline=True)
+    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(posad.capitalize()), inline=True)
     embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(pos), inline=True)
     embed.add_field(name="Reflexive", value="{} did by **{}**.".format(sub.capitalize(), ref), inline=True)
     embed.add_field(name="Frequency", value=freq, inline=True)
