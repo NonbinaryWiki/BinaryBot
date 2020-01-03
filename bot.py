@@ -367,17 +367,7 @@ async def pronountest(ctx, name, arg = None):
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
-        data = getitemdata(arg)
-    # Cheatsheet:
-    # title: 0
-    # desc: 1
-    # Grammatical number: 2
-    # Subject: 3
-    # Object: 4
-    # Possessive adjective: 5
-    # Possessive: 6
-    # Reflexive: 7
-    # Frequency: 8
+        data = getitemdata(arg, properties)
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
         await discord.Message.delete(message)
