@@ -381,6 +381,7 @@ async def pronountest(ctx, name, arg = None):
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
         await discord.Message.delete(message)
+    print(str(data))
     title = ''.join(data[0])
     desc = ''.join(data[1])
     num = '/'.join(data[2]) # a pronoun set can have multiple grammatical numbers
