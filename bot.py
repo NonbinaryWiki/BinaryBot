@@ -339,11 +339,11 @@ async def pronoun(ctx, arg = None):
     desc = ''.join(data[1])
     freq = ''.join(data[8])
     num = ' or '.join(data[2]) # a pronoun set can have multiple grammatical numbers
-    subj = ' or ',join(data[3])
-    obj = ' or ',join(data[4])
-    posad = ' or ',join(data[5])
-    pos= ' or ',join(data[6])
-    ref = ' or ',join(data[7])
+    subj = ' or '.join(data[3])
+    obj = ' or '.join(data[4])
+    posad = ' or '.join(data[5])
+    pos= ' or '.join(data[6])
+    ref = ' or '.join(data[7])
     
     embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
     embed.add_field(name="Conjugation", value=num, inline=True)
