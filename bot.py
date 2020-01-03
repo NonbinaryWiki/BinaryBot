@@ -332,32 +332,27 @@ async def pronoun(ctx, arg = None):
     properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
         data = getitemdata(arg, properties)
-    # Cheatsheet:
-    # title: 0
-    # desc: 1
-    # Grammatical number: 2
-    # Subject: 3
-    # Object: 4
-    # Possessive adjective: 5
-    # Possessive: 6
-    # Reflexive: 7
-    # Frequency: 8
+    title = ''.join(data[0])
+    desc = ''.join(data[1])
+    freq = ''.join(data[8])
+    num = ' or '.join(data[2]) # a pronoun set can have multiple grammatical numbers
+    subj = ' or ',join(data[3])
+    obj = ' or ',join(data[4])
+    posad = ' or ',join(data[5])
+    pos= ' or ',join(data[6])
+    ref = ' or ',join(data[7])
+    
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
-    print(str(data))
     
-    embed = discord.Embed(title="Information about the " + str(data[3]) + "/" + data[4] + " pronoun.", description=data[1])
-    try:
-        embed.add_field(name="Conjugation", value=data[2][0] + " or " + data[2][1], inline=True)
-    except:
-        embed.add_field(name="Conjugation", value=data[2][0], inline=True)
-
-    embed.add_field(name="Subjective", value="**{}** ate the cake.".format(data[3].capitalize()), inline=True)
-    embed.add_field(name="Objective", value="I like **{}**.".format(data[4]), inline=True)
-    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(data[5].capitalize()), inline=True)
-    embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(data[6]), inline=True)
-    embed.add_field(name="Reflexive", value="{} did by **{}**.".format(data[3].capitalize(), data[7]), inline=True)
-    embed.add_field(name="Frequency", value=data[8], inline=True)
+    embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
+    embed.add_field(name="Conjugation", value=num, inline=True)
+    embed.add_field(name="Subjective", value="**{}** ate the cake.".format(subj.capitalize()), inline=True)
+    embed.add_field(name="Objective", value="I like **{}**.".format(obj), inline=True)
+    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(posad.capitalize()), inline=True)
+    embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(pos), inline=True)
+    embed.add_field(name="Reflexive", value="{} did by **{}**.".format(subj.capitalize(), ref), inline=True)
+    embed.add_field(name="Frequency", value=freq, inline=True)
     embed.set_footer(text="Remember! If you are not sure, just ask!")
 
     await discord.Message.delete(message)
