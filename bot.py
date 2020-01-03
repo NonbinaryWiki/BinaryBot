@@ -274,6 +274,7 @@ async def help(ctx, command="list"):
                         value="Tests the given data in a predefined sentence (this command is WIP).")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
+
 def getdataheader(arg):
     article = arg
     extract_link = requests.get(
@@ -281,6 +282,7 @@ def getdataheader(arg):
             article))
     jsonresponse = extract_link.json()
     return jsonresponse
+
 def getdatabody(arg):
     article = arg
     extract_link = requests.get(
@@ -298,7 +300,9 @@ def stripstring(arg):
     else:
         return None
 
-def getjsonresponse(arg):
+def getitemdata(arg, p=[]):
+    # gets all the requested values (p) for a given item (arg) and puts them in plist in the requested order, with title and description first
+    plist = []
     # Gets the header information.
     myjson = getdataheader(arg)
     # Uses a class for easier nested searching.
@@ -306,39 +310,18 @@ def getjsonresponse(arg):
     json_id = stripstring(DictQuery(myjson).get("search/id"))
     json_title = stripstring(DictQuery(myjson).get("search/title"))
     json_desc = stripstring(DictQuery(myjson).get("search/description"))
-
+    plist.append(json_title)
+    plist.append(json_desc)
+    
     # Gets the actual information for that item
-    myjsonbody = getdatabody(json_id)
-    json_conj = DictQuery(myjsonbody).get("entities/{0}/claims/P4/mainsnak/datavalue/value".format(json_id))
-    #json_conj2 = stripstring2(dh.DictQuery(myjsonbody).get("entities/{0}/claims/P4/mainsnak/datavalue/value".format(json_id)))
-
-    json_sub = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P5/mainsnak/datavalue/value".format(json_id)))
-    json_obj = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P6/mainsnak/datavalue/value".format(json_id)))
-    json_posad = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P7/mainsnak/datavalue/value".format(json_id)))
-    json_pos = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P8/mainsnak/datavalue/value".format(json_id)))
-    json_ref = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P9/mainsnak/datavalue/value".format(json_id)))
-    json_freq = stripstring(
-        DictQuery(myjsonbody).get("entities/{0}/claims/P11/mainsnak/datavalue/value".format(json_id)))
-    if (json_conj == None):
-        json_conj = "[unknown]"
-    if (json_sub == None):
-        json_sub = "[unknown]"
-    if (json_obj == None):
-        json_obj = "[unknown]"
-    if (json_posad == None):
-        json_posad = "[unknown]"
-    if (json_pos == None):
-        json_pos = "[unknown]"
-    if (json_ref == None):
-        json_ref = "[unknown]"
-    if (json_freq == None):
-        json_freq = "[unknown]"
-    return json_title, json_desc, json_conj, json_sub, json_obj, json_posad, json_pos, json_ref, json_freq
+    jsonbody = getdatabody(json_id)
+    for i in p:
+        try:
+            plist.append(DictQuery(jsonbody).get("entities/{0}/claims/{1}/mainsnak/datavalue/value".format(json_id, i)))
+        except:
+            plist.append("[unknown]")
+    
+    return plist
 
 @bot.command()
 async def pronoun(ctx, arg = None):
@@ -346,23 +329,34 @@ async def pronoun(ctx, arg = None):
         await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
         return
     message = await ctx.send("Give me a moment. I will search the NBDb...")
+    properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
-        title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
+        data = getitemdata(arg, properties)
+    # Cheatsheet:
+    # title: 0
+    # desc: 1
+    # Grammatical number: 2
+    # Subject: 3
+    # Object: 4
+    # Possessive adjective: 5
+    # Possessive: 6
+    # Reflexive: 7
+    # Frequency: 8
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
 
-    embed = discord.Embed(title="Information about the " + sub + "/" + obj + " pronoun.", description=desc)
+    embed = discord.Embed(title="Information about the " + data[3] + "/" + data[4] + " pronoun.", description=data[1])
     try:
-        embed.add_field(name="Conjugation", value=con[0] + " or " + con[1], inline=True)
+        embed.add_field(name="Conjugation", value=data[2][0] + " or " + data[2][1], inline=True)
     except:
-        embed.add_field(name="Conjugation", value=con[0], inline=True)
+        embed.add_field(name="Conjugation", value=data[2][0], inline=True)
 
-    embed.add_field(name="Subjective", value="**{}** ate the cake.".format(sub.capitalize()), inline=True)
-    embed.add_field(name="Objective", value="I like **{}**.".format(obj), inline=True)
-    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(posad.capitalize()), inline=True)
-    embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(pos), inline=True)
-    embed.add_field(name="Reflexive", value="{} did by **{}**.".format(sub.capitalize(), ref), inline=True)
-    embed.add_field(name="Frequency", value=freq, inline=True)
+    embed.add_field(name="Subjective", value="**{}** ate the cake.".format(data[3].capitalize()), inline=True)
+    embed.add_field(name="Objective", value="I like **{}**.".format(data[4]), inline=True)
+    embed.add_field(name="Possessive Determiner", value="**{}** smile is pretty.".format(data[5].capitalize()), inline=True)
+    embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(data[6]), inline=True)
+    embed.add_field(name="Reflexive", value="{} did by **{}**.".format(data[3].capitalize(), data[7]), inline=True)
+    embed.add_field(name="Frequency", value=data[8], inline=True)
     embed.set_footer(text="Remember! If you are not sure, just ask!")
 
     await discord.Message.delete(message)
@@ -375,17 +369,27 @@ async def pronountest(ctx, name, arg = None):
         await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
         return
     message = await ctx.send("Give me a moment. I will search the NBDb...")
+    properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
-        title, desc, con, sub, obj, posad, pos, ref, freq = getjsonresponse(arg)
-
+        data = getitemdata(arg)
+    # Cheatsheet:
+    # title: 0
+    # desc: 1
+    # Grammatical number: 2
+    # Subject: 3
+    # Object: 4
+    # Possessive adjective: 5
+    # Possessive: 6
+    # Reflexive: 7
+    # Frequency: 8
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
         await discord.Message.delete(message)
     try:
-        con1 = con[0]
-        con2 = con[1]
+        con1 = data[2][0]
+        con2 = data[2][1]
     except:
-        con1 = con[0]
+        con1 = data[2][0]
         con2 = "Null"
 
     mystory1 = ""
@@ -393,21 +397,20 @@ async def pronountest(ctx, name, arg = None):
 
     await discord.Message.delete(message)
     if(con1 == "Plural" or con2 == "Plural"):
-        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, sub, obj, posad, pos, ref) + sub.capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(name,sub,obj,posad,pos,ref)
+        mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format( 
+            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(name,data[3],data[4],data[5],data[6],data[7])
     if(con1 == "Singular" or con2 == "Singular"):
         mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, sub, obj, posad, pos, ref) + sub.capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, sub, obj, posad, pos, ref)
+            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, data[3], data[4], data[5], data[6], data[7])
+        
     if(con == "[unknown]"):
         mystory2 = "Plural Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, sub, obj, posad, pos,
-            ref) + sub.capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, sub, obj, posad, pos, ref)
+            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " were trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, data[3], data[4], data[5], data[6], data[7])
         mystory1 = "Singular Conjugation: It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format(
-            name, sub, obj, posad, pos,
-            ref) + sub.capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
-            name, sub, obj, posad, pos, ref)
+            name, data[3], data[4], data[5], data[6], data[7]) + data[3].capitalize() + " was trying to open a bottle of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful clothes of {4} and the rest of {5}!".format(
+            name, data[3], data[4], data[5], data[6], data[7])
     try:
         await ctx.send(mystory1 + "\n\n" + mystory2)
     except:
