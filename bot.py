@@ -344,7 +344,8 @@ async def pronoun(ctx, arg = None):
     # Frequency: 8
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
-
+    print(str(data))
+    
     embed = discord.Embed(title="Information about the " + str(data[3]) + "/" + data[4] + " pronoun.", description=data[1])
     try:
         embed.add_field(name="Conjugation", value=data[2][0] + " or " + data[2][1], inline=True)
