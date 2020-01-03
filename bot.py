@@ -331,7 +331,10 @@ async def pronoun(ctx, arg = None):
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
-        data = getitemdata(arg, properties)
+        data = getitemdata(arg, properties)    
+    except:
+        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+
     title = ''.join(data[0])
     desc = ''.join(data[1])
     freq = ''.join(data[8])
@@ -341,9 +344,6 @@ async def pronoun(ctx, arg = None):
     posad = ' or ',join(data[5])
     pos= ' or ',join(data[6])
     ref = ' or ',join(data[7])
-    
-    except:
-        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
     
     embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
     embed.add_field(name="Conjugation", value=num, inline=True)
