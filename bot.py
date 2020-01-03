@@ -345,7 +345,7 @@ async def pronoun(ctx, arg = None):
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
 
-    embed = discord.Embed(title="Information about the " + data[3] + "/" + data[4] + " pronoun.", description=data[1])
+    embed = discord.Embed(title="Information about the " + str(data[3]) + "/" + data[4] + " pronoun.", description=data[1])
     try:
         embed.add_field(name="Conjugation", value=data[2][0] + " or " + data[2][1], inline=True)
     except:
