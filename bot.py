@@ -383,7 +383,6 @@ async def pronountest(ctx, name, arg = None):
         await discord.Message.delete(message)
     title = ''.join(data[0])
     desc = ''.join(data[1])
-    freq = ''.join(data[8])
     num = '/'.join(data[2]) # a pronoun set can have multiple grammatical numbers
     subj = '/'.join(data[3])
     obj = '/'.join(data[4])
