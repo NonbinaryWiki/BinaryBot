@@ -335,15 +335,15 @@ async def pronoun(ctx, arg = None):
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
 
-    title = ''.join(data[0]) if isinstance(data[0], list) else "[unknown]"
-    desc = ''.join(data[1]) if isinstance(data[0], list) else "[unknown]"
-    freq = ''.join(data[8]) if isinstance(data[0], list) else "[unknown]"
-    num = '/'.join(data[2]) if isinstance(data[0], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
-    subj = '/'.join(data[3]) if isinstance(data[0], list) else "[unknown]"
-    obj = '/'.join(data[4]) if isinstance(data[0], list) else "[unknown]"
-    posad = '/'.join(data[5]) if isinstance(data[0], list) else "[unknown]"
-    pos= '/'.join(data[6]) if isinstance(data[0], list) else "[unknown]"
-    ref = '/'.join(data[7]) if isinstance(data[0], list) else "[unknown]"
+    title = ''.join(data[0]) 
+    desc = ''.join(data[1]) 
+    freq = ''.join(data[8]) 
+    num = '/'.join(data[2]) # a pronoun set can have multiple grammatical numbers
+    subj = '/'.join(data[3]) 
+    obj = '/'.join(data[4]) 
+    posad = '/'.join(data[5]) 
+    pos= '/'.join(data[6]) 
+    ref = '/'.join(data[7])
     
     embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
     embed.add_field(name="Conjugation", value=num, inline=True)
@@ -372,14 +372,15 @@ async def pronountest(ctx, name, arg = None):
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
         await discord.Message.delete(message)
     print(str(data))
-    title = ''.join(data[0]) if isinstance(data[0], list) else "[unknown]"
-    desc = ''.join(data[1]) if isinstance(data[0], list) else "[unknown]"
-    num = '/'.join(data[2]) if isinstance(data[0], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
-    subj = '/'.join(data[3]) if isinstance(data[0], list) else "[unknown]"
-    obj = '/'.join(data[4]) if isinstance(data[0], list) else "[unknown]"
-    posad = '/'.join(data[5]) if isinstance(data[0], list) else "[unknown]"
-    pos= '/'.join(data[6]) if isinstance(data[0], list) else "[unknown]"
-    ref = '/'.join(data[7]) if isinstance(data[0], list) else "[unknown]"
+    title = ''.join(data[0]) 
+    desc = ''.join(data[1]) 
+    num = '/'.join(data[2])  # a pronoun set can have multiple grammatical numbers
+    subj = '/'.join(data[3]) 
+    obj = '/'.join(data[4]) 
+    posad = '/'.join(data[5]) 
+    pos= '/'.join(data[6]) 
+    ref = '/'.join(data[7]) 
+    print(str(type(data[3])))
 
     story = "It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format( 
             name, subj, obj, posad, pos, ref) + subj.capitalize() + " were trying to open a bottle \
