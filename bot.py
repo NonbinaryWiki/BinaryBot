@@ -381,10 +381,17 @@ async def pronountest(ctx, name, arg = None):
     pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
     ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
 
+    if num.lower() == "singular":
+        verb = "was"
+    elif num.lower == "plural":
+        verb = "were"
+    else:
+        verb = "was/were"
+        
     story = "It wasn't too long ago when {0} found {5} in a sticky situation. Quite literally, actually. ".format( 
-            name, subj, obj, posad, pos, ref) + subj.capitalize() + " were trying to open a bottle \
-            of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful \
-            clothes of {4} and the rest of {5}!".format(name, subj, obj, posad, pos, ref)
+            name, subj, obj, posad, pos, ref) + subj.capitalize() + " {6} trying to open a bottle " + \
+            "of honey, when all of a sudden, {1} lost {3} grip on the bottle and the honey squirted all over those wonderful " + \
+            "clothes of {4} and the rest of {5}!".format(name, subj, obj, posad, pos, ref, verb)
 
     await discord.Message.delete(message)
 
