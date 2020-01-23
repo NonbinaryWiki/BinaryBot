@@ -391,7 +391,7 @@ async def pronountest(ctx, name, arg = None):
     story = "It wasn't too long ago when {0} found {1} in a sticky situation. Quite literally, actually. ".format( 
             name, ref) + subj.capitalize() + " {0} trying to open a bottle ".format(name) + \
             "of honey, when all of a sudden, {0} lost {1} grip on the bottle and the honey squirted all over those wonderful ".format(subj, posad) + \
-            "clothes of {4} and the rest of {5}!".format(pos, ref)
+            "clothes of {0} and the rest of {1}!".format(pos, ref)
 
     await discord.Message.delete(message)
 
