@@ -37,6 +37,7 @@ async def ping(ctx):
     """ Pongs (and confirms that the bot is listening). """
     await ctx.send("Pong! :ping_pong:")
 
+#FractalCode Test
 
 ### WIKI-RELATED COMMANDS ###
 
