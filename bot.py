@@ -222,7 +222,7 @@ async def help(ctx, command="list"):
                               more than one word, please enter them in quotes \"like this.\"")
         embed.add_field(name="Name", value="Your name.", inline=True)
         embed.add_field(name="Pronoun",
-                        value="Can be both the subject form (i.e. 'they') or subject+object (i.e. 'they/them')", inline=True)
+                        value="Can be both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')", inline=True)
         await ctx.send(embed=embed)
     elif str.lower(command) == "pinfo":
         embed = discord.Embed(title=':grey_question: !pinfo <page>', color=discord.Colour.purple(),
@@ -269,7 +269,7 @@ async def help(ctx, command="list"):
                         value="Use this command to check if the bot is listening and can talk in the curent channel.")
         embed.add_field(name="!pronoun <pronoun set>",
                         value="Gives some useful information about the specified pronoun set.")
-        embed.add_field(name="!pronountest <name> <gender> <kin> <singular/plural> <pronouns>",
+        embed.add_field(name="!pronountest <name> <pronouns>",
                         value="Tests the given data in a predefined sentence (this command is WIP).")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
