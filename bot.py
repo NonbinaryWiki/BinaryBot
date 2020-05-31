@@ -37,6 +37,13 @@ async def ping(ctx):
     """ Pongs (and confirms that the bot is listening). """
     await ctx.send("Pong! :ping_pong:")
 
+@bot.command()
+async def thank(ctx):
+    """ Send "Thank you random citizen" gif and a link to the paetron """
+    await ctx.send(file=discord.File('random_citizen.gif'))
+    await ctx.send("If you have the funds, help us keep the wiki alive!\nhttps://www.patreon.com/nonbinarywiki")
+
+
 ### WIKI-RELATED COMMANDS ###
 
 @bot.command()
