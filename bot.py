@@ -39,9 +39,9 @@ async def ping(ctx):
 
 @bot.command()
 async def thank(ctx):
-    """ Send "Thank you random citizen" gif and a link to the paetron """
+    """ Send "Thank you random citizen" gif and a link to the patreon """
+    await ctx.send("If you have the funds, help us keep the wiki alive!\n<https://www.patreon.com/nonbinarywiki>")
     await ctx.send(file=discord.File('random_citizen.gif'))
-    await ctx.send("If you have the funds, help us keep the wiki alive!\nhttps://www.patreon.com/nonbinarywiki")
 
 
 ### WIKI-RELATED COMMANDS ###
@@ -263,6 +263,10 @@ async def help(ctx, command="list"):
                              to get more information on it, as well as an example.")
         embed.add_field(name="Example", value="!help ping")
         await ctx.send(embed=embed)
+    elif str.lower(command) == "thank":
+        embed = discord.Embed(title=':grey_question: !thank', color=discord.Colour.purple(),
+                              description="Thank you, random citizen!")
+        await ctx.send(embed=embed)
     else:
         embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
         embed.add_field(name="!flag <identity>",
@@ -278,6 +282,8 @@ async def help(ctx, command="list"):
                         value="Gives some useful information about the specified pronoun set.")
         embed.add_field(name="!pronountest <name> <pronouns>",
                         value="Tests the given data in a predefined sentence (this command is WIP).")
+        embed.add_field(name="!thank",
+                        value="Thank you, random citizen!")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
 
