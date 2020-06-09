@@ -236,14 +236,13 @@ async def identity(ctx, *, arg):
     print(str(data))
     
     desc = data[1]
-    umbrella_dict = data[2][0]
-    umbrella_id = next(umbrella_dict['id'] for item in umbrella_dict if 'id' in item) #this is a Qid
+    umbrella_id = data[2][0]['id'] #this is a Qid
     umbrella_json = getdataheader(umbrella_id)
-    umbrella = stripstring(DictQuery(umbrella_json).get("search/title"))
+    umbrella = stripstring(DictQuery(umbrella_json).get("search/label"))
     frequency = data[3][0]
-    related_id = data[4][0]['id'] #this is a dict with a Qid
+    related_id = data[4][0]['id'] #this is a Qid
     related_json = getdataheader(related_id)
-    related = stripstring(DictQuery(related_json).get("search/title"))
+    related = stripstring(DictQuery(related_json).get("search/label"))
     flag = data[5][0] # list, should have a single item but just in case
     
     # Set embed
