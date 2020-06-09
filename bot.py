@@ -236,7 +236,8 @@ async def identity(ctx, *, arg):
     print(str(data))
     
     desc = data[1]
-    umbrella_id = next(umbrella_id['id'] for item in data[2] if 'id' in item) #this is a Qid
+    umbrella_dict = data[2]
+    umbrella_id = next(umbrella_dict['id'] for item in data[2] if 'id' in item) #this is a Qid
     umbrella_json = getdataheader(umbrella_id)
     umbrella = stripstring(DictQuery(umbrella_json).get("search/title"))
     frequency = data[3][0]
