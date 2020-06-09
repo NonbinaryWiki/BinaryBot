@@ -236,11 +236,11 @@ async def identity(ctx, *, arg):
     print(str(data))
     
     desc = data[1]
-    umbrella_id = data[2]['id'] #this is a Qid
+    umbrella_id = stripstring(DictQuery(data[2]).get('id')) #this is a Qid
     umbrella_json = getdataheader(umbrella_id)
     umbrella = stripstring(DictQuery(umbrella_json).get("search/title"))
     frequency = data[3][0]
-    related_id = data[4]['id'] #this is a Qid too
+    related_id = stripstring(DictQuery(data[4]).get('id')) #this is a Qid too
     related_json = getdataheader(related_id)
     related = stripstring(DictQuery(related_json).get("search/title"))
     flag = data[5][0] # list, should have a single item but just in case
