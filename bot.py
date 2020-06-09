@@ -235,15 +235,20 @@ async def identity(ctx, *, arg):
     
     print(str(data))
     
-    umbrella = ", ".join(data[0])
-    frequency = "".join(data[1])
-    related = ", ".join(data[2])
-    flag = "".join(data[3])
+    desc = data[1]
+    umbrella_id = data[2]['id'] #this is a Qid
+    umbrella_json = getdataheader(umbrella_id)
+    umbrella = stripstring(DictQuery(umbrella_json).get("search/title"))
+    frequency = data[3][0]
+    related_id = data[4]['id'] #this is a Qid too
+    related_json = getdataheader(related_id)
+    related = stripstring(DictQuery(related_json).get("search/title"))
+    flag = data[5][0] # list, should have a single item but just in case
     
     # Set embed
     #embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
     #                      url="https://nonbinary.wiki/wiki/{0}".format(article))
-    embed = discord.Embed(title=':link: {0}'.format(arg))
+    embed = discord.Embed(title=':link: {0}'.format(arg), description=desc)
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
     embed.add_field(name="Related identities", value="{0}".format(related))
