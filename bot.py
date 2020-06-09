@@ -23,6 +23,53 @@ def read_csv(csvfile):
         mylist = list(csv.reader(csv_file))
     return mylist
 
+def getdataheader(arg):
+    article = arg
+    extract_link = requests.get(
+        url="https://data.nonbinary.wiki/w/api.php?action=wbsearchentities&search={0}&language=en&format=json".format(
+            article))
+    jsonresponse = extract_link.json()
+    return jsonresponse
+
+def getdatabody(arg):
+    article = arg
+    extract_link = requests.get(
+        url="https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids={0}&format=json".format(article))
+    jsonresponse = extract_link.json()
+    return jsonresponse
+
+def stripstring(arg):
+    #arg = str(arg).strip("['")
+    #arg = str(arg).strip(",']")
+
+    #return arg
+    if arg != None:
+       return arg[0]
+    else:
+        return None
+
+def getitemdata(arg, p=[]):
+    # gets all the requested values (p) for a given item (arg) and puts them in plist in the requested order, with title and description first
+    plist = []
+    # Gets the header information.
+    myjson = getdataheader(arg)
+    # Uses a class for easier nested searching.
+    # Stripstring gets rid of excess chars.
+    json_id = stripstring(DictQuery(myjson).get("search/id"))
+    json_title = stripstring(DictQuery(myjson).get("search/title"))
+    json_desc = stripstring(DictQuery(myjson).get("search/description"))
+    plist.append(json_title)
+    plist.append(json_desc)
+    
+    # Gets the actual information for that item
+    jsonbody = getdatabody(json_id)
+    for i in p:
+        try:
+            plist.append(DictQuery(jsonbody).get("entities/{0}/claims/{1}/mainsnak/datavalue/value".format(json_id, i)))
+        except:
+            plist.append("[unknown]")
+    
+    return plist
 
 @bot.event
 async def on_ready():
@@ -176,40 +223,31 @@ async def flag(ctx, *, arg):
 @bot.command()
 async def identity(ctx, *, arg):
     """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
-    article = arg
-    extract_link = requests.get(
-        url="https://nonbinary.wiki/w/api.php?action=query&prop=extracts&explaintext&exsentences=2&titles={0}&redirects&format=json".format(
-            article))
-    extract = next(iter(extract_link.json()['query']['pages'].values()))
-    article = extract['title']  # handle redirects
-    # Get infobox data
-    raw_article = requests.get(url="https://nonbinary.wiki/wiki/{0}?action=raw".format(article))
-    wikitext = mwparserfromhell.parse(raw_article.text)
-    templates = wikitext.filter_templates()
-    for template in templates:
-        print(template)
-        if template.name == "infobox identity\n":
-            popularity = template.get(" percentage ").value.strip()
-            gallery = template.get(" gallery_link ").value.strip()
-            flag = template.get(" flag ").value.strip()
-    print("THE FLAG NAME IS {0}".format(flag))
-    flag_link = requests.get(
-        url="https://nonbinary.wiki/w/api.php?action=query&titles=File:{0}&prop=imageinfo&iiprop=url&format=json".format(
-            flag))
-    flagdict = next(iter(flag_link.json()['query']['pages'].values()))
-    print(str(flagdict))
-    if flagdict == "-1":
-        flag = 'File:Wikilogo_new.png'
-    else:
-        flag = flagdict['imageinfo'][0]['url']
-
+    if arg == None:
+        await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
+        return
+    message = await ctx.send("Give me a moment. I will search the NBDb...")
+    properties = ["P14", "P11", "P15", "P21"] # Properties for umbrella term, frequency, related identities, and main flag.
+    try:
+        data = getitemdata(arg, properties)    
+    except:
+        await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+    
+    umbrella = ", ".join(data[0])
+    frequency = "".join(data[1])
+    related = ", ".join(data[2])
+    flag = "".join(data[3])
+    
     # Set embed
-    embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
-                          url="https://nonbinary.wiki/wiki/{0}".format(article))
+    #embed = discord.Embed(title=':link: {0}'.format(article.title()), description=extract['extract'],
+    #                      url="https://nonbinary.wiki/wiki/{0}".format(article))
+    embed = discord.Embed(title=':link: {0}'.format(arg))
     embed.set_thumbnail(url=flag)
-    embed.add_field(name="Gender Census", value="{0}% of respondents".format(popularity))
-    embed.add_field(name="Pride Gallery",
-                    value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ", "_")))
+    embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
+    embed.add_field(name="Related identities", value="{0}".format(related))
+    embed.add_field(name="Gender Census", value="{0}% of respondents".format(frequency))
+    #embed.add_field(name="Pride Gallery",
+    #                value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ", "_")))
     embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
     await ctx.send(embed=embed)
 
@@ -286,54 +324,6 @@ async def help(ctx, command="list"):
                         value="Thank you, random citizen!")
         embed.set_footer(text="Use !help [command] to get more information on a specific command.")
         await ctx.send(embed=embed)
-
-def getdataheader(arg):
-    article = arg
-    extract_link = requests.get(
-        url="https://data.nonbinary.wiki/w/api.php?action=wbsearchentities&search={0}&language=en&format=json".format(
-            article))
-    jsonresponse = extract_link.json()
-    return jsonresponse
-
-def getdatabody(arg):
-    article = arg
-    extract_link = requests.get(
-        url="https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids={0}&format=json".format(article))
-    jsonresponse = extract_link.json()
-    return jsonresponse
-
-def stripstring(arg):
-    #arg = str(arg).strip("['")
-    #arg = str(arg).strip(",']")
-
-    #return arg
-    if arg != None:
-       return arg[0]
-    else:
-        return None
-
-def getitemdata(arg, p=[]):
-    # gets all the requested values (p) for a given item (arg) and puts them in plist in the requested order, with title and description first
-    plist = []
-    # Gets the header information.
-    myjson = getdataheader(arg)
-    # Uses a class for easier nested searching.
-    # Stripstring gets rid of excess chars.
-    json_id = stripstring(DictQuery(myjson).get("search/id"))
-    json_title = stripstring(DictQuery(myjson).get("search/title"))
-    json_desc = stripstring(DictQuery(myjson).get("search/description"))
-    plist.append(json_title)
-    plist.append(json_desc)
-    
-    # Gets the actual information for that item
-    jsonbody = getdatabody(json_id)
-    for i in p:
-        try:
-            plist.append(DictQuery(jsonbody).get("entities/{0}/claims/{1}/mainsnak/datavalue/value".format(json_id, i)))
-        except:
-            plist.append("[unknown]")
-    
-    return plist
 
 @bot.command()
 async def pronoun(ctx, arg = None):
