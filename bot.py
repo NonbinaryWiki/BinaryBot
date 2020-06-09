@@ -233,6 +233,8 @@ async def identity(ctx, *, arg):
     except:
         await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
     
+    print(str(data))
+    
     umbrella = ", ".join(data[0])
     frequency = "".join(data[1])
     related = ", ".join(data[2])
