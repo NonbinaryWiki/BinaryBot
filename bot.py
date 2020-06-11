@@ -251,7 +251,7 @@ async def identity(ctx, *, arg):
     flag = data[5][0] # list, should have a single item but just in case
     
     interlink_json = getdatabody(main_id)
-    interlink = stripsting(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
+    interlink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
     
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(arg.upper()), description=desc, url="https://nonbinary.wiki/wiki/{0}".format(interlink))
