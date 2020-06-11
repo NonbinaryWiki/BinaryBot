@@ -285,6 +285,8 @@ async def identity(ctx, *, arg):
     if gallery != "None":
         embed.add_field(name="Pride flag gallery", value="[Click here!]({0})".format(gallery))
     embed.set_footer(text="This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki).")
+    
+    await discord.Message.delete(message)
     await ctx.send(embed=embed)
 
 @bot.command()
