@@ -227,7 +227,7 @@ async def identity(ctx, *, arg):
         await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
         return
     message = await ctx.send("Give me a moment. I will search the NBDb...")
-    properties = ["P14", "P11", "P15", "P21"] # Properties for umbrella term, frequency, related identities, and main flag.
+    properties = ["P14", "P11", "P15", "P21", "P37"] # Properties for umbrella term, frequency, related identities, and main flag.
     try:
         data = getitemdata(arg, properties)    
     except:
@@ -245,7 +245,10 @@ async def identity(ctx, *, arg):
     else:
         umbrella = "None"
     
-    frequency = data[3][0]
+    if data[3] != None:
+        frequency = data[3][0]
+    else:
+        frequency = "No data"
     
     if data[4] != None:
         related_id = data[4][0]['id'] #this is a Qid
@@ -254,7 +257,15 @@ async def identity(ctx, *, arg):
     else:
         related = "None"
     
-    flag = data[5][0] # list, should have a single item but just in case
+    if data[5] != None:
+        flag = data[5][0] # list, should have a single item but just in case
+    else:
+        flag = "https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png"
+        
+    if data[6] != None:
+        gallery = data[6][0]
+    else:
+        gallery = "None"
     
     interlink_json = getdatabody(main_id)
     if "nonbinarywiki" in interlink_json:
@@ -271,9 +282,9 @@ async def identity(ctx, *, arg):
     if related != "None":
         embed.add_field(name="Related identities", value="{0}".format(related))
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(frequency))
-    #embed.add_field(name="Pride Gallery",
-    #                value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ", "_")))
-    embed.set_footer(text="This command is still work in progress; bugs are expected! Ping @Ondo if you see an error.")
+    if gallery != "None":
+        embed.add_field(name="Pride flag gallery", value="[Click here!]({0})".format(gallery))
+    embed.set_footer(text="This data has been extracted from the [Nonbinary Database](https://data.nonbinary.wiki/), a [Nonbinary Wiki](https://nonbinary.wiki/) project.")
     await ctx.send(embed=embed)
 
 @bot.command()
