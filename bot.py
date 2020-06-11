@@ -268,7 +268,7 @@ async def identity(ctx, *, arg):
     embed.set_thumbnail(url=flag)
     if umbrella != "None":
         embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
-    if related != "None:
+    if related != "None":
         embed.add_field(name="Related identities", value="{0}".format(related))
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(frequency))
     #embed.add_field(name="Pride Gallery",
