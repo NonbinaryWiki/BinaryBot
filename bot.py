@@ -266,8 +266,10 @@ async def identity(ctx, *, arg):
     # Set embed
     embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
     embed.set_thumbnail(url=flag)
-    embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
-    embed.add_field(name="Related identities", value="{0}".format(related))
+    if umbrella != "None":
+        embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
+    if related != "None:
+        embed.add_field(name="Related identities", value="{0}".format(related))
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(frequency))
     #embed.add_field(name="Pride Gallery",
     #                value="[Click here!](https://nonbinary.wiki/wiki/{0})".format(gallery.replace(" ", "_")))
