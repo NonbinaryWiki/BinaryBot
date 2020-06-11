@@ -238,15 +238,21 @@ async def identity(ctx, *, arg):
     desc = data[1]
     main_id = data[0].split(':')[1] # data[0] is Item:Qid
     
-    umbrella_id = data[2][0]['id'] #this is a Qid
-    umbrella_json = getdataheader(umbrella_id)
-    umbrella = stripstring(DictQuery(umbrella_json).get("search/label"))
+    if data[2] != None:
+        umbrella_id = data[2][0]['id'] #this is a Qid
+        umbrella_json = getdataheader(umbrella_id)
+        umbrella = stripstring(DictQuery(umbrella_json).get("search/label"))
+    else:
+        umbrella = "None"
     
     frequency = data[3][0]
     
-    related_id = data[4][0]['id'] #this is a Qid
-    related_json = getdataheader(related_id)
-    related = stripstring(DictQuery(related_json).get("search/label"))
+    if data[4] != None:
+        related_id = data[4][0]['id'] #this is a Qid
+        related_json = getdataheader(related_id)
+        related = stripstring(DictQuery(related_json).get("search/label"))
+    else:
+        related = "None"
     
     flag = data[5][0] # list, should have a single item but just in case
     
@@ -254,7 +260,7 @@ async def identity(ctx, *, arg):
     interlink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
     
     # Set embed
-    embed = discord.Embed(title=':link: {0}'.format(arg.upper()), description=desc, url="https://nonbinary.wiki/wiki/{0}".format(interlink))
+    embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="https://nonbinary.wiki/wiki/{0}".format(interlink))
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
     embed.add_field(name="Related identities", value="{0}".format(related))
