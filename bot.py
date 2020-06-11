@@ -257,10 +257,14 @@ async def identity(ctx, *, arg):
     flag = data[5][0] # list, should have a single item but just in case
     
     interlink_json = getdatabody(main_id)
-    interlink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
+    if "nonbinarywiki" in interlink_json:
+        sitelink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
+        interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
+    else:
+        interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
     
     # Set embed
-    embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="https://nonbinary.wiki/wiki/{0}".format(interlink))
+    embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
     embed.add_field(name="Related identities", value="{0}".format(related))
