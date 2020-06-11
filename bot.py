@@ -284,7 +284,7 @@ async def identity(ctx, *, arg):
     embed.add_field(name="Gender Census", value="{0}% of respondents".format(frequency))
     if gallery != "None":
         embed.add_field(name="Pride flag gallery", value="[Click here!]({0})".format(gallery))
-    embed.set_footer(text="This data has been extracted from the [Nonbinary Database](https://data.nonbinary.wiki/), a [Nonbinary Wiki](https://nonbinary.wiki/) project.")
+    embed.set_footer(text="This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki).")
     await ctx.send(embed=embed)
 
 @bot.command()
