@@ -271,7 +271,7 @@ async def identity(ctx, *, arg):
     interlink_json = getdatabody(main_id)
     sitelinks = DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
     if "nonbinarywiki" in sitelinks:
-        sitelink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
+        sitelink = DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
         interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
     else:
         interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
