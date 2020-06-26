@@ -223,6 +223,7 @@ async def flag(ctx, *, arg):
 @bot.command()
 async def identity(ctx, *, arg):
     """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
+    # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
     if arg == None:
         await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
         return
@@ -268,7 +269,8 @@ async def identity(ctx, *, arg):
         gallery = "None"
     
     interlink_json = getdatabody(main_id)
-    if "nonbinarywiki" in interlink_json:
+    sitelinks = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id)))
+    if "nonbinarywiki" in sitelinks:
         sitelink = stripstring(DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id)))
         interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
     else:
