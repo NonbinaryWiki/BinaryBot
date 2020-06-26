@@ -12,6 +12,8 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
+footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
+
 ### Commands:
 
 bot = commands.Bot(command_prefix='!')
@@ -286,7 +288,7 @@ async def identity(ctx, *, arg):
     embed.add_field(name="Gender Census", value="{0} of respondents".format(frequency))
     if gallery != "None":
         embed.add_field(name="Pride flag gallery", value="[Click here!]({0})".format(gallery))
-    embed.set_footer(text="This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki).")
+    embed.set_footer(text=footer)
     
     await discord.Message.delete(message)
     await ctx.send(embed=embed)
@@ -395,7 +397,7 @@ async def pronoun(ctx, arg = None):
     embed.add_field(name="Possessive Pronoun", value="The book is **{}**.".format(pos), inline=True)
     embed.add_field(name="Reflexive", value="{} did it by **{}**.".format(subj.capitalize(), ref), inline=True)
     embed.add_field(name="Frequency", value=freq, inline=True)
-    embed.set_footer(text="Remember! If you are not sure, just ask!")
+    embed.set_footer(text=footer)
 
     await discord.Message.delete(message)
     await ctx.send(embed=embed)
