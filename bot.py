@@ -5,6 +5,8 @@ import pytumblr
 import logging
 import mwparserfromhell
 import csv
+import random
+import re
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -425,18 +427,32 @@ async def pronountest(ctx, name, arg = None):
     pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
     ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
 
-    if num.lower() == "singular":
-        verb = "was"
-    elif num.lower == "plural":
-        verb = "were"
+    if num.lower() == "singular": # this is a bit clunky, can it be improved?
+        was_were = "was"
+        is_are = "is"
+    elif num.lower() == "plural":
+        was_were = "were"
+        is_are = "are"
     else:
-        verb = "was/were"
-        
-    story = "It wasn't too long ago when {0} found {1} in a sticky situation. Quite literally, actually. ".format( 
-            name, ref) + subj.capitalize() + " {0} trying to open a bottle ".format(verb) + \
-            "of honey, when all of a sudden, {0} lost {1} grip on the bottle and the honey squirted all over those wonderful ".format(subj, posad) + \
-            "clothes of {0} and the rest of {1}!".format(pos, ref)
-
+        was_were = "was/were"
+        is_are = "is/are"
+    
+    with open('stories.txt') as stories:
+        stories_ls = stories.read().splitlines() # .readlines() leaves the trailing newline, .splitlines() does not
+    
+    story = random.choice(stories_ls).format(
+        name = name.capitalize(),
+        subj = subj,
+        obj = obj,
+        posad = posad,
+        pos = pos,
+        ref = ref,
+        was_were = was_were,
+        is_are = is_are)
+    
+    sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
+    story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
+                                                                # which is undesirable in the case of "I"
     await discord.Message.delete(message)
 
     try:
