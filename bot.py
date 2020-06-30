@@ -83,12 +83,18 @@ async def on_ready():
     print('------')
 
 
-@bot.command()
+@bot.command(
+    help="Use this command to check if the bot is listening and can talk in the current channel.",
+    description="Ping?",
+)
 async def ping(ctx):
     """ Pongs (and confirms that the bot is listening). """
-    await ctx.send("Pong! :ping_pong:")
+    await ctx.send("Pong! :ping_pong: ({0}ms)".format(round(bot.latency * 1000)))
 
-@bot.command()
+
+@bot.command(
+    help="Thank you, random citizen!",
+    description="Thank you, random citizen!")
 async def thank(ctx):
     """ Send "Thank you random citizen" gif and a link to the patreon """
     await ctx.send("If you have the funds, help us keep the wiki alive!\n<https://www.patreon.com/nonbinarywiki>")
@@ -97,7 +103,13 @@ async def thank(ctx):
 
 ### WIKI-RELATED COMMANDS ###
 
-@bot.command()
+@bot.command(
+    help="Returns useful technical information about the specified wiki page.",
+    description="Enter the name of an existing Nonbinary Wiki page to get some useful technical information about the page, " \
+                "such as the amount of contributors, protection status and categorization.",
+    usage="<page>",
+    brief="nonbinary"
+)
 async def pinfo(ctx, *, arg):
     """ Gives some useful information about a wiki page: number of contributors, categories, protection level and useful links. """
     page = arg
@@ -156,7 +168,13 @@ async def pinfo(ctx, *, arg):
         raise
 
 
-@bot.command()
+@bot.command(
+    help="Returns the most common pride flag for the identity and a short description.",
+    description="Enter a nonbinary identity to get its most common pride flag and a short description of the identity.\n" \
+                "You will also get a link to the pride gallery for that identity, so that you can see alternative flags for your identity.",
+    usage="<identity>",
+    brief="nonbinary"
+)
 async def flag(ctx, *, arg):
     """ Returns a link to the Pride Gallery of the specified identity. """
     images = {
@@ -224,7 +242,13 @@ async def flag(ctx, *, arg):
     await ctx.send(embed=embed)
 
 
-@bot.command()
+@bot.command(
+    help="Gets some information about the specified identity from the Nonbinary Wiki.",
+    description="Enter a nonbinary identity to get a short description of the identity as well as some useful data, " \
+                "such as its popularity in the Gender Census. You will also get a link to the wiki page about this identity.",
+    usage="<identity>",
+    brief="nonbinary"
+)
 async def identity(ctx, *, arg):
     """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
     # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
@@ -295,81 +319,53 @@ async def identity(ctx, *, arg):
     await discord.Message.delete(message)
     await ctx.send(embed=embed)
 
-@bot.command()
-async def help(ctx, command="list"):
-    if str.lower(command) == "pronoun":
-        embed = discord.Embed(title=':grey_question: !pronoun <pronoun set>', color=discord.Colour.purple(),
-                              description="Type !pronoun followed by a pronoun set to get some information about the given pronouns. \
-                        Please, give the bot the first two pronouns of the set only")
-        embed.add_field(name="Example", value="!pronoun they/them")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "pronountest":
+@bot.command(
+    help="This message!",
+    description="Sends a list of all available commands from the bot. " \
+                "You can specify a command as a parameter to get more information on it, as well as an example.",
+    usage="[command]",
+    brief="ping"
+    )
+async def help(ctx, arg="list"):
+    cmds = [getattr(cmd, "name") for cmd in bot.commands]
+    
+    """ a primer:
+    command.help is the text that appears when calling !help with no arguments
+    command.description is the longer text that appears when calling !help with a specific command
+    command.usage should be self-explanatory. don't include the name of the command in it, though!
+    command.brief is the text to use in the example- this also shouldn't include the command's name
+    """
+    
+    if arg.lower() in cmds:
+        command = bot.get_command(arg.lower())
+        usage = command.usage if command.usage is not None else '' # prevents lack of args from appearing as None, e.g. "!thanks None"
         embed = discord.Embed(
-            title=':grey_question: !pronountest <name> <pronoun>',
+            title=":grey_question: {0}{1} {2}".format(bot.command_prefix, command.name, usage),
             color=discord.Colour.purple(),
-            description="!pronountest, followed by the following arguments (if you're entering \
-                              more than one word, please enter them in quotes \"like this.\"")
-        embed.add_field(name="Name", value="Your name.", inline=True)
-        embed.add_field(name="Pronoun",
-                        value="Can be both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')", inline=True)
+            description=command.description)
+        if command.usage is not None: # display this field only if the command actually takes arguments
+            embed.add_field(name="Example", value="{0}{1} {2}".format(bot.command_prefix, command.name, command.brief))
         await ctx.send(embed=embed)
-    elif str.lower(command) == "pinfo":
-        embed = discord.Embed(title=':grey_question: !pinfo <page>', color=discord.Colour.purple(),
-                              description="Type !pinfo followed by the name of an existing Nonbinary Wiki page to get some useful \
-                             technical information about the page, such as the amount of contributors, protection status and categorization.")
-        embed.add_field(name="Example", value="!pinfo nonbinary")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "flag":
-        embed = discord.Embed(title=':grey_question: !flag <identity>', color=discord.Colour.purple(),
-                              description="Type !flag followed by a nonbinary identity to get its most common pride flag and a short \
-                             description of the identity. You will also get a link to the pride gallery for that identity, so that you \
-                             can see alternative flags for your identity.")
-        embed.add_field(name="Example", value="!flag nonbinary")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "identity":
-        embed = discord.Embed(title=':grey_question: !identity <identity>', color=discord.Colour.purple(),
-                              description="Type !identity followed by a nonbinary identity to get a short description of the identity \
-                             as well as some useful data, such as its popularity in the Gender Census. You will also get a link to the \
-                             wiki page about this identity.")
-        embed.add_field(name="Example", value="!identity nonbinary")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "ping":
-        embed = discord.Embed(title=':grey_question: !ping', color=discord.Colour.purple(),
-                              description="Ping?")
-        embed.add_field(name="Example", value="!ping")
-        embed.set_footer(text="(pong.)")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "help":
-        embed = discord.Embed(title=':grey_question: !help [command]', color=discord.Colour.purple(),
-                              description="Sends a list of all available commands from the bot. You can specify a command as a parameter \
-                             to get more information on it, as well as an example.")
-        embed.add_field(name="Example", value="!help ping")
-        await ctx.send(embed=embed)
-    elif str.lower(command) == "thank":
-        embed = discord.Embed(title=':grey_question: !thank', color=discord.Colour.purple(),
-                              description="Thank you, random citizen!")
-        await ctx.send(embed=embed)
-    else:
+        
+    elif arg.lower() == "list":
         embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
-        embed.add_field(name="!flag <identity>",
-                        value="Returns the most common pride flag for the identity and a short description.")
-        embed.add_field(name="!help [command]", value="This message!")
-        embed.add_field(name="!identity <identity>",
-                        value="Gets some information about the specified identity from the Nonbinary Wiki.")
-        embed.add_field(name="!pinfo <page>",
-                        value="Returns useful technical information about the specified wiki page.")
-        embed.add_field(name="!ping",
-                        value="Use this command to check if the bot is listening and can talk in the curent channel.")
-        embed.add_field(name="!pronoun <pronoun set>",
-                        value="Gives some useful information about the specified pronoun set.")
-        embed.add_field(name="!pronountest <name> <pronouns>",
-                        value="Tests the given data in a predefined sentence (this command is WIP).")
-        embed.add_field(name="!thank",
-                        value="Thank you, random citizen!")
-        embed.set_footer(text="Use !help [command] to get more information on a specific command.")
+        for command in bot.commands:
+            if not command.hidden: # i don't expect that this bot will have any hidden commands, i'm just preventing unexpected behavior
+                usage = command.usage if command.usage is not None else ''
+                embed.add_field(name="{0}{1} {2}".format(bot.command_prefix, command.name, usage), value=command.help)
+        embed.set_footer(text="Use {0}help [command] to get more information on a specific command.".format(bot.command_prefix))
         await ctx.send(embed=embed)
+        
+    else:
+        await ctx.send("I couldn't find a command named '{0}'.".format(arg.lower()))
 
-@bot.command()
+
+@bot.command(
+    help="Gives some useful information about the specified pronoun set.",
+    description="Get some information about the given pronouns. Please, give the bot the first two pronouns of the set only",
+    usage="<pronoun set>",
+    brief="they/them"
+)
 async def pronoun(ctx, arg = None):
     if arg == None:
         await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
@@ -405,7 +401,14 @@ async def pronoun(ctx, arg = None):
     await ctx.send(embed=embed)
 
 
-@bot.command()
+@bot.command(
+    help="Tests the given data in a predefined sentence (this command is WIP).",
+    description="Try on some new pronouns and see if they fit you!\n" \
+                "Pronouns can be entered as both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')\n" \
+                "If you're entering more than one word, please enter them in quotes \"like this\".",
+    usage="<name> <pronoun>",
+    brief="John she/her"
+)
 async def pronountest(ctx, name, arg = None):
     if arg == None:
         await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
