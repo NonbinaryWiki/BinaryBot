@@ -84,7 +84,7 @@ async def on_ready():
 
 
 @bot.command(
-    help="Use this command to check if the bot islistening and can talk in the current channel.",
+    help="Use this command to check if the bot is listening and can talk in the current channel.",
     description="Ping?",
 )
 async def ping(ctx):
