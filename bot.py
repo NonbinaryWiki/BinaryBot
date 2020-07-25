@@ -491,7 +491,7 @@ class DictQuery(dict):
 async def update(ctx):
     if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
         output = subprocess.check_output("git pull", shell=True)
-        await ctx.send("Pulling latest version from GitHub: " + output)
+        await ctx.send("Pulling latest version from GitHub: " + str(output))
     else:
         await ctx.send("You don't have permission to use this command.")
     
