@@ -503,7 +503,9 @@ async def update(ctx):
 )
 async def reload(ctx):
     if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
-        bot.logout()
-        bot.login(os.environ['TOKEN'])
+        await ctx.send("Reloading...")
+        await bot.logout()
+        await bot.login(os.environ['TOKEN'])
+        await ctx.send(":robot: All systems online :robot:")
 
 bot.run(os.environ['TOKEN'])
