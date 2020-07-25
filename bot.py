@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import urllib, json, requests, os
+import urllib, json, requests, os, subprocess
 import pytumblr
 import logging
 import mwparserfromhell
@@ -481,5 +481,22 @@ class DictQuery(dict):
                 break;
 
         return val
+
+@bot.command(
+    help="Updates the bot to the latest version. Admin-only command",
+    description="Pulls the latest version from the GitHub repository. Only Ondo can use this command",
+    usage="",
+    brief=""
+)
+async def update(ctx):
+    if user.id == "192011575777951744": #That's Ondo's Discord user ID
+        output = subprocess.check_output("git pull", shell=True)
+        if output.startswith("Already"):
+            await ctx.send("I'm already up-to-date")
+        else:
+            await ctx.send("Pulling latest version from GitHub: " + output)
+    else:
+        await ctx.send("You don't have permission to use this command.")
+    
 
 bot.run(os.environ['TOKEN'])
