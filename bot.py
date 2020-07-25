@@ -489,8 +489,7 @@ class DictQuery(dict):
     brief=""
 )
 async def update(ctx):
-    print(ctx.message.author.id)
-    if ctx.message.author.id == "192011575777951744": #That's Ondo's Discord user ID
+    if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
         output = subprocess.check_output("git pull", shell=True)
         if output.startswith("Already"):
             await ctx.send("I'm already up-to-date")
