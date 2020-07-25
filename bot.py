@@ -495,5 +495,15 @@ async def update(ctx):
     else:
         await ctx.send("You don't have permission to use this command.")
     
+@bot.command(
+    help="Reloads the bot. Admin-only command",
+    description="Realods the bot by making it disconnect and connect again to Discord. Only Ondo can use this command",
+    usage="",
+    brief=""
+)
+async def reload(ctx):
+    if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
+        bot.logout()
+        bot.login(os.environ['TOKEN'])
 
 bot.run(os.environ['TOKEN'])
