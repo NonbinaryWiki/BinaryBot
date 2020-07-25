@@ -484,7 +484,7 @@ class DictQuery(dict):
 
 @bot.command(
     help="Updates the bot to the latest version. Admin-only command",
-    description="Pulls the latest version from the GitHub repository. Only Ondo can use this command",
+    description="Pulls the latest version of the code from the GitHub repository. Only Ondo can use this command",
     usage="",
     brief=""
 )
