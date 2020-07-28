@@ -414,8 +414,6 @@ async def pronountest(ctx, name = None, arg = None):
         await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
         return
     
-    await ctx.send(":warning: This command is currently broken. Ondo is investigating the issue, but they are busy with real life. If you know Python, you're free to look at it in <https://github.com/NeoMahler/BinaryBot/blob/master/bot.py#L404>. Thanks for your patience!")
-
     message = await ctx.send("Give me a moment. I will search the NBDb...")
     properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
     try:
