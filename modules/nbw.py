@@ -15,7 +15,7 @@ class NBWCog(commands.Cog):
         usage="<identity>",
         brief="nonbinary"
     )
-    async def flag(ctx, *, arg):
+    async def flag(self, ctx, *, arg):
         """ Returns a link to the Pride Gallery of the specified identity. """
         images = {
             'agender': 'https://static.miraheze.org/nonbinarywiki/thumb/8/83/Agender.png/300px-Agender.png',
@@ -88,7 +88,7 @@ class NBWCog(commands.Cog):
     usage="<page>",
     brief="nonbinary"
     )
-    async def pinfo(ctx, *, arg):
+    async def pinfo(self, ctx, *, arg):
         """ Gives some useful information about a wiki page: number of contributors, categories, protection level and useful links. """
         page = arg
         try:

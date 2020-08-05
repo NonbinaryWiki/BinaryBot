@@ -18,7 +18,7 @@ class NBDbCog(commands.Cog):
         usage="<identity>",
         brief="nonbinary"
     )
-    async def identity(ctx, *, arg):
+    async def identity(self, ctx, *, arg):
         """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
         # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
         if arg == None:
@@ -94,7 +94,7 @@ class NBDbCog(commands.Cog):
         usage="<pronoun set>",
         brief="they/them"
     )
-    async def pronoun(ctx, arg = None):
+    async def pronoun(self, ctx, arg = None):
         if arg == None:
             await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
             return
@@ -137,7 +137,7 @@ class NBDbCog(commands.Cog):
         usage="<name> <pronoun>",
         brief="John she/her"
     )
-    async def pronountest(ctx, name = None, arg = None):
+    async def pronountest(self, ctx, name = None, arg = None):
         if arg == None or name == None:
             await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
             return

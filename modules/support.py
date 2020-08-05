@@ -5,19 +5,19 @@ from discord.ext import commands
 class SupportCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+
     @commands.command(
         help="Use this command to check if the bot is listening and can talk in the current channel.",
         description="Ping?",
     )
-    async def ping(ctx):
+    async def ping(self, ctx):
         """ Pongs (and confirms that the bot is listening). """
         await ctx.send("Pong! :ping_pong: ({0}ms)".format(round(bot.latency * 1000)))
 
     @commands.command(
         help="Thank you, random citizen!",
         description="Thank you, random citizen!")
-    async def thank(ctx):
+    async def thank(self, ctx):
         """ Send "Thank you random citizen" gif and a link to the patreon """
         await ctx.send("If you have the funds, help us keep the wiki alive!\n<https://www.patreon.com/nonbinarywiki>")
         await ctx.send(file=discord.File('random_citizen.gif'))
@@ -29,7 +29,7 @@ class SupportCog(commands.Cog):
         usage="[command]",
         brief="ping"
         )
-    async def help(ctx, arg="list"):
+    async def help(cself, tx, arg="list"):
         cmds = [getattr(cmd, "name") for cmd in bot.commands]
         
         """ a primer:
