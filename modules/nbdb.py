@@ -3,7 +3,7 @@ from discord.ext import commands
 import urllib, json, requests
 import random
 import re
-import utilities
+import modules.utilities
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
 
