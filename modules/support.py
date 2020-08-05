@@ -8,7 +8,7 @@ class SupportCog(commands.Cog):
 
     @commands.command(
         help="Use this command to check if the bot is listening and can talk in the current channel.",
-        description="Ping?",
+        description="Ping?"
     )
     async def ping(self, ctx):
         """ Pongs (and confirms that the bot is listening). """
