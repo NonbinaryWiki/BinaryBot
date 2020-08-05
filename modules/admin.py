@@ -12,7 +12,7 @@ class AdminCog(commands.Cog):
         hidden=True
     )
     @commands.is_owner()
-    async def update(self, ctx):
+    async def update(self, ctx, cog: str):
         if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
             output = subprocess.check_output("git pull", shell=True)
             await ctx.send("Pulling latest version from GitHub: ```" + str(output) + "```")
