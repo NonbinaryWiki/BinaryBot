@@ -3,7 +3,6 @@ from discord.ext import commands
 import urllib, json, requests
 import random
 import re
-import modules.utilities
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
 
@@ -21,15 +20,16 @@ class NBDbCog(commands.Cog):
     async def identity(self, ctx, *, arg):
         """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
         # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
+        utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None:
             await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P14", "P11", "P15", "P21", "P37"] # Properties for umbrella term, frequency, related identities, and main flag.
         try:
-            data = getitemdata(arg, properties)    
+            data = utilities.getitemdata(arg, properties)    
         except:
-            await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
         
         print(str(data))
         
@@ -95,15 +95,16 @@ class NBDbCog(commands.Cog):
         brief="they/them"
     )
     async def pronoun(self, ctx, arg = None):
+        utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None:
             await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
         try:
-            data = getitemdata(arg, properties)    
+            data = utilities.getitemdata(arg, properties)    
         except:
-            await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
 
         #title = ''.join(data[0]) 
         desc = ''.join(data[1]) 
@@ -138,6 +139,7 @@ class NBDbCog(commands.Cog):
         brief="John she/her"
     )
     async def pronountest(self, ctx, name = None, arg = None):
+        utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None or name == None:
             await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
             return
@@ -145,9 +147,9 @@ class NBDbCog(commands.Cog):
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
         try:
-            data = getitemdata(arg, properties)
+            data = utilities.getitemdata(arg, properties)
         except:
-            await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+            await ctx.send("ThThat term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             await discord.Message.delete(message)
         print(str(data))
         #title = ''.join(data[0]) 
