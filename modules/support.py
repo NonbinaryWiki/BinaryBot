@@ -31,6 +31,7 @@ class SupportCog(commands.Cog):
         )
     async def help(self, ctx, arg="list"):
         cmds = [getattr(cmd, "name") for cmd in self.bot.commands]
+        prefix = self.bot.get_prefix()
         
         """ a primer:
         command.help is the text that appears when calling !help with no arguments
@@ -43,7 +44,7 @@ class SupportCog(commands.Cog):
             command = self.bot.get_command(arg.lower())
             usage = command.usage if command.usage is not None else '' # prevents lack of args from appearing as None, e.g. "!thanks None"
             embed = discord.Embed(
-                title=":grey_question: {0}{1} {2}".format(get_prefix, command.name, usage),
+                title=":grey_question: {0}{1} {2}".format(prefix, command.name, usage),
                 color=discord.Colour.purple(),
                 description=command.description)
             if command.usage is not None: # display this field only if the command actually takes arguments
