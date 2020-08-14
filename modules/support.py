@@ -31,7 +31,7 @@ class SupportCog(commands.Cog):
         )
     async def help(self, ctx, arg="list"):
         cmds = [getattr(cmd, "name") for cmd in self.bot.commands]
-        prefix = self.bot.get_prefix(ctx)
+        prefix = "!"
         
         """ a primer:
         command.help is the text that appears when calling !help with no arguments
@@ -48,7 +48,7 @@ class SupportCog(commands.Cog):
                 color=discord.Colour.purple(),
                 description=command.description)
             if command.usage is not None: # display this field only if the command actually takes arguments
-                embed.add_field(name="Example", value="{0}{1} {2}".format(self.bot.command_prefix, command.name, command.brief))
+                embed.add_field(name="Example", value="{0}{1} {2}".format(prefix, command.name, command.brief))
             await ctx.send(embed=embed)
             
         elif arg.lower() == "list":
@@ -56,8 +56,8 @@ class SupportCog(commands.Cog):
             for command in self.bot.commands:
                 if not command.hidden: # i don't expect that this bot will have any hidden commands, i'm just preventing unexpected behavior
                     usage = command.usage if command.usage is not None else ''
-                    embed.add_field(name="{0}{1} {2}".format(self.bot.command_prefix, command.name, usage), value=command.help)
-            embed.set_footer(text="Use {0}help [command] to get more information on a specific command.".format(self.bot.command_prefix))
+                    embed.add_field(name="{0}{1} {2}".format(prefix, command.name, usage), value=command.help)
+            embed.set_footer(text="Use {0}help [command] to get more information on a specific command.".format(prefix))
             await ctx.send(embed=embed)
             
         else:
