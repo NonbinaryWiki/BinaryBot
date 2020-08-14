@@ -38,7 +38,7 @@ class SupportCog(commands.Cog):
         command.usage should be self-explanatory. don't include the name of the command in it, though!
         command.brief is the text to use in the example- this also shouldn't include the command's name
         """
-        
+        print("Command is running." + str(cmds))
         if arg.lower() in cmds:
             command = self.bot.get_command(arg.lower())
             usage = command.usage if command.usage is not None else '' # prevents lack of args from appearing as None, e.g. "!thanks None"
@@ -51,11 +51,15 @@ class SupportCog(commands.Cog):
             await ctx.send(embed=embed)
             
         elif arg.lower() == "list":
+            print("Full command list")
             embed = discord.Embed(title=':grey_question: List of commands', color=discord.Colour.purple())
             for command in self.bot.commands:
                 if not command.hidden: # i don't expect that this bot will have any hidden commands, i'm just preventing unexpected behavior
+                    print("this command is not hidden:" + str(command))
                     usage = command.usage if command.usage is not None else ''
                     embed.add_field(name="{0}{1} {2}".format(self.bot.command_prefix, command.name, usage), value=command.help)
+                else:
+                    print("this command is hidden:" + str(command))
             embed.set_footer(text="Use {0}help [command] to get more information on a specific command.".format(self.bot.command_prefix))
             await ctx.send(embed=embed)
             
