@@ -31,7 +31,7 @@ class SupportCog(commands.Cog):
         )
     async def help(self, ctx, arg="list"):
         cmds = [getattr(cmd, "name") for cmd in self.bot.commands]
-        prefix = self.bot.get_prefix()
+        prefix = self.bot.get_prefix(ctx)
         
         """ a primer:
         command.help is the text that appears when calling !help with no arguments
