@@ -123,13 +123,12 @@ class NBDbCog(commands.Cog):
         else:
             alt_flags = "None"
         
-        meaning_json = utilities.getdatabody(main_id)
-        meaning = utilities.DictQuery(meaning_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
+        data_json = utilities.getdatabody(main_id)
         
-        interlink_json = utilities.getdatabody(main_id)
-        sitelinks = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
+        meaning = utilities.DictQuery(data_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
+        sitelinks = utilities.DictQuery(data_json).get("entities/{0}/sitelinks".format(main_id))
         if "nonbinarywiki" in sitelinks:
-            sitelink = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
+            sitelink = utilities.DictQuery(data_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
         else:
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
