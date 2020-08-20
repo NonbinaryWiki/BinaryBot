@@ -131,9 +131,8 @@ class NBDbCog(commands.Cog):
             await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
             return
         
-        flag_num = int(flag)
-        if flag_num != None:
-            show_flag = alt_flags[flag_num]
+        if flag != None:
+            show_flag = alt_flags[int(flag)]
         else:
             show_flag = main_flag
             
@@ -146,7 +145,7 @@ class NBDbCog(commands.Cog):
         else:
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
         
-        if flag_num == None:
+        if flag == None:
             meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
             try:
                 meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
