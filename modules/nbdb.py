@@ -103,12 +103,11 @@ class NBDbCog(commands.Cog):
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P21", "P22"] # Properties for main flag and alternative flags.
         try:
-            data = utilities.getitemdata(arg, properties)    
+            data = utilities.getitemdata(arg, properties)
+            print(str(data))
         except:
             await discord.Message.delete(message)
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
-            
-        print(str(data))
         
         desc = data[1]
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
