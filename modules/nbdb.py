@@ -105,6 +105,7 @@ class NBDbCog(commands.Cog):
         try:
             data = utilities.getitemdata(arg, properties)    
         except:
+            await discord.Message.delete(message)
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
         
         print(str(data))
@@ -116,7 +117,7 @@ class NBDbCog(commands.Cog):
             main_flag = data[2][0]
         else:
             await discord.Message.delete(message)
-            await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {arg}` to get more information about this identity.")
+            await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {0}` to get more information about this identity.".format(arg))
         
         if data[3] != None:
             alt_flags = str(len(data[3]))
@@ -139,8 +140,8 @@ class NBDbCog(commands.Cog):
         embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
         embed.set_thumbnail(url=main_flag)
         if meaning != "None":
-            embed.add_field(name="Flag meaning", value="{meaning}")
-        embed.add_field(name="Alternative flags", value="{alt_flags}")
+            embed.add_field(name="Flag meaning", value="{0}".format(meaning))
+        embed.add_field(name="Alternative flags", value="{0}".format(alt_flags))
         embed.set_footer(text=footer)
         
         await discord.Message.delete(message)
