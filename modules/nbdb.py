@@ -124,7 +124,7 @@ class NBDbCog(commands.Cog):
             alt_flags = "None"
         
         meaning_json = utilities.getdatabody(main_id)
-        meaning = utilities.DictQuery(interlink_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
+        meaning = utilities.DictQuery(meaning_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
         
         interlink_json = utilities.getdatabody(main_id)
         sitelinks = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
