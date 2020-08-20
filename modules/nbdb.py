@@ -95,7 +95,7 @@ class NBDbCog(commands.Cog):
         usage="<identity>",
         brief="nonbinary"
     )
-    async def flag(self, ctx, *, arg, flag = None):
+    async def flag(self, ctx, arg, flag = None):
         """ Gives some information about the specified identity flag. """
         utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None:
@@ -104,8 +104,7 @@ class NBDbCog(commands.Cog):
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P21", "P22"] # Properties for main flag and alternative flags.
         try:
-            identity = ' '.split(arg)[0]
-            data = utilities.getitemdata(identity, properties)
+            data = utilities.getitemdata(arg, properties)
             print(str(data))
         except:
             await discord.Message.delete(message)
