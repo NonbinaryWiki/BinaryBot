@@ -89,6 +89,63 @@ class NBDbCog(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(
+        help="Gets some information about the specified flag from the Nonbinary Wiki.",
+        description="Enter a nonbinary identity to get its flag and its meaning, as well as alternative flags if there are any.",
+        usage="<identity>",
+        brief="nonbinary"
+    )
+    async def flag(self, ctx, *, arg):
+        """ Gives some information about the specified identity flag. """
+        utilities = self.bot.get_cog("UtilitiesCog")
+        if arg == None:
+            await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
+            return
+        message = await ctx.send("Give me a moment. I will search the NBDb...")
+        properties = ["P21", "P22"] # Properties for main flag and alternative flags.
+        try:
+            data = utilities.getitemdata(arg, properties)    
+        except:
+            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+        
+        print(str(data))
+        
+        desc = data[1]
+        main_id = data[0].split(':')[1] # data[0] is Item:Qid
+        
+        if data[2] != None:
+            main_flag = data[2][0]['id'] #this is a Qid
+        else:
+            await discord.Message.delete(message)
+            await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {arg}` to get more information about this identity.")
+        
+        if data[3] != None:
+            alt_flags = str(len(data[3]))
+        else:
+            alt_flags = "None"
+        
+        meaning_json = utilities.getdatabody(main_id)
+        meaning = utilities.DictQuery(interlink_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
+        
+        interlink_json = utilities.getdatabody(main_id)
+        sitelinks = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
+        if "nonbinarywiki" in sitelinks:
+            sitelink = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
+            interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
+        else:
+            interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
+        
+        # Set embed
+        embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
+        embed.set_thumbnail(url=main_flag)
+        if meaning != "None":
+            embed.add_field(name="Flag meaning", value="{meaning}")
+        embed.add_field(name="Alternative flags", value="{alt_flags}")
+        embed.set_footer(text=footer)
+        
+        await discord.Message.delete(message)
+        await ctx.send(embed=embed)
+        
+    @commands.command(
         help="Gives some useful information about the specified pronoun set.",
         description="Get some information about the given pronouns. Please, give the bot the first two pronouns of the set only",
         usage="<pronoun set>",
