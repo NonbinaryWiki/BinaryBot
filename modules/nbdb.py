@@ -113,7 +113,7 @@ class NBDbCog(commands.Cog):
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
         
         if data[2] != None:
-            main_flag = data[2][0]['id'] #this is a Qid
+            main_flag = data[2][0]
         else:
             await discord.Message.delete(message)
             await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {arg}` to get more information about this identity.")
