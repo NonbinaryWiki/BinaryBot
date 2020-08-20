@@ -30,6 +30,7 @@ class NBDbCog(commands.Cog):
             data = utilities.getitemdata(arg, properties)    
         except:
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+            return
         
         print(str(data))
         
@@ -96,6 +97,7 @@ class NBDbCog(commands.Cog):
     )
     async def flag(self, ctx, *, arg, flag = None):
         """ Gives some information about the specified identity flag. """
+        print(str(arg))
         utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None:
             await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
@@ -108,6 +110,7 @@ class NBDbCog(commands.Cog):
         except:
             await discord.Message.delete(message)
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+            return
         
         desc = data[1]
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
@@ -183,7 +186,8 @@ class NBDbCog(commands.Cog):
             data = utilities.getitemdata(arg, properties)    
         except:
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
-
+            return
+        
         #title = ''.join(data[0]) 
         desc = ''.join(data[1]) 
         freq = ''.join(data[8]) if isinstance(data[8], list) else "[unknown]"
@@ -229,6 +233,8 @@ class NBDbCog(commands.Cog):
         except:
             await ctx.send("ThThat term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             await discord.Message.delete(message)
+            return
+        
         print(str(data))
         #title = ''.join(data[0]) 
         #desc = ''.join(data[1]) 
