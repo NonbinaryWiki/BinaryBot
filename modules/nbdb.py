@@ -92,8 +92,8 @@ class NBDbCog(commands.Cog):
     @commands.command(
         help="Gets some information about the specified flag from the Nonbinary Wiki.",
         description="Enter a nonbinary identity to get its flag and its meaning, as well as alternative flags if there are any.",
-        usage="<identity>",
-        brief="nonbinary"
+        usage="<identity> [numer]",
+        brief="nonbinary 1"
     )
     async def flag(self, ctx, arg, flag = None):
         """ Gives some information about the specified identity flag. """
@@ -132,8 +132,9 @@ class NBDbCog(commands.Cog):
             await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
             return
         
+        flag_num = int(flag)-1
         if flag != None:
-            show_flag = flags_list[int(flag)]
+            show_flag = flags_list[flag_num]
         else:
             show_flag = main_flag
             
@@ -155,7 +156,7 @@ class NBDbCog(commands.Cog):
         else:
             meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P22".format(main_id))
             try:
-                meaning = meaning_json[int(flag)]["qualifiers"]["P38"][0]["datavalue"]["value"]
+                meaning = meaning_json[flag_num]["qualifiers"]["P38"][0]["datavalue"]["value"]
             except KeyError:
                 meaning = "Unknown"
         
