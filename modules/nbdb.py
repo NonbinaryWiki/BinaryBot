@@ -155,7 +155,7 @@ class NBDbCog(commands.Cog):
         else:
             meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P22".format(main_id))
             try:
-                meaning = meaning_json[flag]["qualifiers"]["P38"][0]["datavalue"]["value"]
+                meaning = meaning_json[int(flag)]["qualifiers"]["P38"][0]["datavalue"]["value"]
             except KeyError:
                 meaning = "Unknown"
         
