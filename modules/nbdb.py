@@ -91,9 +91,10 @@ class NBDbCog(commands.Cog):
 
     @commands.command(
         help="Gets some information about the specified flag from the Nonbinary Wiki.",
-        description="Enter a nonbinary identity to get its flag and its meaning, as well as alternative flags if there are any.",
-        usage="<identity> [numer]",
-        brief="nonbinary 1"
+        description="Enter a nonbinary identity to get its flag and its meaning, as well as alternative flags if there are any. You may use a number" \
+                    " after the identity to get an alternative flag; this number can be anything from 1 to the number of available alternative flags.",
+        usage="<identity> [number]",
+        brief="nonbinary"
     )
     async def flag(self, ctx, arg, flag = None):
         """ Gives some information about the specified identity flag. """
