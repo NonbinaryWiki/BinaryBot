@@ -132,8 +132,9 @@ class NBDbCog(commands.Cog):
             await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
             return
         
-        flag_num = int(flag)-1
+        
         if flag != None:
+            flag_num = int(flag)-1
             show_flag = flags_list[flag_num]
         else:
             show_flag = main_flag
