@@ -125,13 +125,14 @@ class NBDbCog(commands.Cog):
         
         data_json = utilities.getdatabody(main_id)
         
-        meaning = utilities.DictQuery(data_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
         sitelinks = utilities.DictQuery(data_json).get("entities/{0}/sitelinks".format(main_id))
         if "nonbinarywiki" in sitelinks:
             sitelink = utilities.DictQuery(data_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
         else:
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
+
+        meaning = utilities.DictQuery(data_json).get("entities/{0}/claims/P21/qualifiers/P38/datavalue/value".format(main_id))
         
         # Set embed
         embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
