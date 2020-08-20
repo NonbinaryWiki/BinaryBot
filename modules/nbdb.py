@@ -134,13 +134,15 @@ class NBDbCog(commands.Cog):
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
 
         meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
-        meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
+        try:
+            meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
+        except KeyError:
+            meaning = "Unknown"
         
         # Set embed
         embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
         embed.set_thumbnail(url=main_flag)
-        if meaning != "None":
-            embed.add_field(name="Flag meaning", value="{0}".format(meaning))
+        embed.add_field(name="Flag meaning", value="{0}".format(meaning))
         embed.add_field(name="Alternative flags", value="{0}".format(alt_flags))
         embed.set_footer(text=footer)
         
