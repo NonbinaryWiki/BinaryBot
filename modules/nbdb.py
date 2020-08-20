@@ -123,6 +123,7 @@ class NBDbCog(commands.Cog):
         
         if data[3] != None:
             alt_flags = str(len(data[3]))
+            flags_list = data[3]
         else:
             alt_flags = "None"
         
@@ -132,7 +133,7 @@ class NBDbCog(commands.Cog):
             return
         
         if flag != None:
-            show_flag = alt_flags[int(flag)]
+            show_flag = flags_list[int(flag)]
         else:
             show_flag = main_flag
             
