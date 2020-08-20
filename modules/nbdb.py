@@ -125,7 +125,7 @@ class NBDbCog(commands.Cog):
         else:
             alt_flags = "None"
         
-        if flag > alt_flags:
+        if flag != None and flag > alt_flags:
             await discord.Message.delete(message)
             await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
             return
