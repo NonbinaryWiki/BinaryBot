@@ -94,7 +94,7 @@ class NBDbCog(commands.Cog):
         usage="<identity>",
         brief="nonbinary"
     )
-    async def flag(self, ctx, *, arg):
+    async def flag(self, ctx, *, arg, flag = None):
         """ Gives some information about the specified identity flag. """
         utilities = self.bot.get_cog("UtilitiesCog")
         if arg == None:
@@ -107,7 +107,7 @@ class NBDbCog(commands.Cog):
         except:
             await discord.Message.delete(message)
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
-        
+            
         print(str(data))
         
         desc = data[1]
@@ -118,12 +118,23 @@ class NBDbCog(commands.Cog):
         else:
             await discord.Message.delete(message)
             await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {0}` to get more information about this identity.".format(arg))
+            return
         
         if data[3] != None:
             alt_flags = str(len(data[3]))
         else:
             alt_flags = "None"
         
+        if flag > alt_flags:
+            await discord.Message.delete(message)
+            await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
+            return
+        
+        if flag != None:
+            show_flag = alt_flags[flag]
+        else:
+            show_flag = main_flag
+            
         data_json = utilities.getdatabody(main_id)
         
         sitelinks = utilities.DictQuery(data_json).get("entities/{0}/sitelinks".format(main_id))
@@ -132,16 +143,23 @@ class NBDbCog(commands.Cog):
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
         else:
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
-
-        meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
-        try:
-            meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
-        except KeyError:
-            meaning = "Unknown"
+        
+        if flag == None:
+            meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
+            try:
+                meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
+            except KeyError:
+                meaning = "Unknown"
+        else:
+            meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P22".format(main_id))
+            try:
+                meaning = meaning_json[flag]["qualifiers"]["P38"][0]["datavalue"]["value"]
+            except KeyError:
+                meaning = "Unknown"
         
         # Set embed
         embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
-        embed.set_thumbnail(url=main_flag)
+        embed.set_thumbnail(url=show_flag)
         embed.add_field(name="Flag meaning", value="{0}".format(meaning))
         embed.add_field(name="Alternative flags", value="{0}".format(alt_flags))
         embed.set_footer(text=footer)
