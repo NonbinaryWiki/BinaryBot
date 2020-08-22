@@ -144,6 +144,11 @@ class NBDbCog(commands.Cog):
         else:
             show_flag = main_flag # use the default flag if no alternative flag is specified
             
+        if show_flag.endswith('.svg'): # Apparently embeds don't like svg files
+            await discord.Message.delete(message)
+            await ctx.send("I found this flag, but I can't display it. You may view it in this URL: {0}".format(show_flag))
+            return
+            
         data_json = utilities.getdatabody(main_id)
         
         # Pick a page to link in the embed title (preferably the wiki article)
