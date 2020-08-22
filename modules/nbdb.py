@@ -25,7 +25,8 @@ class NBDbCog(commands.Cog):
             await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
-        properties = ["P14", "P11", "P15", "P21", "P37"] # Properties for umbrella term, frequency, related identities, and main flag.
+        properties = ["P14", "P11", "P15", "P21", "P37"] # Properties for umbrella term, frequency, related identities, main flag, and pride gallery link.
+        
         try:
             data = utilities.getitemdata(arg, properties)    
         except:
@@ -34,44 +35,46 @@ class NBDbCog(commands.Cog):
         
         print(str(data))
         
+        # Process data
         desc = data[1]
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
         
-        if data[2] != None:
-            umbrella_id = data[2][0]['id'] #this is a Qid
+        if data[2] != None: # Check if it has a P14 claim (umbrella term)
+            umbrella_id = data[2][0]['id'] # this is a Qid
             umbrella_json = utilities.getdataheader(umbrella_id)
-            umbrella = utilities.stripstring(utilities.DictQuery(umbrella_json).get("search/label"))
+            umbrella = utilities.stripstring(utilities.DictQuery(umbrella_json).get("search/label")) # this is the item's label
         else:
             umbrella = "None"
         
-        if data[3] != None:
-            frequency = data[3][0]
+        if data[3] != None: # Check if it has a P11 claim (Gender Census percentage)
+            frequency = data[3][0] # this is a number with the % symbol
         else:
             frequency = "No data"
         
-        if data[4] != None:
-            related_id = data[4][0]['id'] #this is a Qid
+        if data[4] != None: #Check if it has a P15 claim (related identities)
+            related_id = data[4][0]['id'] # this is a Qid
             related_json = utilities.getdataheader(related_id)
-            related = utilities.stripstring(utilities.DictQuery(related_json).get("search/label"))
+            related = utilities.stripstring(utilities.DictQuery(related_json).get("search/label")) # this is the item's label
         else:
             related = "None"
         
-        if data[5] != None:
+        if data[5] != None: # Check if it has a P21 claim (main pride flag)
             flag = data[5][0] # list, should have a single item but just in case
         else:
             flag = "https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png"
             
-        if data[6] != None:
+        if data[6] != None: # check if it has a P37 claim (pride gallery link)
             gallery = data[6][0]
         else:
             gallery = "None"
         
+        # Get interwiki for the nonbinary wiki
         interlink_json = utilities.getdatabody(main_id)
         sitelinks = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
         if "nonbinarywiki" in sitelinks:
             sitelink = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
-        else:
+        else: # fallback: link to the nbdb item page
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
         
         # Set embed
@@ -104,6 +107,7 @@ class NBDbCog(commands.Cog):
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P21", "P22"] # Properties for main flag and alternative flags.
+        
         try:
             data = utilities.getitemdata(arg, properties)
             print(str(data))
@@ -112,24 +116,25 @@ class NBDbCog(commands.Cog):
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             return
         
+        # Process data
         desc = data[1]
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
         
-        if data[2] != None:
+        if data[2] != None: # Look for the main flag (data[2] is the P21 claim)
             main_flag = data[2][0]
         else:
             await discord.Message.delete(message)
             await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {0}` to get more information about this identity.".format(arg))
             return
         
-        if data[3] != None:
+        if data[3] != None: # Look for alternative flags (data[3] is the P22 claim)
             alt_flags = str(len(data[3]))
             flags_list = data[3]
         else:
             alt_flags = "None"
-             
-        if flag != None:
-            flag_num = int(flag)-1
+        
+        if flag != None: # If there is a flag number specified, make sure that it actually exists
+            flag_num = int(flag)-1 # make it human and start counting from 1, not 0
             if int(flag) > int(alt_flags):
                 await discord.Message.delete(message)
                 await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
@@ -137,33 +142,35 @@ class NBDbCog(commands.Cog):
             else:
                 show_flag = flags_list[flag_num]
         else:
-            show_flag = main_flag
+            show_flag = main_flag # use the default flag if no alternative flag is specified
             
         data_json = utilities.getdatabody(main_id)
         
+        # Pick a page to link in the embed title (preferably the wiki article)
         sitelinks = utilities.DictQuery(data_json).get("entities/{0}/sitelinks".format(main_id))
         if "nonbinarywiki" in sitelinks:
             sitelink = utilities.DictQuery(data_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
-        else:
+        else: # fallback: link to the nbdb item page for the identity
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
         
-        if flag == None:
+        # Choose which flag to get
+        if flag == None: # Get the default flag + meaning (default behaviour)
             meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
             try:
                 meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
             except KeyError:
                 meaning = "Unknown"
-        else:
+        else: # Get the specified alternative flag (if any). "flag" is the second argument of the command
             meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P22".format(main_id))
             try:
                 meaning = meaning_json[flag_num]["qualifiers"]["P38"][0]["datavalue"]["value"]
             except KeyError:
-                meaning = "Unknown"
+                meaning = "Unknown"         
         
         # Set embed
         embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
-        embed.set_thumbnail(url=show_flag)
+        embed.set_image(url=show_flag)
         embed.add_field(name="Flag meaning", value="{0}".format(meaning))
         embed.add_field(name="Alternative flags", value="{0}".format(alt_flags))
         embed.set_footer(text=footer)
@@ -184,12 +191,14 @@ class NBDbCog(commands.Cog):
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
+        
         try:
             data = utilities.getitemdata(arg, properties)    
         except:
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             return
         
+        # Process data
         #title = ''.join(data[0]) 
         desc = ''.join(data[1]) 
         freq = ''.join(data[8]) if isinstance(data[8], list) else "[unknown]"
@@ -200,6 +209,7 @@ class NBDbCog(commands.Cog):
         pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
         ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
         
+        # Set embed
         embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
         embed.add_field(name="Conjugation", value=num, inline=True)
         embed.add_field(name="Subjective", value="**{}** ate the cake.".format(subj.capitalize()), inline=True)
@@ -230,14 +240,17 @@ class NBDbCog(commands.Cog):
         
         message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
+        
         try:
             data = utilities.getitemdata(arg, properties)
         except:
-            await ctx.send("ThThat term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             await discord.Message.delete(message)
             return
         
         print(str(data))
+        
+        # Process data
         #title = ''.join(data[0]) 
         #desc = ''.join(data[1]) 
         num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
@@ -246,7 +259,8 @@ class NBDbCog(commands.Cog):
         posad = '/'.join(data[5]) if isinstance(data[5], list) else "[unknown]"
         pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
         ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
-
+        
+        # Make sure that the verbs are conjugated according to the item's P4 claim (conjugation)
         if num.lower() == "singular": # this is a bit clunky, can it be improved?
             was_were = "was"
             is_are = "is"
@@ -257,6 +271,7 @@ class NBDbCog(commands.Cog):
             was_were = "was/were"
             is_are = "is/are"
         
+        # Randomly choose and create a story
         with open('stories.txt') as stories:
             stories_ls = stories.read().splitlines() # .readlines() leaves the trailing newline, .splitlines() does not
         
@@ -279,6 +294,7 @@ class NBDbCog(commands.Cog):
             await ctx.send(story)
         except:
             await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
+            await discord.Message.delete(message)
 
 def setup(bot):
     bot.add_cog(NBDbCog(bot))
