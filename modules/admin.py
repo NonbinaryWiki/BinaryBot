@@ -13,12 +13,9 @@ class AdminCog(commands.Cog):
     )
     @commands.is_owner()
     async def update(self, ctx):
-        if ctx.message.author.id == 192011575777951744: #That's Ondo's Discord user ID
-            output = subprocess.check_output("git pull", shell=True)
-            await ctx.send("Pulling latest version from GitHub: ```" + str(output) + "```")
-            await ctx.send("Remember to use the reload command for the changes to take effect.")
-        else:
-            await ctx.send("You don't have permission to use this command.")
+        output = subprocess.check_output("git pull", shell=True)
+        await ctx.send("Pulling latest version from GitHub: ```" + str(output) + "```")
+        await ctx.send("Remember to use the reload command for the changes to take effect.")
 
     # Hidden means it won't show up on the default help.
     @commands.command(
@@ -32,9 +29,9 @@ class AdminCog(commands.Cog):
         try:
             self.bot.load_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('Module loaded! :tada:')
 
     @commands.command(
         help="Unloads a module. Admin-only command",
@@ -46,9 +43,9 @@ class AdminCog(commands.Cog):
         try:
             self.bot.unload_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('Module unloaded! :tada:')
 
     @commands.command(
         help="Reloads a module. Admin-only command",
@@ -61,9 +58,9 @@ class AdminCog(commands.Cog):
             self.bot.unload_extension(cog)
             self.bot.load_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('Module unloaded! :tada:')
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
