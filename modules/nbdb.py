@@ -269,12 +269,15 @@ class NBDbCog(commands.Cog):
         if num.lower() == "singular": # this is a bit clunky, can it be improved?
             was_were = "was"
             is_are = "is"
+            has_have = "has"
         elif num.lower() == "plural":
             was_were = "were"
             is_are = "are"
+            has_have = "have"
         else:
             was_were = "was/were"
             is_are = "is/are"
+            has_have = "has/have"
         
         # Randomly choose and create a story
         with open('stories.txt') as stories:
