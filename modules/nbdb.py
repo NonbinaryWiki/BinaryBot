@@ -306,7 +306,7 @@ class NBDbCog(commands.Cog):
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
-        if not arg.lower() = "none":
+        if not arg.lower() == "none":
             await discord.Message.delete(message) # message doesn't exist if the no pronouns option is used
 
         try:
