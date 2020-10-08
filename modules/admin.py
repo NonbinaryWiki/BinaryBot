@@ -60,7 +60,7 @@ class AdminCog(commands.Cog):
         except Exception as e:
             await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
-            await ctx.send('Module unloaded! :tada:')
+            await ctx.send('Module reloaded! :tada:')
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
