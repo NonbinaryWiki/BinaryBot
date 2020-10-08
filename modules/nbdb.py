@@ -246,10 +246,10 @@ class NBDbCog(commands.Cog):
         if arg.lower() == "none": #no pronouns/name as pronouns option.
             num = "singular"
             subj = name
-            obj = name
-            ref = name
-            posad = name + "'s"
-            pos = name
+            obj = name.capitalize()
+            ref = name.capitalize()
+            posad = name.capitalize() + "'s"
+            pos = name.capitalize()
         else:
             message = await ctx.send("Give me a moment. I will search the NBDb...")
             properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
