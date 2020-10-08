@@ -243,27 +243,35 @@ class NBDbCog(commands.Cog):
             await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
             return
         
-        message = await ctx.send("Give me a moment. I will search the NBDb...")
-        properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
-        
-        try:
-            data = utilities.getitemdata(arg, properties)
-        except:
-            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
-            await discord.Message.delete(message)
-            return
-        
-        print(str(data))
-        
-        # Process data
-        #title = ''.join(data[0]) 
-        #desc = ''.join(data[1]) 
-        num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
-        subj = '/'.join(data[3]) if isinstance(data[3], list) else "[unknown]"
-        obj = '/'.join(data[4]) if isinstance(data[4], list) else "[unknown]"
-        posad = '/'.join(data[5]) if isinstance(data[5], list) else "[unknown]"
-        pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
-        ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
+        if arg.lower() == "none": #no pronouns/name as pronouns option.
+            num = "singular"
+            subj = name
+            obj = name
+            ref = name
+            posad = name + "'s"
+            pos = name
+        else:
+            message = await ctx.send("Give me a moment. I will search the NBDb...")
+            properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
+
+            try:
+                data = utilities.getitemdata(arg, properties)
+            except:
+                await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+                await discord.Message.delete(message)
+                return
+
+            print(str(data))
+
+            # Process data
+            #title = ''.join(data[0]) 
+            #desc = ''.join(data[1]) 
+            num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
+            subj = '/'.join(data[3]) if isinstance(data[3], list) else "[unknown]"
+            obj = '/'.join(data[4]) if isinstance(data[4], list) else "[unknown]"
+            posad = '/'.join(data[5]) if isinstance(data[5], list) else "[unknown]"
+            pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
+            ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
         
         # Make sure that the verbs are conjugated according to the item's P4 claim (conjugation)
         if num.lower() == "singular": # this is a bit clunky, can it be improved?
@@ -289,9 +297,11 @@ class NBDbCog(commands.Cog):
             obj = obj,
             posad = posad,
             pos = pos,
+            pospro = pos,
             ref = ref,
             was_were = was_were,
-            is_are = is_are)
+            is_are = is_are,
+            has_have = has_have)
         
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
