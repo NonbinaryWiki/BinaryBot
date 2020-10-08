@@ -230,11 +230,12 @@ class NBDbCog(commands.Cog):
 
 
     @commands.command(
-        help="Tests the given data in a predefined sentence (this command is WIP).",
+        help="Tests the given pronouns in a random sentence.",
         description="Try on some new pronouns and see if they fit you!\n" \
                     "Pronouns can be entered as both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')\n" \
-                    "If you're entering more than one word, please enter them in quotes \"like this\".",
-        usage="<name> <pronoun>",
+                    "Instead of a pronoun, you can also enter 'none' and the bot will use no pronouns (using the name instead)." \
+                    "If you're entering more than one word for the name, please enter them in quotes \"like this\".",
+        usage="<name> <pronoun|none>",
         brief="John she/her"
     )
     async def pronountest(self, ctx, name = None, arg = None):
@@ -245,9 +246,9 @@ class NBDbCog(commands.Cog):
         
         if arg.lower() == "none": #no pronouns/name as pronouns option.
             num = "singular"
-            subj = name
+            subj = name.capitalize()
             obj = name.capitalize()
-            ref = name.capitalize()
+            ref = name.capitalize() + "'s self"
             posad = name.capitalize() + "'s"
             pos = name.capitalize()
         else:
