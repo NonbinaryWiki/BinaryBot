@@ -25,7 +25,7 @@ class NBDbCog(commands.Cog):
             await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
             return
         message = await ctx.send("Give me a moment. I will search the NBDb...")
-        properties = ["P14", "P11", "P15", "P21", "P37"] # Properties for umbrella term, frequency, related identities, main flag, and pride gallery link.
+        properties = ["P1", "P14", "P11", "P15", "P21", "P37"] # Properties for instance of, umbrella term, frequency, related identities, main flag, and pride gallery link.
         
         try:
             data = utilities.getitemdata(arg, properties)    
@@ -36,8 +36,14 @@ class NBDbCog(commands.Cog):
         print(str(data))
         
         # Process data
-        desc, umbrella_data, frequency_data, related_data, flag_data, gallery_data = data[1:]
-        main_id = data[0].split(':')[1] # data[0] is Item:Qid
+        entry_title, desc, instance_of, umbrella_data, frequency_data, related_data, flag_data, gallery_data = data
+        main_id = entry_title.split(':')[1] # entry_title is Item:Qid
+
+        if instance_of == None or all(claim['id'] != "Q7" for claim in instance_of):
+            embed = discord.Embed(description="If you believe the database entry at https://data.nonbinary.wiki/wiki/" + entry_title + " should be classified as an identity, consider editing it to include an `Instance of (P1)` property with the value `Gender identity (Q7)`.")
+            await ctx.send(":warning: We found a matching result in the database but it does not seem to be a gender identity term. Example: `!identity nonbinary`. (Maybe you made a typo?)", embed=embed)
+            await discord.Message.delete(message)
+            return
 
         # Default responses 
         umbrella = related = gallery = "None"
