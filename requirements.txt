@@ -1,5 +1,5 @@
+wheel
 git+https://github.com/Rapptz/discord.py
 requests==2.20.0
-pytumblr==0.0.8
 mwparserfromhell==0.5.2
 python-csv
