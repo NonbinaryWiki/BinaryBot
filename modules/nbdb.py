@@ -36,37 +36,32 @@ class NBDbCog(commands.Cog):
         print(str(data))
         
         # Process data
-        desc = data[1]
+        desc, umbrella_data, frequency_data, related_data, flag_data, gallery_data = data[1:]
         main_id = data[0].split(':')[1] # data[0] is Item:Qid
+
+        # Default responses 
+        umbrella = related = gallery = "None"
+        frequency = "No data"
+        flag = "https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png"
         
-        if data[2] != None: # Check if it has a P14 claim (umbrella term)
-            umbrella_id = data[2][0]['id'] # this is a Qid
+        if umbrella_data != None: # Check if it has a P14 claim (umbrella term)
+            umbrella_id = umbrella_data[0]['id'] # this is a Qid
             umbrella_json = utilities.getdataheader(umbrella_id)
             umbrella = utilities.stripstring(utilities.DictQuery(umbrella_json).get("search/label")) # this is the item's label
-        else:
-            umbrella = "None"
         
-        if data[3] != None: # Check if it has a P11 claim (Gender Census percentage)
-            frequency = data[3][0] # this is a number with the % symbol
-        else:
-            frequency = "No data"
+        if frequency_data != None: # Check if it has a P11 claim (Gender Census percentage)
+            frequency = frequency_data[0] # this is a number with the % symbol
         
-        if data[4] != None: #Check if it has a P15 claim (related identities)
-            related_id = data[4][0]['id'] # this is a Qid
+        if related_data != None: #Check if it has a P15 claim (related identities)
+            related_id = related_data[0]['id'] # this is a Qid
             related_json = utilities.getdataheader(related_id)
             related = utilities.stripstring(utilities.DictQuery(related_json).get("search/label")) # this is the item's label
-        else:
-            related = "None"
         
-        if data[5] != None: # Check if it has a P21 claim (main pride flag)
-            flag = data[5][0] # list, should have a single item but just in case
-        else:
-            flag = "https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png"
+        if flag_data != None: # Check if it has a P21 claim (main pride flag)
+            flag = flag_data[0] # list, should have a single item but just in case
             
-        if data[6] != None: # check if it has a P37 claim (pride gallery link)
-            gallery = data[6][0]
-        else:
-            gallery = "None"
+        if gallery_data != None: # check if it has a P37 claim (pride gallery link)
+            gallery = gallery_data[0]
         
         # Get interwiki for the nonbinary wiki
         interlink_json = utilities.getdatabody(main_id)
