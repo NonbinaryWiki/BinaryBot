@@ -4,3 +4,9 @@ __pycache__/
 *$py.class
 *.log
 users.txt
+
+# Visual Studio Code files
+.vscode/
+
+# dotenv file
+.env

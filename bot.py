@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from dotenv import load_dotenv
+
 import logging, sys, traceback, os
 
 logger = logging.getLogger('discord')
@@ -52,4 +54,5 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 
+load_dotenv()
 bot.run(os.environ['TOKEN'], bot=True, reconnect=True)
