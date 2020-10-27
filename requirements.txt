@@ -1,5 +1,5 @@
 wheel
-git+https://github.com/Rapptz/discord.py
+discord
 requests==2.20.0
 mwparserfromhell==0.5.2
 python-csv
