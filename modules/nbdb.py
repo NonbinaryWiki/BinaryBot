@@ -207,7 +207,10 @@ class NBDbCog(commands.Cog):
         # Process data
         #title = ''.join(data[0]) 
         print("data: " + str(data))
-        desc = ''.join(data[1]) 
+        if data[1] == None: # Workaround to an NBDb bug where the item description is not displayed.
+            desc = ""
+        else:
+            desc = ''.join(data[1]) 
         freq = ''.join(data[8]) if isinstance(data[8], list) else "[unknown]"
         num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
         subj = '/'.join(data[3]) if isinstance(data[3], list) else "[unknown]"
