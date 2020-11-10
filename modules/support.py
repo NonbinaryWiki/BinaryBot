@@ -22,6 +22,16 @@ class SupportCog(commands.Cog):
         await ctx.send("If you have the funds, help us keep the wiki alive!\n<https://www.patreon.com/nonbinarywiki>")
         await ctx.send(file=discord.File('random_citizen.gif'))
 
+        
+    @commands.command(
+        help="Use this command to invite the bot to your own server.",
+        description="Gives a link that can be used to invite the bot to your server if you have the Manage Server permission."
+    )
+    async def invite(self, ctx):
+        """ Send an invite link for the bot. """
+        await ctx.send("Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. " \ 
+                       "https://discord.com/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=bot")
+        
     @commands.command(
         help="This message!",
         description="Sends a list of all available commands from the self.bot. " \
