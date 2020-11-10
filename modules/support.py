@@ -19,7 +19,7 @@ class SupportCog(commands.Cog):
         description="Thank you, random citizen!")
     async def thank(self, ctx):
         """ Send "Thank you random citizen" gif and a link to the patreon """
-        await ctx.send("If you have the funds, help us keep the wiki alive!\n<https://www.patreon.com/nonbinarywiki>")
+        await ctx.send("You can support the Nonbinary Wiki and this bot through Ko-fi!\n<https://ko-fi.com/nonbinarywiki>")
         await ctx.send(file=discord.File('random_citizen.gif'))
 
         
@@ -29,7 +29,7 @@ class SupportCog(commands.Cog):
     )
     async def invite(self, ctx):
         """ Send an invite link for the bot. """
-        await ctx.send("Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. https://discord.com/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=bot")
+        await ctx.send("Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. <https://discord.com/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=bot>")
         
     @commands.command(
         help="This message!",
