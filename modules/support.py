@@ -29,8 +29,7 @@ class SupportCog(commands.Cog):
     )
     async def invite(self, ctx):
         """ Send an invite link for the bot. """
-        await ctx.send("Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. " + \ 
-                       "https://discord.com/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=bot")
+        await ctx.send("Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. https://discord.com/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=bot")
         
     @commands.command(
         help="This message!",
