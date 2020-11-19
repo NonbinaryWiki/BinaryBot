@@ -61,6 +61,18 @@ class AdminCog(commands.Cog):
             await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
             await ctx.send('Module reloaded! :tada:')
+    @commands.command(
+        help="Displays a list of server the bot is in. Admin-only command",
+        description="Displays an updated list of al servers the bot is in. Only the bot owner can use this command",
+        hidden=true
+    )
+    @commands.is_owner()
+    async def servers(self, ctx):
+        activeservers = client.guilds
+        servernames = []
+        for guild in activeservers:
+            servernames.append(guild.name)
+        await ctx.send(", ".join(servernames))
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
