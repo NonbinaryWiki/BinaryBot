@@ -72,7 +72,7 @@ class AdminCog(commands.Cog):
         servernames = []
         for guild in activeservers:
             servernames.append(guild.name)
-        await ctx.send(", ".join(servernames))
+        await ctx.send("I'm in **{0}** servers:  {1}".format(len(servernames)), ", ".join(servernames))
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
