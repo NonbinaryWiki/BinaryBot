@@ -64,7 +64,7 @@ class AdminCog(commands.Cog):
     @commands.command(
         help="Displays a list of server the bot is in. Admin-only command",
         description="Displays an updated list of al servers the bot is in. Only the bot owner can use this command",
-        hidden=true
+        hidden=True
     )
     @commands.is_owner()
     async def servers(self, ctx):
