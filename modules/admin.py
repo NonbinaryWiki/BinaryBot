@@ -68,7 +68,7 @@ class AdminCog(commands.Cog):
     )
     @commands.is_owner()
     async def servers(self, ctx):
-        activeservers = bot.guilds
+        activeservers = self.bot.guilds
         servernames = []
         for guild in activeservers:
             servernames.append(guild.name)
