@@ -53,6 +53,13 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='you!'))
     print(f'Successfully logged in and booted...!')
 
+@bot.event
+async def on_message(message):
+    guild = message.guild
+    if guild and message.startswith(tuple(get_prefix(bot, message))):
+        path = "chatlogs/{}.txt".format(guild.id)  
+        with open(path, 'a+') as f:
+            print("{0.timestamp} : {0.author.name} : {0.content}".format(message), file=f)
 
 load_dotenv()
 bot.run(os.environ['TOKEN'], bot=True, reconnect=True)
