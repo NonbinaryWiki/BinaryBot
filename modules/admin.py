@@ -73,6 +73,15 @@ class AdminCog(commands.Cog):
         for guild in activeservers:
             servernames.append(guild.name)
         await ctx.send("I'm in **{0}** servers:  {1}".format(len(servernames), ", ".join(servernames)))
+        
+    @commands.command(
+        help="Forcibly causes the bot to error, for debugging purposes. Admin-only command",
+        description="Forcibly causes the bot to error, for debugging purposes. Only the bot owner can use this command",
+        hidden=True
+    )
+    @commands.is_owner()
+    async def error(self, ctx):
+        raise ValueError("Someone used !error.")
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
