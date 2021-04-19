@@ -284,17 +284,17 @@ class NBDbCog(commands.Cog):
             was_were = "was"
             is_are = "is"
             has_have = "has"
-            like_likes = "likes"
+            s = "s"
         elif num.lower() == "plural":
             was_were = "were"
             is_are = "are"
             has_have = "have"
-            like_likes = "like"
+            s = ""
         else:
             was_were = "was/were"
             is_are = "is/are"
             has_have = "has/have"
-            like_likes = "like(s)
+            s = "(s)
         
         # Randomly choose and create a story
         with open('stories.txt') as stories:
