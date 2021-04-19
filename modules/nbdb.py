@@ -312,7 +312,7 @@ class NBDbCog(commands.Cog):
                     ref = ref,
                     was_were = was_were,
                     is_are = is_are,
-                    has_have = has_have
+                    has_have = has_have,
                     s = s) 
             else:
                 ctx.send("There isn't a story with this number. The current number of stories is {0}. Here's a random story instead:".format(len(stories_ls)))
@@ -326,7 +326,7 @@ class NBDbCog(commands.Cog):
                     ref = ref,
                     was_were = was_were,
                     is_are = is_are,
-                    has_have = has_have
+                    has_have = has_have,
                     s = s)
         else:
             story = random.choice(stories_ls).format(
@@ -339,7 +339,7 @@ class NBDbCog(commands.Cog):
                 ref = ref,
                 was_were = was_were,
                 is_are = is_are,
-                has_have = has_have
+                has_have = has_have,
                 s = s)
         
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
