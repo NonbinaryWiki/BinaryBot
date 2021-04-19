@@ -240,7 +240,7 @@ class NBDbCog(commands.Cog):
                     "Pronouns can be entered as both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')\n" \
                     "Instead of a pronoun, you can also enter 'none' and the bot will use no pronouns (using the name instead)." \
                     "If you're entering more than one word for the name, please enter them in quotes \"like this\".",
-        usage="<name> <pronoun|none>",
+        usage="<name> <pronoun|none> [story number]",
         brief="John she/her"
     )
     async def pronountest(self, ctx, name = None, arg = None, story_num = None):
@@ -284,14 +284,17 @@ class NBDbCog(commands.Cog):
             was_were = "was"
             is_are = "is"
             has_have = "has"
+            like_likes = "likes"
         elif num.lower() == "plural":
             was_were = "were"
             is_are = "are"
             has_have = "have"
+            like_likes = "like"
         else:
             was_were = "was/were"
             is_are = "is/are"
             has_have = "has/have"
+            like_likes = "like(s)
         
         # Randomly choose and create a story
         with open('stories.txt') as stories:
@@ -327,6 +330,7 @@ class NBDbCog(commands.Cog):
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
+        final_story = story.replace("\n", "\n")
         if not arg.lower() == "none":
             await discord.Message.delete(message) # message doesn't exist if the no pronouns option is used
 
