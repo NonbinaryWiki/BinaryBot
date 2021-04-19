@@ -300,21 +300,35 @@ class NBDbCog(commands.Cog):
         with open('stories.txt') as stories:
             stories_ls = stories.read().splitlines() # .readlines() leaves the trailing newline, .splitlines() does not
         
-        if int(story_num) <= len(stories_ls):
-            story = stories_ls[int(story_num)-1].format(
-               name = name.capitalize(),
-                subj = subj,
-                obj = obj,
-                posad = posad,
-                pos = pos,
-                pospro = pos,
-                ref = ref,
-                was_were = was_were,
-                is_are = is_are,
-                has_have = has_have) 
+        if story_num:
+            if int(story_num) <= len(stories_ls):
+                story = stories_ls[int(story_num)-1].format(
+                   name = name.capitalize(),
+                    subj = subj,
+                    obj = obj,
+                    posad = posad,
+                    pos = pos,
+                    pospro = pos,
+                    ref = ref,
+                    was_were = was_were,
+                    is_are = is_are,
+                    has_have = has_have
+                    s = s) 
+            else:
+                ctx.send("There isn't a story with this number. The current number of stories is {0}. Here's a random story instead:".format(len(stories_ls)))
+                story = random.choice(stories_ls).format(
+                    name = name.capitalize(),
+                    subj = subj,
+                    obj = obj,
+                    posad = posad,
+                    pos = pos,
+                    pospro = pos,
+                    ref = ref,
+                    was_were = was_were,
+                    is_are = is_are,
+                    has_have = has_have
+                    s = s)
         else:
-            ctx.send("There isn't a story with this number. The current number of stories is {0}. Here's a random story instead:".format(len(stories_ls)))
-        
             story = random.choice(stories_ls).format(
                 name = name.capitalize(),
                 subj = subj,
@@ -325,7 +339,8 @@ class NBDbCog(commands.Cog):
                 ref = ref,
                 was_were = was_were,
                 is_are = is_are,
-                has_have = has_have)
+                has_have = has_have
+                s = s)
         
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
