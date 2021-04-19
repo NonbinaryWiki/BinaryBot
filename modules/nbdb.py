@@ -298,7 +298,7 @@ class NBDbCog(commands.Cog):
         
         # Randomly choose and create a story
         with open('stories.txt') as stories:
-            stories_ls = stories.read().splitlines() # .readlines() leaves the trailing newline, .splitlines() does not
+            stories_ls = stories.read().replace("\n", "").split('|') # Due to multi-line stories, we need to use a custom separator.
         
         if story_num:
             if int(story_num) <= len(stories_ls):
