@@ -294,7 +294,7 @@ class NBDbCog(commands.Cog):
             was_were = "was/were"
             is_are = "is/are"
             has_have = "has/have"
-            s = "(s)
+            s = "(s)"
         
         # Randomly choose and create a story
         with open('stories.txt') as stories:
