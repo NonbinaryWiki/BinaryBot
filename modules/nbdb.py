@@ -335,7 +335,7 @@ class NBDbCog(commands.Cog):
             await discord.Message.delete(message) # message doesn't exist if the no pronouns option is used
 
         try:
-            await ctx.send(story)
+            await ctx.send(final_story)
         except:
             await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
             await discord.Message.delete(message)
