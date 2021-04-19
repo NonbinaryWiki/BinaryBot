@@ -315,7 +315,7 @@ class NBDbCog(commands.Cog):
                     has_have = has_have,
                     s = s) 
             else:
-                ctx.send("There isn't a story with this number. The current number of stories is {0}. Here's a random story instead:".format(len(stories_ls)))
+                ctx.send("There isn't a story with this number. The current number of stories is {0}.\nHere's a random story instead:".format(len(stories_ls)))
                 story = random.choice(stories_ls).format(
                     name = name.capitalize(),
                     subj = subj,
@@ -345,12 +345,11 @@ class NBDbCog(commands.Cog):
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
-        final_story = story.replace("\n", "\n")
         if not arg.lower() == "none":
             await discord.Message.delete(message) # message doesn't exist if the no pronouns option is used
 
         try:
-            await ctx.send(final_story)
+            await ctx.send(story)
         except:
             await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
             await discord.Message.delete(message)
