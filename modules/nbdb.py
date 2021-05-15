@@ -300,9 +300,14 @@ class NBDbCog(commands.Cog):
         with open('stories.txt') as stories:
             stories_ls = stories.read().replace("\n", "").split('|') # Due to multi-line stories, we need to use a custom separator.
         
-        story_num = story_num.replace('#','') # The stories have a # before its number, so some users were using the # in front of the number.
-        if story_num and int(story_num) <= len(stories_ls):
-            chosen_story = stories_ls[int(story_num)-1]
+        
+        if story_num:
+            story_num = story_num.replace('#','') # The stories have a # before its number, so some users were using the # in front of the number.
+            if int(story_num) <= len(stories_ls):
+                chosen_story = stories_ls[int(story_num)-1]
+            else:
+                await ctx.send("There's no story with this number! Giving you a random story instead:")
+                chosen_story = random.choice(stories_ls)
         else:
             chosen_story = random.choice(stories_ls)
         story = chosen_story.format(
