@@ -199,7 +199,7 @@ class NBDbCog(commands.Cog):
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
         
         try:
-            data = utilities.getitemdata(arg, properties)    
+            data = utilities.getitemdata(arg.lower(), properties)    
         except:
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             return
@@ -261,7 +261,7 @@ class NBDbCog(commands.Cog):
             properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
 
             try:
-                data = utilities.getitemdata(arg, properties)
+                data = utilities.getitemdata(arg.lower(), properties)
             except:
                 await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
                 await discord.Message.delete(message)
