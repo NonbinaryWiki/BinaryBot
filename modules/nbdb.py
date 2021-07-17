@@ -28,7 +28,7 @@ class NBDbCog(commands.Cog):
         properties = ["P1", "P14", "P11", "P15", "P21", "P37"] # Properties for instance of, umbrella term, frequency, related identities, main flag, and pride gallery link.
         
         try:
-            data = utilities.getitemdata(arg, properties)    
+            data = utilities.getitemdata(arg.lower(), properties)    
         except:
             await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
             return
