@@ -309,7 +309,7 @@ class NBDbCog(commands.Cog):
                 else:
                     await ctx.send("There's no story with this number! Giving you a random story instead:")
                     chosen_story = random.choice(stories_ls)
-             except ValueError:
+            except ValueError:
                 await ctx.send("The third parameter should be a number! For exemple: `!pronountest Name they/them #2`. I'll give you a random story instead:")
                 chosen_story = random.choice(stories_ls)
         else:
