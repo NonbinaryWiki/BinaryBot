@@ -5,6 +5,8 @@ import random
 import re
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
+connecterror = "I wasn't able to connect to the Nonbinary Database, so it might be temporarily down. Please try again later!"
+genericerror = "I couldn't find the term **{0}** in the NBDb! Maybe it's not added to the database, you made a typo, or I'm not intelligent enough to find it."
 
 class NBDbCog(commands.Cog):
     def __init__(self, bot):
@@ -29,8 +31,13 @@ class NBDbCog(commands.Cog):
         
         try:
             data = utilities.getitemdata(arg.capitalize(), properties)    
-        except:
-            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+        except requests.Timeout:
+            await ctx.send(connecterror)
+            await discord.Message.delete(message)
+            return
+        except Exception:
+            await ctx.send(genericerror.format(arg))
+            await discord.Message.delete(message)
             return
         
         print(str(data))
@@ -112,9 +119,13 @@ class NBDbCog(commands.Cog):
         try:
             data = utilities.getitemdata(arg.capitalize(), properties)
             print(str(data))
-        except:
+        except requests.Timeout:
+            await ctx.send(connecterror)
             await discord.Message.delete(message)
-            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+            return
+        except Exception:
+            await ctx.send(genericerror.format(arg))
+            await discord.Message.delete(message)
             return
         
         # Process data
@@ -200,8 +211,13 @@ class NBDbCog(commands.Cog):
         
         try:
             data = utilities.getitemdata(arg.lower(), properties)    
-        except:
-            await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+        except requests.Timeout:
+            await ctx.send(connecterror)
+            await discord.Message.delete(message)
+            return
+        except Exception:
+            await ctx.send(genericerror.format(arg))
+            await discord.Message.delete(message)
             return
         
         # Process data
@@ -262,8 +278,12 @@ class NBDbCog(commands.Cog):
 
             try:
                 data = utilities.getitemdata(arg.lower(), properties)
-            except:
-                await ctx.send("That term is not in the NBDb! Maybe it's not added to the database, or you made a typo.")
+            except requests.Timeout:
+                await ctx.send(connecterror)
+                await discord.Message.delete(message)
+                return
+            except Exception:
+                await ctx.send(genericerror.format(arg))
                 await discord.Message.delete(message)
                 return
 
