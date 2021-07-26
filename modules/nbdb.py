@@ -303,10 +303,14 @@ class NBDbCog(commands.Cog):
         
         if story_num:
             story_num = story_num.replace('#','') # The stories have a # before its number, so some users were using the # in front of the number.
-            if int(story_num) <= len(stories_ls):
-                chosen_story = stories_ls[int(story_num)-1]
-            else:
-                await ctx.send("There's no story with this number! Giving you a random story instead:")
+            try:
+                if int(story_num) <= len(stories_ls):
+                    chosen_story = stories_ls[int(story_num)-1]
+                else:
+                    await ctx.send("There's no story with this number! Giving you a random story instead:")
+                    chosen_story = random.choice(stories_ls)
+             except ValueError:
+                await ctx.send("The third parameter should be a number! For exemple: `!pronountest Name they/them #2`. I'll give you a random story instead:")
                 chosen_story = random.choice(stories_ls)
         else:
             chosen_story = random.choice(stories_ls)
