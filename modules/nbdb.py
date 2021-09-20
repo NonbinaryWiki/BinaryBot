@@ -34,12 +34,12 @@ class NBDbCog(commands.Cog):
         except requests.Timeout as e:
             await ctx.send(connecterror)
             await discord.Message.delete(message)
-            print(str(e))
+            print(repr(e))
             return
         except Exception as e: 
             await ctx.send(genericerror.format(arg))
             await discord.Message.delete(message)
-            print(str(e))
+            print(repr(e))
             return
         
         print(str(data))
