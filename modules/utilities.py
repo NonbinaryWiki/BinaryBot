@@ -17,6 +17,11 @@ class UtilitiesCog(commands.Cog):
             url="https://data.nonbinary.wiki/w/api.php?action=wbsearchentities&search={0}&language=en&format=json".format(
                 article))
         jsonresponse = extract_link.json()
+        if jsonresponse['search'] == []:
+            extract_link = requests.get(
+            url="https://data.nonbinary.wiki/w/api.php?action=wbsearchentities&search={0}&language=en&format=json".format(
+                article.capitalize())) #Capitalization is not consistent in the NBDb
+            jsonresponse = extract_link.json()
         return jsonresponse
 
     def getdatabody(self, arg):
