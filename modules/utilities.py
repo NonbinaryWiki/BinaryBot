@@ -44,7 +44,7 @@ class UtilitiesCog(commands.Cog):
         myjson = self.getdataheader(arg)
         # Uses a class for easier nested searching.
         # Stripstring gets rid of excess chars.
-        print(str(arg))
+        print(str(myjson))
         json_id = self.stripstring(self.DictQuery(myjson).get("search/id"))
         json_title = self.stripstring(self.DictQuery(myjson).get("search/title"))
         json_desc = self.stripstring(self.DictQuery(myjson).get("search/description"))
