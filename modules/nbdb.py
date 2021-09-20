@@ -31,13 +31,15 @@ class NBDbCog(commands.Cog):
         
         try:
             data = utilities.getitemdata(arg.capitalize(), properties)    
-        except requests.Timeout:
+        except requests.Timeout as e:
             await ctx.send(connecterror)
             await discord.Message.delete(message)
+            print(str(e))
             return
-        except Exception:
+        except Exception as e: 
             await ctx.send(genericerror.format(arg))
             await discord.Message.delete(message)
+            print(str(e))
             return
         
         print(str(data))
