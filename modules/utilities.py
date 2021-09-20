@@ -23,7 +23,7 @@ class UtilitiesCog(commands.Cog):
         article = arg
         extract_link = requests.get(
             url="https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids={0}&format=json".format(article))
-        jsonresponse = extract_link.json()
+        jsonresponse = extract_link.json().lower()
         return jsonresponse
 
     def stripstring(self, arg):
@@ -77,7 +77,7 @@ class UtilitiesCog(commands.Cog):
 
                 if not val:
                     break
-            print(val)
+                    
             return val
 
 def setup(bot):
