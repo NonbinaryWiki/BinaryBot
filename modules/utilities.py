@@ -77,7 +77,7 @@ class UtilitiesCog(commands.Cog):
 
                 if not val:
                     break
-
+            print(val)
             return val
 
 def setup(bot):
