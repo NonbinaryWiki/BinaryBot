@@ -3,6 +3,7 @@ from discord.ext import commands
 import urllib, json, requests
 import random
 import re
+import sys
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
 connecterror = "I wasn't able to connect to the Nonbinary Database, so it might be temporarily down. Please try again later!"
@@ -34,12 +35,12 @@ class NBDbCog(commands.Cog):
         except requests.Timeout as e:
             await ctx.send(connecterror)
             await discord.Message.delete(message)
-            print(repr(e))
+            print(sys.exc_info()[2])
             return
         except Exception as e: 
             await ctx.send(genericerror.format(arg))
             await discord.Message.delete(message)
-            print(repr(e))
+            print(sys.exc_info()[2])
             return
         
         print(str(data))
