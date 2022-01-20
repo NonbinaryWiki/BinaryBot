@@ -25,7 +25,7 @@ class AdminCog(commands.Cog):
     )
     @commands.is_owner()
     async def load(self, ctx, *, cog: str):
-
+        module = "modules." + cog
         try:
             self.bot.load_extension(cog)
         except Exception as e:
@@ -40,6 +40,7 @@ class AdminCog(commands.Cog):
     )
     @commands.is_owner()
     async def unload(self, ctx, *, cog: str):
+        module = "modules." + cog
         try:
             self.bot.unload_extension(cog)
         except Exception as e:
@@ -54,9 +55,10 @@ class AdminCog(commands.Cog):
     )
     @commands.is_owner()
     async def reload(self, ctx, *, cog: str):
+        module = "modules." + cog
         try:
-            self.bot.unload_extension(cog)
-            self.bot.load_extension(cog)
+            self.bot.unload_extension(module)
+            self.bot.load_extension(module)
         except Exception as e:
             await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
