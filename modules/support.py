@@ -13,6 +13,13 @@ class SupportCog(commands.Cog):
     async def ping(self, ctx):
         """ Pongs (and confirms that the bot is listening). """
         await ctx.send("Pong! :ping_pong: ({0}ms)".format(round(self.bot.latency * 1000)))
+        
+        wikiping = await ctx.send("_Calculating pings to the Nonbinary Wiki and the NBDb..._")
+        nbw_ping = requests.get('https://nonbinary.wiki').elapsed.total_seconds()*1000
+        nbdb_ping = requests.get('https://data.nonbinary.wiki').elapsed.total_seconds()*1000
+        
+        await discord.Message.delete(wikiping)
+        await ctx.send(f"Nonbinary Wiki: {int(nbw_ping)}ms // NBDb: {int(nbdb_ping)}ms")
 
     @commands.command(
         help="Thank you, random citizen!",
