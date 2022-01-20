@@ -27,7 +27,7 @@ class AdminCog(commands.Cog):
     async def load(self, ctx, *, cog: str):
         module = "modules." + cog
         try:
-            self.bot.load_extension(cog)
+            self.bot.load_extension(module)
         except Exception as e:
             await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
@@ -42,7 +42,7 @@ class AdminCog(commands.Cog):
     async def unload(self, ctx, *, cog: str):
         module = "modules." + cog
         try:
-            self.bot.unload_extension(cog)
+            self.bot.unload_extension(module)
         except Exception as e:
             await ctx.send(f':scream: Error: {type(e).__name__} - {e}')
         else:
