@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-import request
+import requests
 
 class SupportCog(commands.Cog):
     def __init__(self, bot):
