@@ -1,5 +1,5 @@
 wheel
-discord.py
+py-cord
 requests==2.20.0
 mwparserfromhell==0.5.2
 python-csv

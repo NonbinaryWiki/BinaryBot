@@ -1,95 +1,85 @@
 import discord
 from discord.ext import commands
+from discord.commands import slash_command, Option
 import urllib, json, requests
 import random
 import re
 import traceback
+import os
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
-connecterror = "I wasn't able to connect to the Nonbinary Database, so it might be temporarily down. Please try again later!"
-genericerror = "I couldn't find the term **{0}** in the NBDb! Maybe it's not added to the database, you made a typo, or I'm not intelligent enough to find it."
+notfounderror = "I couldn't find this in my database—check for typos or try again later (I might not be synced the latest version)."
 
 class NBDbCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(
-        help="Gets some information about the specified identity from the Nonbinary Wiki.",
-        description="Enter a nonbinary identity to get a short description of the identity as well as some useful data, " \
-                    "such as its popularity in the Gender Census. You will also get a link to the wiki page about this identity.",
-        usage="<identity>",
-        brief="nonbinary"
-    )
-    async def identity(self, ctx, *, arg):
-        """ Gives some information about the specified identity, including an excerpt, the flag and some data from the Gender Census. """
+    @slash_command(name="identity", description="Gives some information about the specified identity pulled from the NBDb.", guild_ids=[551837071703146506])
+    async def identity(self, ctx, identity: Option(str, "Name of the gender identity")):
+        await ctx.defer()
         # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
-        utilities = self.bot.get_cog("UtilitiesCog")
-        if arg == None:
-            await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
-            return
-        message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P1", "P14", "P11", "P15", "P21", "P37"] # Properties for instance of, umbrella term, frequency, related identities, main flag, and pride gallery link.
-        
-        try:
-            data = utilities.getitemdata(arg.lower(), properties)    
-        except requests.Timeout as e:
-            await ctx.send(connecterror)
-            await discord.Message.delete(message)
-            print(traceback.format_exc())
-            return
-        except Exception as e: 
-            await ctx.send(genericerror.format(arg))
-            await discord.Message.delete(message)
-            print(traceback.format_exc())
+        utilities = self.bot.get_cog("UtilitiesCog")
+
+        index_file = os.path.join("NBDB_lists", "id-index.json")
+        in_index = utilities.check_index(index_file, identity.lower())
+        if in_index:
+            print("Identity in local databases " + in_index)
+            data = utilities.getlocaldata(in_index, properties)
+        else:
+            await ctx.respond(notfounderror)
             return
         
         print(str(data))
-        
-        # Process data
-        entry_title, desc, instance_of, umbrella_data, frequency_data, related_data, flag_data, gallery_data = data
-        main_id = entry_title.split(':')[1] # entry_title is Item:Qid
+        main_id, desc, instance_of, umbrella_data, frequency_data, related_data, flag_data, gallery_data, sitelink = data
 
         if instance_of == None or all(claim['id'] != "Q7" for claim in instance_of):
             embed = discord.Embed(description="If you believe the database entry at https://data.nonbinary.wiki/wiki/" + entry_title + " should be classified as an identity, consider editing it to include an `Instance of (P1)` property with the value `Gender identity (Q7)`.")
-            await ctx.send(":warning: We found a matching result in the database but it does not seem to be a gender identity term. Example: `!identity nonbinary`. (Maybe you made a typo?)", embed=embed)
-            await discord.Message.delete(message)
+            await ctx.respond(":warning: We found a matching result in the database but it does not seem to be a gender identity term. Example: `/identity nonbinary`. (Maybe you made a typo?)", embed=embed)
             return
 
-        # Default responses 
+        # Default responses
         umbrella = related = gallery = "None"
         frequency = "No data"
         flag = "https://static.miraheze.org/nonbinarywiki/3/32/Wikilogo_new.png"
-        
-        if umbrella_data != None: # Check if it has a P14 claim (umbrella term)
-            umbrella_id = umbrella_data[0]['id'] # this is a Qid
-            umbrella_json = utilities.getdataheader(umbrella_id)
-            umbrella = utilities.stripstring(utilities.DictQuery(umbrella_json).get("search/label")) # this is the item's label
-        
+
+        if umbrella_data != "[unknown]" and umbrella_data != None: # Check if it has a P14 claim (umbrella term)
+            umbrella_terms = []
+            for i in umbrella_data:
+                id = i['id']
+                with open(index_file, "r") as f:
+                    dict = json.load(f)
+                    term = dict[id][0]
+                    umbrella_terms.append(term)
+            umbrella = ", ".join(umbrella_terms)
+
         if frequency_data != None: # Check if it has a P11 claim (Gender Census percentage)
             frequency = frequency_data[0] # this is a number with the % symbol
-        
-        if related_data != None: #Check if it has a P15 claim (related identities)
-            related_id = related_data[0]['id'] # this is a Qid
-            related_json = utilities.getdataheader(related_id)
-            related = utilities.stripstring(utilities.DictQuery(related_json).get("search/label")) # this is the item's label
-        
+
+        if related_data != "[unknown]" and related_data != None: #Check if it has a P15 claim (related identities)
+            related_terms = []
+            for i in related_data:
+                id = i['id']
+                with open(index_file, "r") as f:
+                    dict = json.load(f)
+                    term = dict[id][0]
+                    related_terms.append(term)
+            related = ", ".join(related_terms)
+
         if flag_data != None: # Check if it has a P21 claim (main pride flag)
             flag = flag_data[0] # list, should have a single item but just in case
-            
+
         if gallery_data != None: # check if it has a P37 claim (pride gallery link)
             gallery = gallery_data[0]
-        
+
         # Get interwiki for the nonbinary wiki
-        interlink_json = utilities.getdatabody(main_id)
-        sitelinks = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks".format(main_id))
-        if "nonbinarywiki" in sitelinks:
-            sitelink = utilities.DictQuery(interlink_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
+        if sitelink != "[unknown]":
             interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
         else: # fallback: link to the nbdb item page
             interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
-        
+
         # Set embed
-        embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
+        embed = discord.Embed(title=':link: {0}'.format(identity.title()), description=desc, url="{0}".format(interlink))
         embed.set_thumbnail(url=flag)
         if umbrella != "None":
             embed.add_field(name="Umbrella term", value="{0}".format(umbrella))
@@ -98,138 +88,114 @@ class NBDbCog(commands.Cog):
         embed.add_field(name="Gender Census", value="{0} of respondents".format(frequency))
         if gallery != "None":
             embed.add_field(name="Pride flag gallery", value="[Click here!]({0})".format(gallery))
+        embed.add_field(name="Flag information", value=f"Use `/flag {identity.title()}` to get more information about this flag.")
         embed.set_footer(text=footer)
-        
-        await discord.Message.delete(message)
-        await ctx.send(embed=embed)
 
-    @commands.command(
-        help="Gets some information about the specified flag from the Nonbinary Wiki.",
-        description="Enter a nonbinary identity to get its flag and its meaning, as well as alternative flags if there are any. You may use a number" \
-                    " after the identity to get an alternative flag; this number can be anything from 1 to the number of available alternative flags.",
-        usage="<identity> [number]",
-        brief="nonbinary"
-    )
-    async def flag(self, ctx, arg, flag = None):
-        """ Gives some information about the specified identity flag. """
+        await ctx.respond(embed=embed)
+
+    @slash_command(name="flag", description="Gives some information about the specified identity flag, pulled from the NBDb.", guild_ids=[551837071703146506])
+    async def flag(self, ctx, identity: Option(str, "Name of the gender identity"), number: Option(int, "Number of the flag (to get a specific flag)", required=False)):
+        await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
-        if arg == None:
-            await ctx.send(":warning: You need to specify an identity! Example: `!identity nonbinary`.")
-            return
-        message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P21", "P22"] # Properties for main flag and alternative flags.
-        
-        try:
-            data = utilities.getitemdata(arg.capitalize(), properties)
-            print(str(data))
-        except requests.Timeout:
-            await ctx.send(connecterror)
-            await discord.Message.delete(message)
+
+        index_file = os.path.join("NBDB_lists", "id-index.json")
+        in_index = utilities.check_index(index_file, identity.lower())
+        if in_index:
+            print("Identity in local databases " + in_index)
+            data = utilities.getlocaldata(in_index, properties)
+            #[main_id, desc, P21, P22, sitelink]
+        else:
+            await ctx.respond(notfounderror)
             return
-        except Exception:
-            await ctx.send(genericerror.format(arg))
-            await discord.Message.delete(message)
-            return
-        
+
+        print(str(data))
         # Process data
         desc = data[1]
-        main_id = data[0].split(':')[1] # data[0] is Item:Qid
-        
+        id = data[0]
+        sitelink = data[4]
+
         if data[2] != None: # Look for the main flag (data[2] is the P21 claim)
             main_flag = data[2][0]
         else:
-            await discord.Message.delete(message)
-            await ctx.send("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {0}` to get more information about this identity.".format(arg))
+            await ctx.respond("I found the identity on the NBDb, but it doesn't seem to have any associated pride flag. Use `!identity {0}` to get more information about this identity.".format(identity))
             return
-        
+
         if data[3] != None: # Look for alternative flags (data[3] is the P22 claim)
             alt_flags = str(len(data[3]))
             flags_list = data[3]
         else:
             alt_flags = "None"
-        
-        if flag != None: # If there is a flag number specified, make sure that it actually exists
-            flag_num = int(flag)-1 # make it human and start counting from 1, not 0
-            if int(flag) > int(alt_flags):
-                await discord.Message.delete(message)
-                await ctx.send("I found the identity on the NBDb, but it only has {0} alternative flags! Use a lower number.".format(alt_flags))
+
+        if number != None: # If there is a flag number specified, make sure that it actually exists
+            flag_num = int(number)-1 # make it human and start counting from 1, not 0
+            if int(number) > int(alt_flags):
+                await ctx.respond(f"I found the identity on the NBDb, but it only has {alt_flags} alternative flags! Use a lower number.")
                 return
             else:
                 show_flag = flags_list[flag_num]
         else:
             show_flag = main_flag # use the default flag if no alternative flag is specified
-            
+
         if show_flag.endswith('.svg'): # Apparently embeds don't like svg files
-            await discord.Message.delete(message)
-            await ctx.send("I found this flag, but I can't display it. You may view it in this URL: {0}".format(show_flag))
+            await ctx.respond(f"I found this flag, but I can't display it. You may view it in this URL: {show_flag}")
             return
-            
-        data_json = utilities.getdatabody(main_id)
+
+        # Choose which flag to get
+        if number == None: # Get the default flag + meaning (default behaviour)
+            meaning_data = utilities.getqualifierdata(in_index, "P21", "P38")
+            if meaning_data == [None]:
+                meaning = None
+            else:
+                print(str(meaning_data))
+                meaning = meaning_data[0][0]["datavalue"]["value"]
+        else: # Get the specified alternative flag (if any). "flag" is the second argument of the command
+            meaning_data = utilities.getqualifierdata(in_index, "P22", "P38")
+            try:
+                meaning = meaning_data[0][0]["datavalue"]["value"]
+            except:
+                meaning = None
         
         # Pick a page to link in the embed title (preferably the wiki article)
-        sitelinks = utilities.DictQuery(data_json).get("entities/{0}/sitelinks".format(main_id))
-        if "nonbinarywiki" in sitelinks:
-            sitelink = utilities.DictQuery(data_json).get("entities/{0}/sitelinks/nonbinarywiki/title".format(main_id))
-            interlink = "https://nonbinary.wiki/wiki/{0}".format(sitelink)
-        else: # fallback: link to the nbdb item page for the identity
-            interlink = "https://data.nonbinary.wiki/wiki/Item:{0}".format(main_id)
-        
-        # Choose which flag to get
-        if flag == None: # Get the default flag + meaning (default behaviour)
-            meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P21".format(main_id))
-            try:
-                meaning = meaning_json[0]["qualifiers"]["P38"][0]["datavalue"]["value"]
-            except KeyError:
-                meaning = "Unknown"
-        else: # Get the specified alternative flag (if any). "flag" is the second argument of the command
-            meaning_json = utilities.DictQuery(data_json).get("entities/{0}/claims/P22".format(main_id))
-            try:
-                meaning = meaning_json[flag_num]["qualifiers"]["P38"][0]["datavalue"]["value"]
-            except KeyError:
-                meaning = "Unknown"         
+        print("sitelink: " + str(sitelink))
+        if sitelink != "[unknown]" and sitelink != {}:
+            interlink = f"https://nonbinary.wiki/wiki/{sitelink}"
+        else: # fallback: link to the nbdb item page
+            interlink = f"https://data.nonbinary.wiki/wiki/Item:{id}"
         
         # Set embed
-        embed = discord.Embed(title=':link: {0}'.format(arg.title()), description=desc, url="{0}".format(interlink))
+        embed = discord.Embed(title=f':link: {identity.title()}', description=desc, url="{0}".format(interlink))
         embed.set_image(url=show_flag)
-        embed.add_field(name="Flag meaning", value="{0}".format(meaning))
-        embed.add_field(name="Alternative flags", value="{0}".format(alt_flags))
+        if meaning != None:
+            embed.add_field(name="Flag meaning", value=f"{meaning}")
+        embed.add_field(name="Alternative flags", value=f"{alt_flags}\nUse the same command with a number to see them: `/flag {identity.title()} 2`")
         embed.set_footer(text=footer)
-        
-        await discord.Message.delete(message)
-        await ctx.send(embed=embed)
-        
-    @commands.command(
-        help="Gives some useful information about the specified pronoun set.",
-        description="Get some information about the given pronouns. Please, give the bot the first two pronouns of the set only",
-        usage="<pronoun set>",
-        brief="they/them"
-    )
-    async def pronoun(self, ctx, arg = None):
+
+        await ctx.respond(embed=embed)
+
+    @slash_command(name="pronoun", description="Gives information about the specified pronoun set from the NBDb.", guild_ids=[551837071703146506])
+    async def pronoun(self, ctx, pronouns: Option(str, "Pronoun you want to look up. It can be simple (they) or complex (they/them).")):
+        await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
-        if arg == None:
-            await ctx.send(":warning: You need to specify a pronoun! Example: `!pronoun they/them`.")
-            return
-        message = await ctx.send("Give me a moment. I will search the NBDb...")
         properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
-        
-        try:
-            data = utilities.getitemdata(arg.lower(), properties)    
-        except requests.Timeout:
-            await ctx.send(connecterror)
-            await discord.Message.delete(message)
+
+        index_file = os.path.join("NBDB_lists", "p-index.json")
+        in_index = utilities.check_index(index_file, pronouns.lower())
+        if in_index:
+            print("Identity in local databases " + in_index)
+            data = utilities.getlocaldata(in_index, properties)
+            print(data)
+        else:
+            await ctx.respond(notfounderror)
             return
-        except Exception:
-            await ctx.send(genericerror.format(arg))
-            await discord.Message.delete(message)
-            return
-        
+
         # Process data
-        #title = ''.join(data[0]) 
+        #title = ''.join(data[0])
         print("data: " + str(data))
         if data[1] == None: # Workaround to an NBDb bug where the item description is not displayed.
             desc = ""
         else:
-            desc = ''.join(data[1]) 
+            desc = ''.join(data[1])
         freq = ''.join(data[8]) if isinstance(data[8], list) else "[unknown]"
         num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
         subj = '/'.join(data[3]) if isinstance(data[3], list) else "[unknown]"
@@ -237,7 +203,7 @@ class NBDbCog(commands.Cog):
         posad = '/'.join(data[5]) if isinstance(data[5], list) else "[unknown]"
         pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
         ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
-        
+
         # Set embed
         embed = discord.Embed(title="Information about the " + subj + "/" + obj + " pronoun.", description=desc)
         embed.add_field(name="Conjugation", value=num, inline=True)
@@ -249,26 +215,13 @@ class NBDbCog(commands.Cog):
         embed.add_field(name="Frequency", value=freq, inline=True)
         embed.set_footer(text=footer)
 
-        await discord.Message.delete(message)
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
-
-    @commands.command(
-        help="Tests the given pronouns in a random sentence.",
-        description="Try on some new pronouns and see if they fit you!\n" \
-                    "Pronouns can be entered as both the subject form (i.e. 'they') or subject/object (i.e. 'they/them')\n" \
-                    "Instead of a pronoun, you can also enter 'none' and the bot will use no pronouns (using the name instead)." \
-                    "If you're entering more than one word for the name, please enter them in quotes \"like this\".",
-        usage="<name> <pronoun|none> [story number]",
-        brief="John she/her"
-    )
-    async def pronountest(self, ctx, name = None, arg = None, story_num = None):
+    @slash_command(name="pronountest", description="Try on some new pronouns with your name!", guild_ids=[551837071703146506])
+    async def pronountest(self, ctx, name: Option(str, "Enter your name"), pronouns: Option(str, "It can be simple (they) or complex (they/them). Use 'none' for no pronouns/name as pronouns."), story: Option(int, "Story you want to use", required=False)):
+        await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
-        if arg == None or name == None:
-            await ctx.send(":warning: You need to specify a name and a pronoun! Example: `!pronountest John she/her`")
-            return
-        
-        if arg.lower() == "none": #no pronouns/name as pronouns option.
+        if pronouns.lower() == "none": #no pronouns/name as pronouns option.
             num = "singular"
             subj = name.capitalize()
             obj = name.capitalize()
@@ -276,32 +229,30 @@ class NBDbCog(commands.Cog):
             posad = name.capitalize() + "'s"
             pos = name.capitalize()
         else:
-            message = await ctx.send("Give me a moment. I will search the NBDb...")
             properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
 
-            try:
-                data = utilities.getitemdata(arg.lower(), properties)
-            except requests.Timeout:
-                await ctx.send(connecterror)
-                await discord.Message.delete(message)
-                return
-            except Exception:
-                await ctx.send(genericerror.format(arg))
-                await discord.Message.delete(message)
-                return
+            index_file = os.path.join("NBDB_lists", "p-index.json")
+            in_index = utilities.check_index(index_file, pronouns.lower())
+            if in_index:
+                print("Identity in local databases " + in_index)
+                data = utilities.getlocaldata(in_index, properties)
+                print(data)
+            else:
+                await ctx.respond(notfounderror)
+                return  
 
             print(str(data))
 
             # Process data
-            #title = ''.join(data[0]) 
-            #desc = ''.join(data[1]) 
+            #title = ''.join(data[0])
+            #desc = ''.join(data[1])
             num = '/'.join(data[2]) if isinstance(data[2], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
             subj = '/'.join(data[3]) if isinstance(data[3], list) else "[unknown]"
             obj = '/'.join(data[4]) if isinstance(data[4], list) else "[unknown]"
             posad = '/'.join(data[5]) if isinstance(data[5], list) else "[unknown]"
             pos= '/'.join(data[6]) if isinstance(data[6], list) else "[unknown]"
             ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
-        
+
         # Make sure that the verbs are conjugated according to the item's P4 claim (conjugation)
         if num.lower() == "singular": # this is a bit clunky, can it be improved?
             was_were = "was"
@@ -318,22 +269,17 @@ class NBDbCog(commands.Cog):
             is_are = "is/are"
             has_have = "has/have"
             s = "(s)"
-        
+
         # Randomly choose and create a story
         with open('stories.txt') as stories:
             stories_ls = stories.read().replace("\n", "").split('|') # Due to multi-line stories, we need to use a custom separator.
-        
-        
-        if story_num:
-            story_num = story_num.replace('#','') # The stories have a # before its number, so some users were using the # in front of the number.
-            try:
-                if int(story_num) <= len(stories_ls):
-                    chosen_story = stories_ls[int(story_num)-1]
-                else:
-                    await ctx.send("There's no story with this number! Giving you a random story instead:")
-                    chosen_story = random.choice(stories_ls)
-            except ValueError:
-                await ctx.send("The third parameter should be a number! For exemple: `!pronountest Name they/them #2`. I'll give you a random story instead:")
+
+
+        if story: #story is the optional field (int)
+            if int(story) <= len(stories_ls):
+                chosen_story = stories_ls[int(story)-1]
+            else:
+                await ctx.send("There's no story with this number! Giving you a random story instead:")
                 chosen_story = random.choice(stories_ls)
         else:
             chosen_story = random.choice(stories_ls)
@@ -349,18 +295,14 @@ class NBDbCog(commands.Cog):
                 is_are = is_are,
                 has_have = has_have,
                 s = s)
-        
+
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
-        if not arg.lower() == "none":
-            await discord.Message.delete(message) # message doesn't exist if the no pronouns option is used
-
         try:
-            await ctx.send(story)
+            await ctx.respond(story)
         except:
-            await ctx.send("That term is not in the NBDb! Maybe try typing it differently?")
-            await discord.Message.delete(message)
+            await ctx.respond("That term is not in the NBDb! Maybe try typing it differently?")
 
 def setup(bot):
     bot.add_cog(NBDbCog(bot))

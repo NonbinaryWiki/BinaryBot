@@ -1,6 +1,8 @@
 from discord.ext import commands
 import csv
 import requests
+import json
+import os
 
 class UtilitiesCog(commands.Cog):
     def __init__(self, bot):
@@ -11,6 +13,49 @@ class UtilitiesCog(commands.Cog):
             mylist = list(csv.reader(csv_file))
         return mylist
 
+    def check_index(self, file, identity):
+        """Checks if the provided identity is in the provided file"""
+        with open(file, "r") as f:
+            data = json.load(f)
+            for id in data:
+                aliases = data[id]
+                print(str(aliases))
+                if identity in [alias.lower() for alias in aliases]:
+                    return id
+        return False
+
+    def getlocaldata(self, arg, p=[]):
+        plist = []
+        file = os.path.join("NBDB_lists", f'{arg}.json')
+        with open(file, "r") as f:
+            data = json.load(f)
+            json_id = self.DictQuery(data).get("id")
+            #json_title = self.DictQuery(data).get("title") #That's the full title ("Item:Q1")
+            json_desc = self.DictQuery(data).get("descriptions/en/value")
+            plist.append(json_id)
+            plist.append(json_desc)
+            for i in p:
+                try:
+                    plist.append(self.DictQuery(data).get(f"claims/{i}/mainsnak/datavalue/value"))
+                except:
+                    plist.append("[unknown]")
+            try:
+                plist.append(self.DictQuery(data).get(f"sitelinks/nonbinarywiki/title"))
+            except:
+                plist.append("[unknown]")
+
+        return plist
+    
+    def getqualifierdata(self, arg, property, qualifier):
+        file = os.path.join("NBDB_lists", f'{arg}.json')
+        with open(file, "r") as f:
+            data = json.load(f)
+            try:
+                result = self.DictQuery(data).get(f"claims/{property}/qualifiers/{qualifier}")
+                return result
+            except:
+                return None
+                
     def getdataheader(self, arg):
         article = arg
         extract_link = requests.get(
@@ -51,9 +96,9 @@ class UtilitiesCog(commands.Cog):
         # Stripstring gets rid of excess chars.
         print(str(myjson))
         json_id = self.stripstring(self.DictQuery(myjson).get("search/id"))
-        json_title = self.stripstring(self.DictQuery(myjson).get("search/title"))
+        #json_title = self.stripstring(self.DictQuery(myjson).get("search/title"))
         json_desc = self.stripstring(self.DictQuery(myjson).get("search/description"))
-        plist.append(json_title)
+        plist.append(json_id)
         plist.append(json_desc)
         
         # Gets the actual information for that item

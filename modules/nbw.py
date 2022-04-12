@@ -1,5 +1,6 @@
 import discord
-from discord.ext import commands 
+from discord.ext import commands
+from discord.commands import slash_command, Option
 import requests
 import mwparserfromhell
 
@@ -8,16 +9,10 @@ class NBWCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(
-    help="Returns useful technical information about the specified wiki page.",
-    description="Enter the name of an existing Nonbinary Wiki page to get some useful technical information about the page, " \
-                "such as the amount of contributors, protection status and categorization.",
-    usage="<page>",
-    brief="nonbinary"
-    )
-    async def pinfo(self, ctx, *, arg):
+    @slash_command(name="pinfo", description="Gives some technical information about a wiki page.", guild_ids=[551837071703146506])
+    async def pinfo(self, ctx, page: Option(str, "Full title of the page.")):
         """ Gives some useful information about a wiki page: number of contributors, categories, protection level and useful links. """
-        page = arg
+        await ctx.defer()
         try:
             # Use the MediaWiki API to get the information in json format:
             protection_link = requests.get(
@@ -66,9 +61,9 @@ class NBWCog(commands.Cog):
             embed.add_field(name=":key: Protection", value=protect_value)
             embed.add_field(name=":chains: Categories", value="{0}".format(', '.join(cats)), inline=False)
 
-            await ctx.send(embed=embed)
+            await ctx.respond(embed=embed)
         except:  # In case there's an unwanted error, send this message:
-            await ctx.send(":bug: There was an error. " + \
+            await ctx.respond(":bug: There was an error. " + \
                         "Maybe the specified page doesn't exist. Check your spelling!")
             raise
 
