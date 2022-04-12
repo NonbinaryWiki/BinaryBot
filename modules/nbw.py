@@ -9,7 +9,7 @@ class NBWCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(name="pinfo", description="Gives some technical information about a wiki page.", guild_ids=[551837071703146506])
+    @slash_command(name="pinfo", description="Gives some technical information about a wiki page.")
     async def pinfo(self, ctx, page: Option(str, "Full title of the page.")):
         """ Gives some useful information about a wiki page: number of contributors, categories, protection level and useful links. """
         await ctx.defer()

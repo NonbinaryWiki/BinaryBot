@@ -14,7 +14,7 @@ class NBDbCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(name="identity", description="Gives some information about the specified identity pulled from the NBDb.", guild_ids=[551837071703146506])
+    @slash_command(name="identity", description="Gives some information about the specified identity pulled from the NBDb.")
     async def identity(self, ctx, identity: Option(str, "Name of the gender identity")):
         await ctx.defer()
         # Example JSONFM response: https://data.nonbinary.wiki/w/api.php?action=wbgetentities&ids=Q20&format=jsonfm
@@ -93,7 +93,7 @@ class NBDbCog(commands.Cog):
 
         await ctx.respond(embed=embed)
 
-    @slash_command(name="flag", description="Gives some information about the specified identity flag, pulled from the NBDb.", guild_ids=[551837071703146506])
+    @slash_command(name="flag", description="Gives some information about the specified identity flag, pulled from the NBDb.")
     async def flag(self, ctx, identity: Option(str, "Name of the gender identity"), number: Option(int, "Number of the flag (to get a specific flag)", required=False)):
         await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
@@ -173,7 +173,7 @@ class NBDbCog(commands.Cog):
 
         await ctx.respond(embed=embed)
 
-    @slash_command(name="pronoun", description="Gives information about the specified pronoun set from the NBDb.", guild_ids=[551837071703146506])
+    @slash_command(name="pronoun", description="Gives information about the specified pronoun set from the NBDb.")
     async def pronoun(self, ctx, pronouns: Option(str, "Pronoun you want to look up. It can be simple (they) or complex (they/them).")):
         await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
@@ -217,7 +217,7 @@ class NBDbCog(commands.Cog):
 
         await ctx.respond(embed=embed)
 
-    @slash_command(name="pronountest", description="Try on some new pronouns with your name!", guild_ids=[551837071703146506])
+    @slash_command(name="pronountest", description="Try on some new pronouns with your name!")
     async def pronountest(self, ctx, name: Option(str, "Enter your name"), pronouns: Option(str, "It can be simple (they) or complex (they/them). Use 'none' for no pronouns/name as pronouns."), story: Option(int, "Story you want to use", required=False)):
         await ctx.defer()
         utilities = self.bot.get_cog("UtilitiesCog")
