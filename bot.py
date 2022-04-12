@@ -54,4 +54,4 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 load_dotenv()
-bot.run(os.environ['TOKEN'], bot=True, reconnect=True)
+bot.run(os.environ['TOKEN'], reconnect=True)
