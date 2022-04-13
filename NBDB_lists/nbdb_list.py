@@ -89,6 +89,6 @@ def write_items():
         filename = id + ".json"
         with open(filename, "w") as fitem:
             json.dump(type[1], fitem, indent=4)
-        print(f'Created file {filename}')
+        print(f'Created file {filename} and updated {index[type[0]]}')
 
 write_items()
