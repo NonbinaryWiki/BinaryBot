@@ -19,7 +19,7 @@ def get_instance(id):
         instanceof = iteminfo["entities"][id]["claims"]["P1"][0]["mainsnak"]["datavalue"]["value"]["id"]
         allinfo = iteminfo["entities"][id]
         if instanceof == "Q3": # Q3 = Standard personal pronoun
-            print("{0} is   a STANDARD PRONOUN".format(id))
+            print("{0} is a STANDARD PRONOUN".format(id))
             return ["sp", allinfo]
         elif instanceof == "Q15": # Q15 = Neopronoun
             print("{0} is a NEOPRONOUN".format(id))
@@ -31,7 +31,7 @@ def get_instance(id):
             print("{0} is a GENDER IDENTITY".format(id))
             return ["id", allinfo]
         else:
-            print("{0} is NOT a pronoun nor a gender identity".format(id))
+            #print("{0} is NOT a pronoun nor a gender identity".format(id))
             return ["other", allinfo]
     except KeyError:
         print("{0} doesn't have P1".format(id))
@@ -85,7 +85,7 @@ def write_items():
                 data[id] = aliases
         with open(index[type[0]], "w") as findex:
             json.dump(data, findex, indent=4) # Update index with the new index
-        print('Updated index')
+        #print('Updated index')
         filename = id + ".json"
         with open(filename, "w") as fitem:
             json.dump(type[1], fitem, indent=4)
