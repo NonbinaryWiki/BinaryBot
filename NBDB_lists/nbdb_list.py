@@ -8,7 +8,7 @@ wb = Wikibase("https://data.nonbinary.wiki/w/api.php")
 def cleanup():
     files = os.listdir(".")
     for f in files:
-        if f.endswith(".txt"):
+        if f.endswith(".json"):
             os.remove(f)
     print("All files have been cleared")
 
@@ -55,7 +55,13 @@ def write_items():
     
     for item in cleanitems:
         id = item["title"].replace("Item:", "")
-        type = get_instance(id)
+        for attempts in range(3):
+            try:
+                type = get_instance(id)
+                break
+            except requests.exceptions.RequestException as e:
+                print(f"Error while querying {item}: {e}\nRetrying.")
+                continue
         if type[0] == "other" or type[0] == "unknown":
             continue
         #print(str(type))
