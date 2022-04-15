@@ -8,7 +8,7 @@ class AdminCog(commands.Cog):
         self.bot = bot
     
     @slash_command(name="update", description="Pulls the latest version from GitHub (owner-only).", default_permission=False)
-    @commands.is_owner()
+    @permissions.is_owner()
     async def update(self, ctx):
         await ctx.defer()
         output = "Commented out"
