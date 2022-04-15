@@ -7,11 +7,8 @@ class AdminCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    async def is_owner(ctx):
-        return ctx.author.id == 192011575777951744
-
     @slash_command(name="update", description="Pulls the latest version from GitHub (owner-only).", default_permission=False)
-    @commands.check(is_owner)
+    @commands.is_owner()
     async def update(self, ctx):
         await ctx.defer()
         output = "Commented out"
