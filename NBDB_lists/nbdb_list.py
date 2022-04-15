@@ -4,13 +4,12 @@ import os
 import json
 
 wb = Wikibase("https://data.nonbinary.wiki/w/api.php")
-
-def cleanup():
-    files = os.listdir(".")
-    for f in files:
-        if f.endswith(".json"):
-            os.remove(f)
-    print("All files have been cleared")
+index = {
+        "sp": "p-index.json",
+        "neop": "p-index.json",
+        "nounp": "p-index.json",
+        "id": "id-index.json"
+    }
 
 def get_instance(id):
     iteminfo = wb.entity.get(id)
@@ -37,25 +36,42 @@ def get_instance(id):
         print("{0} doesn't have P1".format(id))
         return ["unknown"]
 
+def check_deleted(allpages):
+    files = os.listdir(".")
+    localitems = []
+    for f in files:
+        i = f.replace(".json", "")
+        localitems.append(i)
+    
+    nbdbitems = []
+    for item in allpages:
+        i = item["title"].replace("Item:", "")
+        nbdbitems.append(i)
+    
+    diff = list(set(nbdbitems).difference(localitems))
+
+    if len(diff) == 0:
+        print("No items have been deleted.")
+        return None
+    else:
+        print(f"Items that have been deleted: {str(diff)}")
+        return diff
+
 def write_items():
-    cleanup() # reset the lists
 
     itemlist = "https://data.nonbinary.wiki/w/api.php?action=query&list=allpages&apnamespace=860&aplimit=500&format=json"
-
-    index = {
-        "sp": "p-index.json",
-        "neop": "p-index.json",
-        "nounp": "p-index.json",
-        "id": "id-index.json"
-    }
-
     data_json = requests.get(itemlist).json()
-    cleanitems = data_json["query"]["allpages"]
-    #print(cleanitems)
+    allitems = data_json["query"]["allpages"]
     
-    for item in cleanitems:
+    deleted = check_deleted(allitems)
+    if deleted != None:
+        for i in deleted:
+            os.remove(i + ".json")
+        print("Deleted items.")
+
+    for item in allitems:
         id = item["title"].replace("Item:", "")
-        for attempts in range(3):
+        for attempt in range(3):
             try:
                 type = get_instance(id)
                 break
