@@ -38,7 +38,6 @@ bot = commands.Bot(command_prefix=get_prefix, description='it/its')
 # CONFIG: CHANGE OWNER_ID IN ABOVE LINE TO YOUR DISCORD ACCOUNT'S USER ID.
 
 bot.remove_command('help')
-bot.owner_id = 192011575777951744
 
 # Here we load our extensions(cogs) listed above in [initial_extensions].
 if __name__ == '__main__':
