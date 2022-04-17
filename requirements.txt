@@ -5,3 +5,4 @@ mwparserfromhell==0.5.2
 python-csv
 python-dotenv
 wikibase_api
+python-dateutil
