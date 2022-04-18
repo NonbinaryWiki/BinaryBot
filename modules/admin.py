@@ -11,8 +11,7 @@ class AdminCog(commands.Cog):
     @permissions.is_owner()
     async def update(self, ctx):
         await ctx.defer()
-        output = "Commented out"
-        #output = subprocess.check_output("git pull", shell=True)
+        output = subprocess.check_output("git pull", shell=True)
         await ctx.respond("Pulling latest version from GitHub: ```" + str(output) + "``` Remember to use the reload command for the changes to take effect.")
 
     @slash_command(name="load", description="Loads a previously unloaded module (owner-only).", guild_ids=[551837071703146506])
