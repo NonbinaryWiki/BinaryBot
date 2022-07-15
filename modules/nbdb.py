@@ -233,15 +233,44 @@ class NBDbCog(commands.Cog):
 
             index_file = os.path.join("NBDB_lists", "p-index.json")
             in_index = utilities.check_index(index_file, pronouns.lower())
+            print(in_index)
             if in_index:
                 print("Identity in local databases " + in_index)
                 data = utilities.getlocaldata(in_index, properties)
                 print(data)
             else:
-                await ctx.respond(notfounderror)
-                return  
+                print("Can't find pronoun set. Trying multiple pronouns.")
+                pronouns = pronouns.lower().split("/")
+                if len(pronouns) == 6:
+                    data = []
+                    data.insert(0, "MANUAL")
+                    data.insert(0, "MANUAL")
+                    for p in pronouns:
+                        data.append([p])
+                elif len(pronouns) > 6:
+                    await ctx.respond(":warning: To many pronouns! Pronoun sets need to have 6 forms or less.")
+                    return
+                else:
+                    multiple_p = []
+                    for p in pronouns:
+                        index_file = os.path.join("NBDB_lists", "p-index.json")
+                        in_index = utilities.check_index(index_file, p)
+                        print(in_index)
+                        if in_index:
+                            if in_index in multiple_p:
+                                print(f"{p} already checked.")
+                                continue
+                            else:
+                                print(f"{p} added to list.")
+                                multiple_p.append(in_index)
+                    print(f"List of pronouns: {multiple_p}.")
 
-            print(str(data))
+                    data = utilities.set_multiple_pronouns(multiple_p)
+                    if data == "notenough":
+                        await ctx.respond(":bug: Something went wrong and I couldn't find all pronoun forms [Not enough pronouns]. You can specify all forms manually too: `/pronountest NAME they/him/its/zir/theirs/zirself`")
+                        return
+
+            print(f"List of pronoun forms: {data}")
 
             # Process data
             #title = ''.join(data[0])
@@ -300,7 +329,11 @@ class NBDbCog(commands.Cog):
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
         try:
-            await ctx.respond(story)
+            if data[0] == "MULTIPLE":
+                manual_option = "\n_Want to fine-tune these results? Type the pronoun set in its full form: `they/him/its/zir/theirs/zirself`_"
+                await ctx.respond(f"{story}{manual_option}")
+            else:
+                await ctx.respond(f"{story}")
         except:
             await ctx.respond("That term is not in the NBDb! Maybe try typing it differently?")
 

@@ -1,8 +1,10 @@
+from typing import final
 from discord.ext import commands
 import csv
 import requests
 import json
 import os
+import random
 
 class UtilitiesCog(commands.Cog):
     def __init__(self, bot):
@@ -19,10 +21,34 @@ class UtilitiesCog(commands.Cog):
             data = json.load(f)
             for id in data:
                 aliases = data[id]
-                print(str(aliases))
+                #print(str(aliases))
                 if identity in [alias.lower() for alias in aliases]:
                     return id
         return False
+
+    def set_multiple_pronouns(self, pronouns):
+        """Takes different pronoun sets and returns a randomized list of forms that make up a coherent multiple pronoun set."""
+        # Get all forms for each pronouns in separate lists. They need to have the same order
+        all_p = []
+        final_form = []
+        properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
+        for p in pronouns:
+            p_forms = self.getlocaldata(p, properties)
+            all_p.append(p_forms)
+        
+        print(f"All forms: {all_p}.")
+        
+        for i in range(6):
+            chosen = random.choice(all_p)
+            final_form.append(chosen[2+i])
+        
+        final_form.insert(0, "MULTIPLE")
+        final_form.insert(0, "MULTIPLE") # pronountest() starts getting pronouns from the third item
+
+        if len(final_form) < 8:
+            return "notenough"
+        else:
+            return(final_form)
 
     def getlocaldata(self, arg, p=[]):
         plist = []
