@@ -328,14 +328,34 @@ class NBDbCog(commands.Cog):
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
         story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
                                                                     # which is undesirable in the case of "I"
+        
+        btn = discord.ui.View()
+        params = [name, pronouns]
+        btn.add_item(self.Button(ctx, params))
+
         try:
             if data[0] == "MULTIPLE":
                 manual_option = "\n_Want to fine-tune these results? Type the pronoun set in its full form: `they/him/its/zir/theirs/zirself`_"
-                await ctx.respond(f"{story}{manual_option}")
+                await ctx.respond(f"{story}{manual_option}", view=btn)
             else:
-                await ctx.respond(f"{story}")
+                await ctx.respond(f"{story}", view=btn)
         except:
             await ctx.respond("That term is not in the NBDb! Maybe try typing it differently?")
+
+    class Button(discord.ui.Button):
+        def __init__(self, ctx, params):
+            super().__init__(label="Run this command again", style=discord.ButtonStyle.primary, emoji="♻️")
+            self.ctx = ctx
+            self.params = params
+            
+        async def callback(self, interaction):
+            self.ctx.interaction = interaction
+            if isinstance(self.params[1], list): #Multiple pronouns are a list instead of a string.
+                pronouns = "/".join(self.params[1])
+            else:
+                pronouns = self.params[1]
+            await NBDbCog.pronountest(self.ctx, self.params[0], pronouns, None)
+            return
 
 def setup(bot):
     bot.add_cog(NBDbCog(bot))
