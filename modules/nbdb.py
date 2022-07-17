@@ -325,9 +325,16 @@ class NBDbCog(commands.Cog):
                 has_have = has_have,
                 s = s)
 
+        final_story = []
         sentences = re.split('(?<=[.!?]) +', story)                 # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
-        story = ' '.join([i[0].upper() + i[1:] for i in sentences]) # .capitalize() isn't used here because it converts every other letter in the sentence to lowercase,
-                                                                    # which is undesirable in the case of "I"
+        print(sentences)
+        for i in sentences:
+            if i.startswith("**"):
+                new_sentence = i[:2] + i[2].upper() + i[3:]
+                final_story.append(new_sentence)
+            else:
+                final_story.append(i)
+        final_story = " ".join(final_story)
         
         btn = discord.ui.View()
         params = [name, pronouns]
@@ -336,9 +343,9 @@ class NBDbCog(commands.Cog):
         try:
             if data[0] == "MULTIPLE":
                 manual_option = "\n_Want to fine-tune these results? Type the pronoun set in its full form: `they/him/its/zir/theirs/zirself`_"
-                await ctx.respond(f"{story}{manual_option}", view=btn)
+                await ctx.respond(f"{final_story}{manual_option}", view=btn)
             else:
-                await ctx.respond(f"{story}", view=btn)
+                await ctx.respond(f"{final_story}", view=btn)
         except:
             await ctx.respond("That term is not in the NBDb! Maybe try typing it differently?")
 
