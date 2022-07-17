@@ -53,4 +53,8 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 load_dotenv()
-bot.run(os.environ['TOKEN'], reconnect=True)
+try:
+    bot.run(os.environ['TOKEN'], reconnect=True)
+except KeyError:
+    token = input("I can't find the token. You can enter it manually here: ")
+    bot.run(token, reconnect=True)
