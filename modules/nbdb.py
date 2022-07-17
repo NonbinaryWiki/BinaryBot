@@ -283,6 +283,9 @@ class NBDbCog(commands.Cog):
             ref = '/'.join(data[7]) if isinstance(data[7], list) else "[unknown]"
 
         # Make sure that the verbs are conjugated according to the item's P4 claim (conjugation)
+        if subj == "they":
+            num = "plural" # Exception for they/them, as it's usually conjugated in plural
+        
         if num.lower() == "singular": # this is a bit clunky, can it be improved?
             was_were = "was"
             is_are = "is"
@@ -294,10 +297,10 @@ class NBDbCog(commands.Cog):
             has_have = "have"
             s = ""
         else:
-            was_were = "was/were"
-            is_are = "is/are"
-            has_have = "has/have"
-            s = "(s)"
+            was_were = "was"
+            is_are = "is"
+            has_have = "has"
+            s = "s"
 
         # Randomly choose and create a story
         with open('stories.txt') as stories:
