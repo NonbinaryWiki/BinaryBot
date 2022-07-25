@@ -229,6 +229,7 @@ class NBDbCog(commands.Cog):
             posad = name.capitalize() + "'s"
             pos = name.capitalize()
         else:
+            pronouns = pronouns.replace(" ", "/")
             properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
 
             index_file = os.path.join("NBDB_lists", "p-index.json")
