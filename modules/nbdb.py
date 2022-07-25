@@ -242,14 +242,14 @@ class NBDbCog(commands.Cog):
             else:
                 print("Can't find pronoun set. Trying multiple pronouns.")
                 pronouns = pronouns.lower().split("/")
-                if len(pronouns) == 6:
+                if len(pronouns) == 5:
                     data = []
                     data.insert(0, "MANUAL")
                     data.insert(0, "MANUAL")
                     for p in pronouns:
                         data.append([p])
-                elif len(pronouns) > 6:
-                    await ctx.respond(":warning: To many pronouns! Pronoun sets need to have 6 forms or less.")
+                elif len(pronouns) > 5:
+                    await ctx.respond(":warning: To many pronouns! Pronoun sets need to have 5 forms or less.")
                     return
                 else:
                     multiple_p = []
