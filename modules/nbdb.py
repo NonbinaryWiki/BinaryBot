@@ -8,7 +8,7 @@ import traceback
 import os
 
 footer = "This data has been extracted from the NBDb (data.nonbinary.wiki), a project by the Nonbinary Wiki (nonbinary.wiki)." # Used as credit in embeds
-notfounderror = "I couldn't find this in my database—check for typos or try again later (I might not be synced the latest version)."
+notfounderror = ":warning: I couldn't find this in my database—check for typos or try again later (I might not be synced the latest version)."
 
 class NBDbCog(commands.Cog):
     def __init__(self, bot):
@@ -229,6 +229,9 @@ class NBDbCog(commands.Cog):
             posad = name.capitalize() + "'s"
             pos = name.capitalize()
         else:
+            if "(" in pronouns or ")" in pronouns:
+                await ctx.respond(":warning: Don't use parenthesis in your pronouns. Use slashes (/) to separate pronoun forms or multiple pronouns: `they/them`, `they/xe`.")
+                return
             pronouns = pronouns.replace(" ", "/")
             properties = ["P4", "P5", "P6", "P7", "P8", "P9", "P11"] # Properties for conjugation, pronoun forms and frequency
 
@@ -244,6 +247,7 @@ class NBDbCog(commands.Cog):
                 pronouns = pronouns.lower().split("/")
                 if len(pronouns) == 5:
                     data = []
+                    data.insert(0, "singular") # Manual pronouns are always treated as singular
                     data.insert(0, "MANUAL")
                     data.insert(0, "MANUAL")
                     for p in pronouns:
@@ -264,6 +268,9 @@ class NBDbCog(commands.Cog):
                             else:
                                 print(f"{p} added to list.")
                                 multiple_p.append(in_index)
+                    if multiple_p == []:
+                        await ctx.respond(notfounderror)
+                        return
                     print(f"List of pronouns: {multiple_p}.")
 
                     data = utilities.set_multiple_pronouns(multiple_p)
@@ -346,7 +353,7 @@ class NBDbCog(commands.Cog):
 
         try:
             if data[0] == "MULTIPLE":
-                manual_option = "\n_Want to fine-tune these results? Type the pronoun set in its full form: `they/him/its/zir/theirs/zirself`_"
+                manual_option = "\n_Want to fine-tune these results? Type the pronoun set in its full form: `they/him/its/zir/zirself`_"
                 await ctx.respond(f"{final_story}{manual_option}", view=btn)
             else:
                 await ctx.respond(f"{final_story}", view=btn)
