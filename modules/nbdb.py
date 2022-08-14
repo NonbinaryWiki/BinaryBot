@@ -228,6 +228,7 @@ class NBDbCog(commands.Cog):
             ref = name.capitalize() + "'s self"
             posad = name.capitalize() + "'s"
             pos = name.capitalize()
+            data = [num, subj, obj, ref, posad, pos]
         else:
             if "(" in pronouns or ")" in pronouns:
                 await ctx.respond(":warning: Don't use parenthesis in your pronouns. Use slashes (/) to separate pronoun forms or multiple pronouns: `they/them`, `they/xe`.")
