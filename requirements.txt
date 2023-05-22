@@ -1,6 +1,6 @@
 wheel
 py-cord==2.0.0b7
-requests==2.20.0
+requests==2.31.0
 mwparserfromhell==0.5.2
 python-csv
 python-dotenv
