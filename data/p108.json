@@ -1,0 +1,29 @@
+{
+    "description": "A variant of the \"xe\" series of pronouns. See \"xe/hir\" for more info.",
+    "aliases": [
+        "xe",
+        "xir",
+        "xir",
+        "xirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "xe"
+    ],
+    "object": [
+        "xir"
+    ],
+    "possessive adjective": [
+        "xir"
+    ],
+    "possessive": [
+        "xirs"
+    ],
+    "reflexive": [
+        "xirself"
+    ],
+    "census percentage": 0.2,
+    "wiki link": {}
+}

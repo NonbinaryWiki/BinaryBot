@@ -1,0 +1,30 @@
+{
+    "description": "Neopronouns proposed by Fred E. Foldvary",
+    "aliases": [
+        "zhe",
+        "zhim",
+        "zher",
+        "zhers"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "zhe"
+    ],
+    "object": [
+        "zhim"
+    ],
+    "possessive adjective": [
+        "zher"
+    ],
+    "possessive": [
+        "zhers"
+    ],
+    "reflexive": [
+        "zhimself",
+        "zherself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

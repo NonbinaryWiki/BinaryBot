@@ -1,0 +1,24 @@
+{
+    "description": "Gender identity that refers to people that experience more than one gender, usually more than three.",
+    "name": "Polygender",
+    "aliases": [
+        "poly-gender",
+        "Polygender"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Pangender",
+        "Trigender",
+        "Multigender"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/8/87/Polygender.png"
+    ],
+    "alternative flags": null,
+    "wiki link": [
+        "https://nonbinary.wiki/wiki/Pride_Gallery/Polygender"
+    ]
+}

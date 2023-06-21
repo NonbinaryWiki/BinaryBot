@@ -1,0 +1,29 @@
+{
+    "description": "variant of ae pronouns",
+    "aliases": [
+        "ae",
+        "aem",
+        "aer",
+        "aers"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ae"
+    ],
+    "object": [
+        "aem"
+    ],
+    "possessive adjective": [
+        "aer"
+    ],
+    "possessive": [
+        "aers"
+    ],
+    "reflexive": [
+        "aemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

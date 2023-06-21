@@ -1,0 +1,31 @@
+{
+    "description": "Called \"person pronouns,\" these are meant to be used for a person of any gender.",
+    "aliases": [
+        "per",
+        "person",
+        "per",
+        "per",
+        "pers"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "per",
+        "person"
+    ],
+    "object": [
+        "per"
+    ],
+    "possessive adjective": [
+        "per"
+    ],
+    "possessive": [
+        "pers"
+    ],
+    "reflexive": [
+        "perself"
+    ],
+    "census percentage": 0.1,
+    "wiki link": {}
+}

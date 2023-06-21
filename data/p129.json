@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "that thing",
+        "it",
+        "its",
+        "that thing's"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "that thing"
+    ],
+    "object": [
+        "it"
+    ],
+    "possessive adjective": [
+        "its"
+    ],
+    "possessive": [
+        "that thing's"
+    ],
+    "reflexive": [
+        "itself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

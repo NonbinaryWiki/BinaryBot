@@ -1,0 +1,27 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "voi",
+        "void",
+        "voids",
+        "voids"
+    ],
+    "number": null,
+    "subject": [
+        "voi"
+    ],
+    "object": [
+        "void"
+    ],
+    "possessive adjective": [
+        "voids"
+    ],
+    "possessive": [
+        "voids"
+    ],
+    "reflexive": [
+        "voidself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

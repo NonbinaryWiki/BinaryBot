@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "dea",
+        "deam",
+        "deas",
+        "deams"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "dea"
+    ],
+    "object": [
+        "deam"
+    ],
+    "possessive adjective": [
+        "deas"
+    ],
+    "possessive": [
+        "deams"
+    ],
+    "reflexive": [
+        "deaself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

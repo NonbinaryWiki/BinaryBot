@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ze",
+        "zir",
+        "zir",
+        "zirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ze"
+    ],
+    "object": [
+        "zir"
+    ],
+    "possessive adjective": [
+        "zir"
+    ],
+    "possessive": [
+        "zirs"
+    ],
+    "reflexive": [
+        "zirself"
+    ],
+    "census percentage": 0.1,
+    "wiki link": {}
+}

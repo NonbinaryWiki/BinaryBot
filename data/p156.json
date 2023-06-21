@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "au",
+        "auti",
+        "autis",
+        "autis"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "au"
+    ],
+    "object": [
+        "auti"
+    ],
+    "possessive adjective": [
+        "autis"
+    ],
+    "possessive": [
+        "autis"
+    ],
+    "reflexive": [
+        "autiself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

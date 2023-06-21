@@ -1,0 +1,33 @@
+{
+    "description": "A pronoun created in 1970.",
+    "aliases": [
+        "ve",
+        "ver",
+        "vir",
+        "vis",
+        "vis",
+        "virs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ve"
+    ],
+    "object": [
+        "ver",
+        "vir"
+    ],
+    "possessive adjective": [
+        "vis"
+    ],
+    "possessive": [
+        "vis",
+        "virs"
+    ],
+    "reflexive": [
+        "verself"
+    ],
+    "census percentage": 0.2,
+    "wiki link": {}
+}

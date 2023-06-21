@@ -1,0 +1,30 @@
+{
+    "description": "An identity for people whose gender is partially fluid (genderfluid) with the other part(s) being static",
+    "name": "Demifluid",
+    "aliases": [
+        "Demifluid"
+    ],
+    "umbrella term": [
+        "Demigender"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Demiboy",
+        "Demigirl",
+        "Deminonbinary",
+        "Genderfluid",
+        "Demiflux"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/1/1f/Demifluid.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/6/6c/Demifluid-2.png",
+        "https://static.miraheze.org/nonbinarywiki/d/de/Demifluid-3.png",
+        "https://static.miraheze.org/nonbinarywiki/1/14/Demifluid-4.png",
+        "https://static.miraheze.org/nonbinarywiki/a/a4/Demigenderfluid.png"
+    ],
+    "wiki link": [
+        "https://nonbinary.wiki/wiki/Pride_Gallery/Demigender"
+    ]
+}

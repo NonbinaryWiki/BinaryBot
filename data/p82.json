@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronouns based on the word \"nemesis\"",
+    "aliases": [
+        "ne",
+        "nem",
+        "nemes",
+        "nemes"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ne"
+    ],
+    "object": [
+        "nem"
+    ],
+    "possessive adjective": [
+        "nemes"
+    ],
+    "possessive": [
+        "nemes"
+    ],
+    "reflexive": [
+        "nemesiself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "fang",
+        "fang",
+        "fangs",
+        "fangs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "fang"
+    ],
+    "object": [
+        "fang"
+    ],
+    "possessive adjective": [
+        "fangs"
+    ],
+    "possessive": [
+        "fangs"
+    ],
+    "reflexive": [
+        "fangself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

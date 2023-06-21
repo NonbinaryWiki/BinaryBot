@@ -1,0 +1,32 @@
+{
+    "description": "Also known as xe/xyr. Xe/xem is the most common neopronoun used, after they/them.",
+    "aliases": [
+        "xe",
+        "xem",
+        "xyr",
+        "xyr",
+        "xyrs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "xe"
+    ],
+    "object": [
+        "xem",
+        "xyr"
+    ],
+    "possessive adjective": [
+        "xyr"
+    ],
+    "possessive": [
+        "xyrs"
+    ],
+    "reflexive": [
+        "xemself",
+        "xyrself"
+    ],
+    "census percentage": 7.2,
+    "wiki link": {}
+}

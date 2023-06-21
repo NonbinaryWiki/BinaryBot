@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "sr",
+        "srx",
+        "srz",
+        "srz"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "sr"
+    ],
+    "object": [
+        "srx"
+    ],
+    "possessive adjective": [
+        "srz"
+    ],
+    "possessive": [
+        "srz"
+    ],
+    "reflexive": [
+        "srxself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

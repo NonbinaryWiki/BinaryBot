@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "di",
+        "div",
+        "divis",
+        "divis"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "di"
+    ],
+    "object": [
+        "div"
+    ],
+    "possessive adjective": [
+        "divis"
+    ],
+    "possessive": [
+        "divis"
+    ],
+    "reflexive": [
+        "divineself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

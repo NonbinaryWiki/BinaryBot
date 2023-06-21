@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "3",
+        "3",
+        "3s",
+        "3s"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "3"
+    ],
+    "object": [
+        "3"
+    ],
+    "possessive adjective": [
+        "3s"
+    ],
+    "possessive": [
+        "3s"
+    ],
+    "reflexive": [
+        "3self"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

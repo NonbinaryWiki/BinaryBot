@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "xi",
+        "xir",
+        "xir",
+        "xirs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "xi"
+    ],
+    "object": [
+        "xir"
+    ],
+    "possessive adjective": [
+        "xir"
+    ],
+    "possessive": [
+        "xirs"
+    ],
+    "reflexive": [
+        "xirself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

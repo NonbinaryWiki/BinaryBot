@@ -1,0 +1,31 @@
+{
+    "description": "Swedish neutral neopronoun",
+    "aliases": [
+        "hen",
+        "hen",
+        "henom",
+        "hens",
+        "hens"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "hen"
+    ],
+    "object": [
+        "hen",
+        "henom"
+    ],
+    "possessive adjective": [
+        "hens"
+    ],
+    "possessive": [
+        "hens"
+    ],
+    "reflexive": [
+        "sig"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

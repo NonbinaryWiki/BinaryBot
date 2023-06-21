@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "py",
+        "pyx",
+        "pyxis",
+        "pyxis"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "py"
+    ],
+    "object": [
+        "pyx"
+    ],
+    "possessive adjective": [
+        "pyxis"
+    ],
+    "possessive": [
+        "pyxis"
+    ],
+    "reflexive": [
+        "pyxiself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

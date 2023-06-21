@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "cat",
+        "cat",
+        "cats",
+        "cats"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "cat"
+    ],
+    "object": [
+        "cat"
+    ],
+    "possessive adjective": [
+        "cats"
+    ],
+    "possessive": [
+        "cats"
+    ],
+    "reflexive": [
+        "catself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

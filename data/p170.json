@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ny",
+        "nym",
+        "nys",
+        "nys"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "ny"
+    ],
+    "object": [
+        "nym"
+    ],
+    "possessive adjective": [
+        "nys"
+    ],
+    "possessive": [
+        "nys"
+    ],
+    "reflexive": [
+        "nymself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

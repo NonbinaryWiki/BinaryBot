@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "ghost",
+        "ghost",
+        "ghosts",
+        "ghosts"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ghost"
+    ],
+    "object": [
+        "ghost"
+    ],
+    "possessive adjective": [
+        "ghosts"
+    ],
+    "possessive": [
+        "ghosts"
+    ],
+    "reflexive": [
+        "ghostself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

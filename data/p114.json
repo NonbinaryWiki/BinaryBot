@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "se",
+        "ser",
+        "ser",
+        "sers"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "se"
+    ],
+    "object": [
+        "ser"
+    ],
+    "possessive adjective": [
+        "ser"
+    ],
+    "possessive": [
+        "sers"
+    ],
+    "reflexive": [
+        "serself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

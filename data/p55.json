@@ -1,0 +1,30 @@
+{
+    "description": "Neutral third-person pronouns in English",
+    "aliases": [
+        "they",
+        "them",
+        "their",
+        "theirs"
+    ],
+    "number": [
+        "Plural"
+    ],
+    "subject": [
+        "they"
+    ],
+    "object": [
+        "them"
+    ],
+    "possessive adjective": [
+        "their"
+    ],
+    "possessive": [
+        "theirs"
+    ],
+    "reflexive": [
+        "themselves",
+        "themself"
+    ],
+    "census percentage": 79.5,
+    "wiki link": "Singular they"
+}

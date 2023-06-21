@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "artim",
+        "artim",
+        "artos",
+        "artims"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "artim"
+    ],
+    "object": [
+        "artim"
+    ],
+    "possessive adjective": [
+        "artos"
+    ],
+    "possessive": [
+        "artims"
+    ],
+    "reflexive": [
+        "arself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

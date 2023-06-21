@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "star",
+        "star",
+        "stars",
+        "stars"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "star"
+    ],
+    "object": [
+        "star"
+    ],
+    "possessive adjective": [
+        "stars"
+    ],
+    "possessive": [
+        "stars"
+    ],
+    "reflexive": [
+        "starself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

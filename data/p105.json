@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "vey",
+        "vym",
+        "vyr",
+        "vyrs"
+    ],
+    "number": [
+        "plural"
+    ],
+    "subject": [
+        "vey"
+    ],
+    "object": [
+        "vym"
+    ],
+    "possessive adjective": [
+        "vyr"
+    ],
+    "possessive": [
+        "vyrs"
+    ],
+    "reflexive": [
+        "vymself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

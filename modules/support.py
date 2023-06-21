@@ -30,5 +30,10 @@ class SupportCog(commands.Cog):
         """Sends an invite link for the bot."""
         await ctx.respond(":raised_hands: Use the following link to invite me to your server! Please note that you will need the _Manage Server_ permission in order to invite me. <https://discord.com/api/oauth2/authorize?client_id=521031266762489857&permissions=0&scope=applications.commands%20bot>")
 
+    @slash_command(name="feedback")
+    async def support(self, ctx):
+        """Sends a link to the bot's GitHub issue tracker."""
+        await ctx.respond(":mailbox: You can give feedback about the bot, including suggesting new identities and pronoun sets (as well as reporting bugs) here: <https://github.com/NonbinaryWiki/BinaryBot/issues>")
+
 def setup(bot):
     bot.add_cog(SupportCog(bot))

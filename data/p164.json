@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronouns based on the word “fiend”",
+    "aliases": [
+        "fie",
+        "fiend",
+        "fiends",
+        "fiends"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "fie"
+    ],
+    "object": [
+        "fiend"
+    ],
+    "possessive adjective": [
+        "fiends"
+    ],
+    "possessive": [
+        "fiends"
+    ],
+    "reflexive": [
+        "fiendself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

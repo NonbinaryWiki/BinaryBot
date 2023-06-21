@@ -1,0 +1,31 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "vam",
+        "vamp",
+        "vamp",
+        "vamps",
+        "vamps"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "vam",
+        "vamp"
+    ],
+    "object": [
+        "vamp"
+    ],
+    "possessive adjective": [
+        "vamps"
+    ],
+    "possessive": [
+        "vamps"
+    ],
+    "reflexive": [
+        "vampself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

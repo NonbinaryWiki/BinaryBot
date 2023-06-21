@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "dræ",
+        "dræm",
+        "drær",
+        "drærs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "dræ"
+    ],
+    "object": [
+        "dræm"
+    ],
+    "possessive adjective": [
+        "drær"
+    ],
+    "possessive": [
+        "drærs"
+    ],
+    "reflexive": [
+        "dræmself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

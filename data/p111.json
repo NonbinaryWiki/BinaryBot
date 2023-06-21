@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "iv",
+        "ivy",
+        "ivs",
+        "ivys"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "iv"
+    ],
+    "object": [
+        "ivy"
+    ],
+    "possessive adjective": [
+        "ivs"
+    ],
+    "possessive": [
+        "ivys"
+    ],
+    "reflexive": [
+        "ivyself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

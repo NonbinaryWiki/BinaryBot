@@ -1,0 +1,29 @@
+{
+    "description": "Nya/nyan is a pronoun set related to cats.",
+    "aliases": [
+        "nya",
+        "nyan",
+        "nyans",
+        "nyans"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "nya"
+    ],
+    "object": [
+        "nyan"
+    ],
+    "possessive adjective": [
+        "nyans"
+    ],
+    "possessive": [
+        "nyans"
+    ],
+    "reflexive": [
+        "nyanself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

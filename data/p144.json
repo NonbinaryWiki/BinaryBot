@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ve",
+        "vir",
+        "vir",
+        "virs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "ve"
+    ],
+    "object": [
+        "vir"
+    ],
+    "possessive adjective": [
+        "vir"
+    ],
+    "possessive": [
+        "virs"
+    ],
+    "reflexive": [
+        "virself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

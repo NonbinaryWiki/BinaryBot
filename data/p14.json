@@ -1,0 +1,30 @@
+{
+    "description": "Coined in 2013, a pronoun relating to fairies/faefolk. The most commonly used nounself pronoun, and likely what inspired others to use nounself pronouns.",
+    "aliases": [
+        "fae",
+        "faer",
+        "faer",
+        "faers"
+    ],
+    "number": [
+        "Singular",
+        "Plural"
+    ],
+    "subject": [
+        "fae"
+    ],
+    "object": [
+        "faer"
+    ],
+    "possessive adjective": [
+        "faer"
+    ],
+    "possessive": [
+        "faers"
+    ],
+    "reflexive": [
+        "faerself"
+    ],
+    "census percentage": 4.3,
+    "wiki link": {}
+}

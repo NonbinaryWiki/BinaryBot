@@ -1,0 +1,27 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "dae",
+        "daem",
+        "daer",
+        "daers"
+    ],
+    "number": null,
+    "subject": [
+        "dae"
+    ],
+    "object": [
+        "daem"
+    ],
+    "possessive adjective": [
+        "daer"
+    ],
+    "possessive": [
+        "daers"
+    ],
+    "reflexive": [
+        "daemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

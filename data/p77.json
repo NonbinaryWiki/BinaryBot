@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set based on the letter V",
+    "aliases": [
+        "v",
+        "v",
+        "v's",
+        "v's"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "v"
+    ],
+    "object": [
+        "v"
+    ],
+    "possessive adjective": [
+        "v's"
+    ],
+    "possessive": [
+        "v's"
+    ],
+    "reflexive": [
+        "vself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

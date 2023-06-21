@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ve",
+        "vim",
+        "vis",
+        "vis"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ve"
+    ],
+    "object": [
+        "vim"
+    ],
+    "possessive adjective": [
+        "vis"
+    ],
+    "possessive": [
+        "vis"
+    ],
+    "reflexive": [
+        "vimself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

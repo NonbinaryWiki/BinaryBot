@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "viod",
+        "vuud",
+        "vids",
+        "vidu"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "viod"
+    ],
+    "object": [
+        "vuud"
+    ],
+    "possessive adjective": [
+        "vids"
+    ],
+    "possessive": [
+        "vidu"
+    ],
+    "reflexive": [
+        "voodself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

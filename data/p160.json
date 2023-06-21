@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "jee",
+        "jem",
+        "jeir",
+        "jeirs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "jee"
+    ],
+    "object": [
+        "jem"
+    ],
+    "possessive adjective": [
+        "jeir"
+    ],
+    "possessive": [
+        "jeirs"
+    ],
+    "reflexive": [
+        "jemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

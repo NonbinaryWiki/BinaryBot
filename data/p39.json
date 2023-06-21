@@ -1,0 +1,31 @@
+{
+    "description": "Neutral neopronoun in english",
+    "aliases": [
+        "vey",
+        "vem",
+        "vir",
+        "virs"
+    ],
+    "number": [
+        "Plural",
+        "Singular"
+    ],
+    "subject": [
+        "vey"
+    ],
+    "object": [
+        "vem"
+    ],
+    "possessive adjective": [
+        "vir"
+    ],
+    "possessive": [
+        "virs"
+    ],
+    "reflexive": [
+        "virself",
+        "virselves"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

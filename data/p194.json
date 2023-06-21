@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "hx",
+        "hxm",
+        "hxs",
+        "hxs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "hx"
+    ],
+    "object": [
+        "hxm"
+    ],
+    "possessive adjective": [
+        "hxs"
+    ],
+    "possessive": [
+        "hxs"
+    ],
+    "reflexive": [
+        "hxmself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

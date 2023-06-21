@@ -1,0 +1,30 @@
+{
+    "description": "Nonbinary identity that consists of not having a gender or a gender identity",
+    "name": "Agender",
+    "aliases": [
+        "genderless",
+        "ungendered",
+        "non-gendered",
+        "genderfree",
+        "Agender"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Agenderfluid",
+        "Agenderflux"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/8/83/Agender.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/5/58/Agender-2.png",
+        "https://static.miraheze.org/nonbinarywiki/5/5f/Agender-3.png",
+        "https://nonbinary.wiki/wiki/File:Agender-4.png"
+    ],
+    "wiki link": [
+        "https://nonbinary.wiki/wiki/Pride_Gallery/Agender"
+    ]
+}

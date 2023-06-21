@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "kye",
+        "kyr",
+        "kyne",
+        "kynes"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "kye"
+    ],
+    "object": [
+        "kyr"
+    ],
+    "possessive adjective": [
+        "kyne"
+    ],
+    "possessive": [
+        "kynes"
+    ],
+    "reflexive": [
+        "kyrself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

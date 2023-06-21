@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ix",
+        "ix",
+        "ixs",
+        "ixs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ix"
+    ],
+    "object": [
+        "ix"
+    ],
+    "possessive adjective": [
+        "ixs"
+    ],
+    "possessive": [
+        "ixs"
+    ],
+    "reflexive": [
+        "ixself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

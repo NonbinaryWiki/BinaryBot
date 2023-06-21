@@ -1,0 +1,29 @@
+{
+    "description": "A pronoun that has been around since the 1850s.",
+    "aliases": [
+        "ne",
+        "nem",
+        "nir",
+        "nirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ne"
+    ],
+    "object": [
+        "nem"
+    ],
+    "possessive adjective": [
+        "nir"
+    ],
+    "possessive": [
+        "nirs"
+    ],
+    "reflexive": [
+        "nemself"
+    ],
+    "census percentage": 0.2,
+    "wiki link": {}
+}

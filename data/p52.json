@@ -1,0 +1,28 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "zey",
+        "zem",
+        "zeir",
+        "zeirs"
+    ],
+    "number": null,
+    "subject": [
+        "zey"
+    ],
+    "object": [
+        "zem"
+    ],
+    "possessive adjective": [
+        "zeir"
+    ],
+    "possessive": [
+        "zeirs"
+    ],
+    "reflexive": [
+        "zeirself",
+        "zemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

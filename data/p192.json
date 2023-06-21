@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun",
+    "aliases": [
+        "jab",
+        "jabber",
+        "wock",
+        "wocky"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "jab"
+    ],
+    "object": [
+        "jabber"
+    ],
+    "possessive adjective": [
+        "wock"
+    ],
+    "possessive": [
+        "wocky"
+    ],
+    "reflexive": [
+        "jabberwocky"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

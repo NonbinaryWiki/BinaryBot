@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "end",
+        "end",
+        "ends",
+        "ends"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "end"
+    ],
+    "object": [
+        "end"
+    ],
+    "possessive adjective": [
+        "ends"
+    ],
+    "possessive": [
+        "ends"
+    ],
+    "reflexive": [
+        "endself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

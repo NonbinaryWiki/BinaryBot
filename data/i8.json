@@ -1,0 +1,21 @@
+{
+    "description": "a gender that does not yet have a term to describe it",
+    "name": "genderweird",
+    "aliases": [
+        "genderweird"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        null
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/e/e7/Genderweird.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/2/20/Genderweird_by_tirednowhasablog.png"
+    ],
+    "wiki link": null
+}

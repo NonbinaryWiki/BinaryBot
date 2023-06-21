@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "LOUD",
+        "LOUD",
+        "LOUDS",
+        "LOUDS"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "LOUD"
+    ],
+    "object": [
+        "LOUD"
+    ],
+    "possessive adjective": [
+        "LOUDS"
+    ],
+    "possessive": [
+        "LOUDS"
+    ],
+    "reflexive": [
+        "LOUDSELF"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

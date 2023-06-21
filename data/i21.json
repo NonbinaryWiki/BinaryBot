@@ -1,0 +1,33 @@
+{
+    "description": "Gender identity used for people who do not fit the gender binary.",
+    "name": "Nonbinary",
+    "aliases": [
+        "non-binary",
+        "non binary",
+        "enby",
+        "NB",
+        "Nonbinary"
+    ],
+    "umbrella term": [
+        "transgender"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Genderqueer"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/c/c0/Nonbinary.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/f/fb/Nonbinary-2.png",
+        "https://static.miraheze.org/nonbinarywiki/1/12/Nonbinary-3.png",
+        "https://static.miraheze.org/nonbinarywiki/5/57/Nonbinary-4.png",
+        "https://static.miraheze.org/nonbinarywiki/a/ab/Nonbinary-5.png",
+        "https://static.miraheze.org/nonbinarywiki/b/bc/Nonbinary-6.svg",
+        "https://static.miraheze.org/nonbinarywiki/f/f4/Nonbinary_flag_by_Sascha_Viktor.jpg",
+        "https://static.miraheze.org/nonbinarywiki/c/c9/Nonbinary_flag_by_bandorys.png"
+    ],
+    "wiki link": [
+        "https://nonbinary.wiki/wiki/Pride_Gallery/Nonbinary"
+    ]
+}

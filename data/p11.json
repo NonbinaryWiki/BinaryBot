@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "sol",
+        "sol",
+        "sols",
+        "solaires"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "sol"
+    ],
+    "object": [
+        "sol"
+    ],
+    "possessive adjective": [
+        "sols"
+    ],
+    "possessive": [
+        "solaires"
+    ],
+    "reflexive": [
+        "solaireself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

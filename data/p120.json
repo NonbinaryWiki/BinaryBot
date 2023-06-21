@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ze",
+        "zim",
+        "zis",
+        "zis"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ze"
+    ],
+    "object": [
+        "zim"
+    ],
+    "possessive adjective": [
+        "zis"
+    ],
+    "possessive": [
+        "zis"
+    ],
+    "reflexive": [
+        "zimself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

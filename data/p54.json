@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ze",
+        "zer",
+        "zers",
+        "zers"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "ze"
+    ],
+    "object": [
+        "zer"
+    ],
+    "possessive adjective": [
+        "zers"
+    ],
+    "possessive": [
+        "zers"
+    ],
+    "reflexive": [
+        "zeroself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

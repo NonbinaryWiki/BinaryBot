@@ -1,0 +1,29 @@
+{
+    "description": "weather based pronouns, based off of rain.",
+    "aliases": [
+        "rai",
+        "rai",
+        "rain",
+        "rain"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "rai"
+    ],
+    "object": [
+        "rai"
+    ],
+    "possessive adjective": [
+        "rain"
+    ],
+    "possessive": [
+        "rain"
+    ],
+    "reflexive": [
+        "rainself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

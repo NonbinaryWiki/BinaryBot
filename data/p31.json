@@ -1,0 +1,29 @@
+{
+    "description": "Third-person singular pronouns in English, usually associated with the female gender.",
+    "aliases": [
+        "she",
+        "her",
+        "her",
+        "hers"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "she"
+    ],
+    "object": [
+        "her"
+    ],
+    "possessive adjective": [
+        "her"
+    ],
+    "possessive": [
+        "hers"
+    ],
+    "reflexive": [
+        "herself"
+    ],
+    "census percentage": 29.0,
+    "wiki link": {}
+}

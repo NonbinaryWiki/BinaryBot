@@ -1,0 +1,29 @@
+{
+    "description": "Pronoun set",
+    "aliases": [
+        "tey",
+        "tem",
+        "ter",
+        "ters"
+    ],
+    "number": [
+        "plural"
+    ],
+    "subject": [
+        "tey"
+    ],
+    "object": [
+        "tem"
+    ],
+    "possessive adjective": [
+        "ter"
+    ],
+    "possessive": [
+        "ters"
+    ],
+    "reflexive": [
+        "temself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "se",
+        "sym",
+        "syr",
+        "syrs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "se"
+    ],
+    "object": [
+        "sym"
+    ],
+    "possessive adjective": [
+        "syr"
+    ],
+    "possessive": [
+        "syrs"
+    ],
+    "reflexive": [
+        "syrself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

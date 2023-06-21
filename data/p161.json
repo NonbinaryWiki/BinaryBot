@@ -1,0 +1,31 @@
+{
+    "description": "One of many nounself pronouns. Origin unknown, please add if you find it. A fairy (faery, faerie, fey, or Fair Folk) themed set.",
+    "aliases": [
+        "fey",
+        "fey",
+        "feyr",
+        "feys",
+        "feys"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "fey"
+    ],
+    "object": [
+        "fey",
+        "feyr"
+    ],
+    "possessive adjective": [
+        "feys"
+    ],
+    "possessive": [
+        "feys"
+    ],
+    "reflexive": [
+        "feyself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

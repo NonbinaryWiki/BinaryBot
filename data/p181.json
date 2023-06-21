@@ -1,0 +1,30 @@
+{
+    "description": "A variation of \"fae/faer\"",
+    "aliases": [
+        "fae",
+        "faen",
+        "faer",
+        "faers"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "fae"
+    ],
+    "object": [
+        "faen"
+    ],
+    "possessive adjective": [
+        "faer"
+    ],
+    "possessive": [
+        "faers"
+    ],
+    "reflexive": [
+        "faenself",
+        "faerself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

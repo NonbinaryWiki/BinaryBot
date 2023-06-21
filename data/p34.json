@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set based on \"they/them\"",
+    "aliases": [
+        "hey",
+        "hem",
+        "heir",
+        "heirs"
+    ],
+    "number": [
+        "plural"
+    ],
+    "subject": [
+        "hey"
+    ],
+    "object": [
+        "hem"
+    ],
+    "possessive adjective": [
+        "heir"
+    ],
+    "possessive": [
+        "heirs"
+    ],
+    "reflexive": [
+        "hemself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

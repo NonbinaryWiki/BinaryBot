@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "hy",
+        "hym",
+        "hys",
+        "hys"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "hy"
+    ],
+    "object": [
+        "hym"
+    ],
+    "possessive adjective": [
+        "hys"
+    ],
+    "possessive": [
+        "hys"
+    ],
+    "reflexive": [
+        "hymself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

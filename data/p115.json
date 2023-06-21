@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "root",
+        "root",
+        "roots",
+        "roots"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "root"
+    ],
+    "object": [
+        "root"
+    ],
+    "possessive adjective": [
+        "roots"
+    ],
+    "possessive": [
+        "roots"
+    ],
+    "reflexive": [
+        "rootself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

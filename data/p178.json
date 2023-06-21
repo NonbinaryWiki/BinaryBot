@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "shi",
+        "hir",
+        "hir",
+        "hirs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "shi"
+    ],
+    "object": [
+        "hir"
+    ],
+    "possessive adjective": [
+        "hir"
+    ],
+    "possessive": [
+        "hirs"
+    ],
+    "reflexive": [
+        "hirself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

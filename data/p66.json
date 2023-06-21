@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "glow",
+        "worm",
+        "glows",
+        "worms"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "glow"
+    ],
+    "object": [
+        "worm"
+    ],
+    "possessive adjective": [
+        "glows"
+    ],
+    "possessive": [
+        "worms"
+    ],
+    "reflexive": [
+        "glowwormself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

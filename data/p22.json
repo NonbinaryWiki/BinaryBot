@@ -1,0 +1,27 @@
+{
+    "description": "neopronoun set",
+    "aliases": [
+        "vae",
+        "ver",
+        "vaer",
+        "vaers"
+    ],
+    "number": null,
+    "subject": [
+        "vae"
+    ],
+    "object": [
+        "ver"
+    ],
+    "possessive adjective": [
+        "vaer"
+    ],
+    "possessive": [
+        "vaers"
+    ],
+    "reflexive": [
+        "verself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

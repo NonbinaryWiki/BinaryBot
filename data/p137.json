@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "blue",
+        "blue",
+        "blues",
+        "blues"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "blue"
+    ],
+    "object": [
+        "blue"
+    ],
+    "possessive adjective": [
+        "blues"
+    ],
+    "possessive": [
+        "blues"
+    ],
+    "reflexive": [
+        "blueself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,21 @@
+{
+    "description": "Category of genders that can only be defined as the opposite of an existing gender.",
+    "name": "Antigender",
+    "aliases": [
+        "Antigender"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        null
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/0/02/Antigender_flag.png"
+    ],
+    "alternative flags": [
+        "https://nonbinary.wiki/wiki/File:Antigender_flag_2.png"
+    ],
+    "wiki link": null
+}

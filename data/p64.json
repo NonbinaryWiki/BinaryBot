@@ -1,0 +1,29 @@
+{
+    "description": "A set of neopronouns",
+    "aliases": [
+        "re",
+        "rem",
+        "rheirs",
+        "rheir"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "re"
+    ],
+    "object": [
+        "rem"
+    ],
+    "possessive adjective": [
+        "rheirs"
+    ],
+    "possessive": [
+        "rheir"
+    ],
+    "reflexive": [
+        "remself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

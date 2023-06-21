@@ -1,0 +1,31 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "dey",
+        "dem",
+        "der",
+        "deir",
+        "ders",
+        "deirs"
+    ],
+    "number": null,
+    "subject": [
+        "dey"
+    ],
+    "object": [
+        "dem"
+    ],
+    "possessive adjective": [
+        "der",
+        "deir"
+    ],
+    "possessive": [
+        "ders",
+        "deirs"
+    ],
+    "reflexive": [
+        "demself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

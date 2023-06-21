@@ -1,0 +1,29 @@
+{
+    "description": "Veterinarian Al Lippart independently proposed the same set of pronouns in 1999, recommending them for use when it would be inappropriate to specify the gender of a human, animal, or deity.",
+    "aliases": [
+        "ne",
+        "ner",
+        "nis",
+        "nis"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ne"
+    ],
+    "object": [
+        "ner"
+    ],
+    "possessive adjective": [
+        "nis"
+    ],
+    "possessive": [
+        "nis"
+    ],
+    "reflexive": [
+        "nemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

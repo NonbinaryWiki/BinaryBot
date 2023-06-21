@@ -1,0 +1,29 @@
+{
+    "description": "Neopronouns",
+    "aliases": [
+        "asp",
+        "spen",
+        "aspens",
+        "aspens"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "asp"
+    ],
+    "object": [
+        "spen"
+    ],
+    "possessive adjective": [
+        "aspens"
+    ],
+    "possessive": [
+        "aspens"
+    ],
+    "reflexive": [
+        "aspenself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

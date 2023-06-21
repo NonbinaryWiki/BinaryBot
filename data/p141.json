@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "nin",
+        "nin",
+        "nins",
+        "nins"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "nin"
+    ],
+    "object": [
+        "nin"
+    ],
+    "possessive adjective": [
+        "nins"
+    ],
+    "possessive": [
+        "nins"
+    ],
+    "reflexive": [
+        "ninself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

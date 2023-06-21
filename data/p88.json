@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "bell",
+        "bell",
+        "bells",
+        "bells"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "bell"
+    ],
+    "object": [
+        "bell"
+    ],
+    "possessive adjective": [
+        "bells"
+    ],
+    "possessive": [
+        "bells"
+    ],
+    "reflexive": [
+        "bellself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

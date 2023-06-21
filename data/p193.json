@@ -1,0 +1,29 @@
+{
+    "description": "Also known as \"Spivak\" pronouns. Michael Spivak created these pronouns in 1990 for his manual \"The Joy of TeX\" so that no person in his manuals had a specified gender.",
+    "aliases": [
+        "E",
+        "Em",
+        "Eir",
+        "Eirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "E"
+    ],
+    "object": [
+        "Em"
+    ],
+    "possessive adjective": [
+        "Eir"
+    ],
+    "possessive": [
+        "Eirs"
+    ],
+    "reflexive": [
+        "Emself"
+    ],
+    "census percentage": 5.2,
+    "wiki link": {}
+}

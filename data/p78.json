@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "doll",
+        "doll",
+        "doll's",
+        "dolls"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "doll"
+    ],
+    "object": [
+        "doll"
+    ],
+    "possessive adjective": [
+        "doll's"
+    ],
+    "possessive": [
+        "dolls"
+    ],
+    "reflexive": [
+        "dollself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

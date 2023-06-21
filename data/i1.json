@@ -1,0 +1,19 @@
+{
+    "description": "Identity that refers to when someone hears about a certain gender they start to become that gender.",
+    "name": "Audiogender",
+    "aliases": [
+        "Audiogender"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        null
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/a/aa/Audiogender_flag.png"
+    ],
+    "alternative flags": null,
+    "wiki link": null
+}

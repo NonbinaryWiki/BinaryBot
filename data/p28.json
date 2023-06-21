@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun",
+    "aliases": [
+        "fla",
+        "flare",
+        "flares",
+        "flares"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "fla"
+    ],
+    "object": [
+        "flare"
+    ],
+    "possessive adjective": [
+        "flares"
+    ],
+    "possessive": [
+        "flares"
+    ],
+    "reflexive": [
+        "flareself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

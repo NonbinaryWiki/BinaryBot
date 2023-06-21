@@ -1,0 +1,29 @@
+{
+    "description": "Used to imply ambiguity between \"he\" and \"she\"",
+    "aliases": [
+        "*e",
+        "h*",
+        "h*s",
+        "h*s"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "*e"
+    ],
+    "object": [
+        "h*"
+    ],
+    "possessive adjective": [
+        "h*s"
+    ],
+    "possessive": [
+        "h*s"
+    ],
+    "reflexive": [
+        "h*self"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

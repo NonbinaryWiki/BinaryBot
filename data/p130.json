@@ -1,0 +1,29 @@
+{
+    "description": "nounself pronouns based on the Latin word for “eye”",
+    "aliases": [
+        "oc",
+        "ocul",
+        "oculus",
+        "oculus"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "oc"
+    ],
+    "object": [
+        "ocul"
+    ],
+    "possessive adjective": [
+        "oculus"
+    ],
+    "possessive": [
+        "oculus"
+    ],
+    "reflexive": [
+        "oculuself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

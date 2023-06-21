@@ -1,0 +1,29 @@
+{
+    "description": "A variant of the xe/hir pronoun.",
+    "aliases": [
+        "ze",
+        "hir",
+        "hir",
+        "hirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ze"
+    ],
+    "object": [
+        "hir"
+    ],
+    "possessive adjective": [
+        "hir"
+    ],
+    "possessive": [
+        "hirs"
+    ],
+    "reflexive": [
+        "hirself"
+    ],
+    "census percentage": 4.7,
+    "wiki link": {}
+}

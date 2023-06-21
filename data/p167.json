@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun",
+    "aliases": [
+        "dear",
+        "dear",
+        "dears",
+        "dears"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "dear"
+    ],
+    "object": [
+        "dear"
+    ],
+    "possessive adjective": [
+        "dears"
+    ],
+    "possessive": [
+        "dears"
+    ],
+    "reflexive": [
+        "dearself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

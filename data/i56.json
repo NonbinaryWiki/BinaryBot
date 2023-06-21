@@ -1,0 +1,28 @@
+{
+    "description": "Gender identity that varies in intensity over time.",
+    "name": "Genderflux",
+    "aliases": [
+        "Genderflux"
+    ],
+    "umbrella term": [
+        "Nonbinary"
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Genderfluid",
+        "Fluidflux",
+        "Demiflux"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/a/ae/Genderflux.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/5/5e/Genderflux-2.png",
+        "https://static.miraheze.org/nonbinarywiki/e/ed/Genderflux-3.png",
+        "https://static.miraheze.org/nonbinarywiki/e/ee/Genderflux-4.png",
+        "https://static.miraheze.org/nonbinarywiki/7/77/Genderflux-5.png"
+    ],
+    "wiki link": [
+        "https://nonbinary.wiki/wiki/Pride_Gallery/Genderfluid,_genderflux_and_fluidflux"
+    ]
+}

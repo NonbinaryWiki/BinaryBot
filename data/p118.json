@@ -1,0 +1,27 @@
+{
+    "description": "A pronoun set about apollo",
+    "aliases": [
+        "allo",
+        "alle",
+        "allon",
+        "allos"
+    ],
+    "number": null,
+    "subject": [
+        "allo"
+    ],
+    "object": [
+        "alle"
+    ],
+    "possessive adjective": [
+        "allon"
+    ],
+    "possessive": [
+        "allos"
+    ],
+    "reflexive": [
+        "alleself"
+    ],
+    "census percentage": 1.0,
+    "wiki link": {}
+}

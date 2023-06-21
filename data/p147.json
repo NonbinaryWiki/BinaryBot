@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "non",
+        "human",
+        "nons",
+        "humans"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "non"
+    ],
+    "object": [
+        "human"
+    ],
+    "possessive adjective": [
+        "nons"
+    ],
+    "possessive": [
+        "humans"
+    ],
+    "reflexive": [
+        "nonhumanself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

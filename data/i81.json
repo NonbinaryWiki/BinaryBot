@@ -1,0 +1,24 @@
+{
+    "description": "Ipsogender describes an intersex person who agrees with their gender assigned at birth.",
+    "name": "Ipsogender",
+    "aliases": [
+        "ipso gender",
+        "Ipsogender"
+    ],
+    "umbrella term": [
+        null
+    ],
+    "census percentage": 0.0,
+    "related identities": [
+        "Intergender",
+        "Amalgagender"
+    ],
+    "flag": [
+        "https://static.miraheze.org/nonbinarywiki/1/16/Ipsogender_flag.png"
+    ],
+    "alternative flags": [
+        "https://static.miraheze.org/nonbinarywiki/7/79/Ipsogender_man.png",
+        "https://static.miraheze.org/nonbinarywiki/8/81/Ipsogender_woman.png"
+    ],
+    "wiki link": null
+}

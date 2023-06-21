@@ -1,0 +1,29 @@
+{
+    "description": "Third-person singular neutral neopronouns in English.",
+    "aliases": [
+        "zie",
+        "hir",
+        "hir",
+        "hirs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "zie"
+    ],
+    "object": [
+        "hir"
+    ],
+    "possessive adjective": [
+        "hir"
+    ],
+    "possessive": [
+        "hirs"
+    ],
+    "reflexive": [
+        "hirself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

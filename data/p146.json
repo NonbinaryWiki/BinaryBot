@@ -1,0 +1,27 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ae",
+        "em",
+        "aes",
+        "aes"
+    ],
+    "number": null,
+    "subject": [
+        "ae"
+    ],
+    "object": [
+        "em"
+    ],
+    "possessive adjective": [
+        "aes"
+    ],
+    "possessive": [
+        "aes"
+    ],
+    "reflexive": [
+        "aemself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

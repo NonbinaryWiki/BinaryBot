@@ -1,0 +1,461 @@
+{
+    "i1": [
+        "Audiogender"
+    ],
+    "i2": [
+        "Heatwavesgender"
+    ],
+    "i3": [
+        "Demigender"
+    ],
+    "i4": [
+        "parawoman",
+        "parafemale",
+        "parafeminine",
+        "paragirl"
+    ],
+    "i5": [
+        "Neurogender"
+    ],
+    "i6": [
+        "Librafluid"
+    ],
+    "i7": [
+        "Epicene"
+    ],
+    "i8": [
+        "genderweird"
+    ],
+    "i9": [
+        "delicagender",
+        "daingender",
+        "etherereagender",
+        "elegender",
+        "Ethegender"
+    ],
+    "i10": [
+        "Xenogender"
+    ],
+    "i11": [
+        "timtum",
+        "טֻומְטוּם",
+        "tumtum"
+    ],
+    "i12": [
+        "deergender",
+        "Fawngender"
+    ],
+    "i13": [
+        "Anongender"
+    ],
+    "i14": [
+        "lunarian"
+    ],
+    "i15": [
+        "solarian"
+    ],
+    "i16": [
+        "Apogender"
+    ],
+    "i17": [
+        "juxera"
+    ],
+    "i18": [
+        "Egender",
+        "Exgender"
+    ],
+    "i19": [
+        "Trigender"
+    ],
+    "i20": [
+        "Androgyne"
+    ],
+    "i21": [
+        "non-binary",
+        "non binary",
+        "enby",
+        "NB",
+        "Nonbinary"
+    ],
+    "i22": [
+        "Librafeminine"
+    ],
+    "i23": [
+        "Espigender"
+    ],
+    "i24": [
+        "Nonbinaryfluid",
+        "Enbyalt"
+    ],
+    "i25": [
+        "genderfloat"
+    ],
+    "i26": [
+        "mahu",
+        "māhū"
+    ],
+    "i27": [
+        "demiwoman",
+        "demifemale",
+        "demigal",
+        "Demigirl"
+    ],
+    "i28": [
+        "Neuter"
+    ],
+    "i29": [
+        "Cogender"
+    ],
+    "i30": [
+        "Glitchgender"
+    ],
+    "i31": [
+        "nonpuerella",
+        "nonvirmina"
+    ],
+    "i32": [
+        "Microgender"
+    ],
+    "i33": [
+        "Intergender"
+    ],
+    "i34": [
+        "gendermars",
+        "Genderfaun"
+    ],
+    "i35": [
+        "Gendercosm"
+    ],
+    "i36": [
+        "Amalgagender"
+    ],
+    "i37": [
+        "wolfgender"
+    ],
+    "i38": [
+        "cancegender",
+        "Agenderfluid"
+    ],
+    "i39": [
+        "genderfaunet"
+    ],
+    "i40": [
+        "Fluidflux"
+    ],
+    "i41": [
+        "Anagender",
+        "Anogender"
+    ],
+    "i42": [
+        "demiman",
+        "demimale",
+        "demiguy",
+        "Demiboy"
+    ],
+    "i43": [
+        "Hijra"
+    ],
+    "i44": [
+        "Bigenderfluid"
+    ],
+    "i45": [
+        "cenrell"
+    ],
+    "i46": [
+        "man",
+        "boy",
+        "Male"
+    ],
+    "i47": [
+        "null gender",
+        "nullgender"
+    ],
+    "i48": [
+        "doeflux",
+        "thilflux",
+        "faeflux"
+    ],
+    "i49": [
+        "ceterogender"
+    ],
+    "i50": [
+        "woman",
+        "girl",
+        "Female"
+    ],
+    "i51": [
+        "Oneirogender"
+    ],
+    "i52": [
+        "censari"
+    ],
+    "i53": [
+        "astrumgender"
+    ],
+    "i54": [
+        "Fa'afafine"
+    ],
+    "i55": [
+        "Deminonbinary"
+    ],
+    "i56": [
+        "Genderflux"
+    ],
+    "i57": [
+        "Antigender"
+    ],
+    "i58": [
+        "Abifluid"
+    ],
+    "i59": [
+        "autismgender",
+        "Autigender"
+    ],
+    "i60": [
+        "genderfaer"
+    ],
+    "i61": [
+        "Genderblank"
+    ],
+    "i62": [
+        "gendervae",
+        "genderflor"
+    ],
+    "i63": [
+        "neutral gender",
+        "Gender neutral"
+    ],
+    "i64": [
+        "Ambigender"
+    ],
+    "i65": [
+        "ultergender"
+    ],
+    "i66": [
+        "Necrogender"
+    ],
+    "i67": [
+        "femgender",
+        "femmegender"
+    ],
+    "i68": [
+        "Gendersea"
+    ],
+    "i69": [
+        "bigenderflux"
+    ],
+    "i70": [
+        "Gendernull"
+    ],
+    "i71": [
+        "ethale"
+    ],
+    "i72": [
+        "bxy"
+    ],
+    "i73": [
+        "Neutrois"
+    ],
+    "i74": [
+        "Quoigender"
+    ],
+    "i75": [
+        "nonera",
+        "nonpuella"
+    ],
+    "i76": [
+        "Hydrogender"
+    ],
+    "i77": [
+        "Proxvir"
+    ],
+    "i78": [
+        "Abiflux"
+    ],
+    "i79": [
+        "femache"
+    ],
+    "i80": [
+        "gendersatyr"
+    ],
+    "i81": [
+        "ipso gender",
+        "Ipsogender"
+    ],
+    "i82": [
+        "Genderopaque"
+    ],
+    "i83": [
+        "gender modality"
+    ],
+    "i84": [
+        "Butch"
+    ],
+    "i85": [
+        "faesari"
+    ],
+    "i86": [
+        "Demifluid"
+    ],
+    "i87": [
+        "gender fluid",
+        "gender-fluid",
+        "fluid gener",
+        "Genderfluid"
+    ],
+    "i88": [
+        "Ambonec"
+    ],
+    "i89": [
+        "genderless",
+        "ungendered",
+        "non-gendered",
+        "genderfree",
+        "Agender"
+    ],
+    "i90": [
+        "Multigender"
+    ],
+    "i91": [
+        "Demiflux"
+    ],
+    "i92": [
+        "Agenderflux"
+    ],
+    "i93": [
+        "Aliagender"
+    ],
+    "i94": [
+        "genderliminal"
+    ],
+    "i95": [
+        "genderselkie"
+    ],
+    "i96": [
+        "genderfloren"
+    ],
+    "i97": [
+        "greygender",
+        "grey agender",
+        "gray agender",
+        "Graygender"
+    ],
+    "i98": [
+        "nonvir",
+        "nonpuer"
+    ],
+    "i99": [
+        "aesthetigender",
+        "aesthetegender",
+        "Aesthetgender"
+    ],
+    "i100": [
+        "Maverique"
+    ],
+    "i101": [
+        "genderdoe",
+        "genderfae"
+    ],
+    "i102": [
+        "Gendervoid"
+    ],
+    "i103": [
+        "genderflow",
+        "aquarigender"
+    ],
+    "i104": [
+        "Aporagender"
+    ],
+    "i105": [
+        "trans",
+        "transgender"
+    ],
+    "i106": [
+        "boi"
+    ],
+    "i107": [
+        "Earthgender"
+    ],
+    "i108": [
+        "Macrogender"
+    ],
+    "i109": [
+        "Ｘジェンダー",
+        "X-gender"
+    ],
+    "i110": [
+        "Abigender"
+    ],
+    "i111": [
+        "amogender",
+        "genderamas",
+        "Flirtgender"
+    ],
+    "i112": [
+        "presquegender"
+    ],
+    "i113": [
+        "poly-gender",
+        "Polygender"
+    ],
+    "i114": [
+        "singularian"
+    ],
+    "i115": [
+        "charagender",
+        "Egogender"
+    ],
+    "i116": [
+        "Libramasculine"
+    ],
+    "i117": [
+        "Libragender"
+    ],
+    "i118": [
+        "stellarian"
+    ],
+    "i119": [
+        "monagender",
+        "monegender",
+        "selenogender",
+        "Lunagender"
+    ],
+    "i120": [
+        "omnigender",
+        "Pangender"
+    ],
+    "i121": [
+        "abrogender"
+    ],
+    "i122": [
+        "Firegender"
+    ],
+    "i123": [
+        "GenderQueer",
+        "Gender queer",
+        "Genderqueer"
+    ],
+    "i124": [
+        "Energender"
+    ],
+    "i125": [
+        "Ludogender"
+    ],
+    "i126": [
+        "bigender"
+    ],
+    "i127": [
+        "gxnderfluix",
+        "agxnderfluix",
+        "afluidflux",
+        "flxidflux",
+        "agenderfluix"
+    ],
+    "i128": [
+        "isogender"
+    ],
+    "i129": [
+        "agender girl",
+        "gxrl"
+    ]
+}

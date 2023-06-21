@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "xe",
+        "xim",
+        "xis",
+        "xis"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "xe"
+    ],
+    "object": [
+        "xim"
+    ],
+    "possessive adjective": [
+        "xis"
+    ],
+    "possessive": [
+        "xis"
+    ],
+    "reflexive": [
+        "ximself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "pup",
+        "pup",
+        "pups",
+        "pups"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "pup"
+    ],
+    "object": [
+        "pup"
+    ],
+    "possessive adjective": [
+        "pups"
+    ],
+    "possessive": [
+        "pups"
+    ],
+    "reflexive": [
+        "pupself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

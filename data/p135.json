@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "nycto",
+        "nyct",
+        "nyctos",
+        "nyctos"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "nycto"
+    ],
+    "object": [
+        "nyct"
+    ],
+    "possessive adjective": [
+        "nyctos"
+    ],
+    "possessive": [
+        "nyctos"
+    ],
+    "reflexive": [
+        "nyctoself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}

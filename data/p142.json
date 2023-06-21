@@ -1,0 +1,29 @@
+{
+    "description": "Humanist neopronoun set",
+    "aliases": [
+        "hu",
+        "hum",
+        "hus",
+        "hus"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "hu"
+    ],
+    "object": [
+        "hum"
+    ],
+    "possessive adjective": [
+        "hus"
+    ],
+    "possessive": [
+        "hus"
+    ],
+    "reflexive": [
+        "humself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "kr",
+        "kr",
+        "krs",
+        "krs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "kr"
+    ],
+    "object": [
+        "kr"
+    ],
+    "possessive adjective": [
+        "krs"
+    ],
+    "possessive": [
+        "krs"
+    ],
+    "reflexive": [
+        "krself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

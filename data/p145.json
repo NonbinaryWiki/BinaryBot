@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "android",
+        "android",
+        "androids",
+        "androids"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "android"
+    ],
+    "object": [
+        "android"
+    ],
+    "possessive adjective": [
+        "androids"
+    ],
+    "possessive": [
+        "androids"
+    ],
+    "reflexive": [
+        "androidself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

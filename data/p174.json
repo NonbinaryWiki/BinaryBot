@@ -1,0 +1,29 @@
+{
+    "description": "an uncommon pronoun set that is plant based",
+    "aliases": [
+        "fleur",
+        "fleur",
+        "fleurs",
+        "fleurs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "fleur"
+    ],
+    "object": [
+        "fleur"
+    ],
+    "possessive adjective": [
+        "fleurs"
+    ],
+    "possessive": [
+        "fleurs"
+    ],
+    "reflexive": [
+        "fleurself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

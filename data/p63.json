@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "!!",
+        "!!",
+        "!!s",
+        "!!s"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "!!"
+    ],
+    "object": [
+        "!!"
+    ],
+    "possessive adjective": [
+        "!!s"
+    ],
+    "possessive": [
+        "!!s"
+    ],
+    "reflexive": [
+        "!!self"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

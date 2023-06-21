@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "soda",
+        "soda",
+        "sodas",
+        "sodas"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "soda"
+    ],
+    "object": [
+        "soda"
+    ],
+    "possessive adjective": [
+        "sodas"
+    ],
+    "possessive": [
+        "sodas"
+    ],
+    "reflexive": [
+        "sodaself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

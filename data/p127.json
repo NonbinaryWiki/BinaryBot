@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ce",
+        "cir",
+        "cir",
+        "cirs"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "ce"
+    ],
+    "object": [
+        "cir"
+    ],
+    "possessive adjective": [
+        "cir"
+    ],
+    "possessive": [
+        "cirs"
+    ],
+    "reflexive": [
+        "cirself"
+    ],
+    "census percentage": 0.1,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "ie",
+        "ie",
+        "ies",
+        "ies"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "ie"
+    ],
+    "object": [
+        "ie"
+    ],
+    "possessive adjective": [
+        "ies"
+    ],
+    "possessive": [
+        "ies"
+    ],
+    "reflexive": [
+        "ieself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

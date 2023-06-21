@@ -1,0 +1,29 @@
+{
+    "description": "beep/boop pronouns",
+    "aliases": [
+        "bee/boo",
+        "beep/boop",
+        "beeps/boops",
+        "beeps/boops"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "bee/boo"
+    ],
+    "object": [
+        "beep/boop"
+    ],
+    "possessive adjective": [
+        "beeps/boops"
+    ],
+    "possessive": [
+        "beeps/boops"
+    ],
+    "reflexive": [
+        "beepself/boopself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

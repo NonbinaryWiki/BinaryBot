@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun",
+    "aliases": [
+        "sea",
+        "sear",
+        "sears",
+        "sears"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "sea"
+    ],
+    "object": [
+        "sear"
+    ],
+    "possessive adjective": [
+        "sears"
+    ],
+    "possessive": [
+        "sears"
+    ],
+    "reflexive": [
+        "seaself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

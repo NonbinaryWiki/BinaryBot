@@ -1,0 +1,29 @@
+{
+    "description": "Norwegian neutral neopronoun",
+    "aliases": [
+        "hen",
+        "hen",
+        "hens",
+        "hens"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "hen"
+    ],
+    "object": [
+        "hen"
+    ],
+    "possessive adjective": [
+        "hens"
+    ],
+    "possessive": [
+        "hens"
+    ],
+    "reflexive": [
+        "seg"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "moon",
+        "moon",
+        "moons",
+        "moons"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "moon"
+    ],
+    "object": [
+        "moon"
+    ],
+    "possessive adjective": [
+        "moons"
+    ],
+    "possessive": [
+        "moons"
+    ],
+    "reflexive": [
+        "moonself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "A nounself pronoun set based on the word slime, intended for slimekin but not exclusive to them",
+    "aliases": [
+        "sli",
+        "slime",
+        "slime",
+        "slimes",
+        "slimes"
+    ],
+    "number": null,
+    "subject": [
+        "sli",
+        "slime"
+    ],
+    "object": [
+        "slime"
+    ],
+    "possessive adjective": [
+        "slimes"
+    ],
+    "possessive": [
+        "slimes"
+    ],
+    "reflexive": [
+        "slimeself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

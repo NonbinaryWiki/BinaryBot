@@ -1,0 +1,33 @@
+{
+    "description": "An amalgamation of the pronouns she/her and they/them in english",
+    "aliases": [
+        "shey",
+        "shem",
+        "sheir",
+        "sheir",
+        "sheirs"
+    ],
+    "number": [
+        "Plural",
+        "Singular"
+    ],
+    "subject": [
+        "shey"
+    ],
+    "object": [
+        "shem"
+    ],
+    "possessive adjective": [
+        "sheir",
+        "sheir"
+    ],
+    "possessive": [
+        "sheirs"
+    ],
+    "reflexive": [
+        "shemself",
+        "shemselves"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Nounself pronoun set",
+    "aliases": [
+        "gli",
+        "glitch",
+        "glitches",
+        "glitches"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "gli"
+    ],
+    "object": [
+        "glitch"
+    ],
+    "possessive adjective": [
+        "glitches"
+    ],
+    "possessive": [
+        "glitches"
+    ],
+    "reflexive": [
+        "glitchself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

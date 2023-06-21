@@ -1,0 +1,29 @@
+{
+    "description": "Third-person singular pronouns in English, usually associated with the male gender",
+    "aliases": [
+        "he",
+        "him",
+        "his",
+        "his"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "he"
+    ],
+    "object": [
+        "him"
+    ],
+    "possessive adjective": [
+        "his"
+    ],
+    "possessive": [
+        "his"
+    ],
+    "reflexive": [
+        "himself"
+    ],
+    "census percentage": 30.8,
+    "wiki link": {}
+}

@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "x",
+        "x",
+        "xs",
+        "xs"
+    ],
+    "number": [
+        "Singular"
+    ],
+    "subject": [
+        "x"
+    ],
+    "object": [
+        "x"
+    ],
+    "possessive adjective": [
+        "xs"
+    ],
+    "possessive": [
+        "xs"
+    ],
+    "reflexive": [
+        "xself"
+    ],
+    "census percentage": 0.02,
+    "wiki link": {}
+}

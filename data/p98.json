@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "xie",
+        "xer",
+        "xer",
+        "xers"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "xie"
+    ],
+    "object": [
+        "xer"
+    ],
+    "possessive adjective": [
+        "xer"
+    ],
+    "possessive": [
+        "xers"
+    ],
+    "reflexive": [
+        "xerself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}

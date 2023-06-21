@@ -1,0 +1,29 @@
+{
+    "description": "Neopronoun set",
+    "aliases": [
+        "se",
+        "sem",
+        "sems",
+        "sems"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "se"
+    ],
+    "object": [
+        "sem"
+    ],
+    "possessive adjective": [
+        "sems"
+    ],
+    "possessive": [
+        "sems"
+    ],
+    "reflexive": [
+        "semself"
+    ],
+    "census percentage": null,
+    "wiki link": {}
+}
