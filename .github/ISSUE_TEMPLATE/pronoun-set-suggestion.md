@@ -2,7 +2,7 @@
 name: Pronoun set suggestion
 about: Suggest a new pronoun set to be added to the bot's database.
 title: ''
-labels: ''
+labels: New pronoun set suggestion
 assignees: ''
 
 ---
