@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 *.log
 users.txt
-*.json
 
 # Visual Studio Code files
 .vscode/

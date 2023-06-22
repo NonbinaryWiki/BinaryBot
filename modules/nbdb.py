@@ -7,7 +7,7 @@ import re
 import traceback
 import os
 
-footer = "This data is user-contributed. Run /feedback to suggest a new pronoun set to be added!"
+footer = "This data is user-contributed. Run /feedback to suggest a new identity, flag, or pronoun set to be added!"
 notfounderror = ":warning: I couldn't find this in my database—check for typos or try again later (I might not be synced the latest version)."
 
 class NBDbCog(commands.Cog):
@@ -97,7 +97,7 @@ class NBDbCog(commands.Cog):
             main_flag = data["flag"][0]
         else:
             await ctx.respond("I found the identity, but it doesn't seem to have any associated pride flag in my database. Use `/identity {0}` to get more information about this identity.".format(identity))
-            return
+            return False
 
         if data["alternative flags"] != None: # Look for alternative flags (data[3] is the P22 claim)
             alt_flags = str(len(data["alternative flags"]))
@@ -318,6 +318,33 @@ class NBDbCog(commands.Cog):
         except:
             await ctx.respond("That term is not in my database! Maybe try typing it differently?")
 
+    @slash_command(name="random", description="Gives some information about the specified gender identity.")
+    async def random(self, ctx, type: Option(str, "'pronoun' or 'identity'")):
+        if type.startswith("p"):
+            index_file = os.path.join("data", "p-index.json")
+        elif type.startswith("i") or type.startswith("f"):
+            index_file = os.path.join("data", "id-index.json")
+        else:
+            await ctx.respond("Please tell me if you want a random pronoun or identity! For example: `/random identity`")
+            return
+
+        utilities = self.bot.get_cog("UtilitiesCog")
+     
+        with open(index_file, "r") as f:
+            data = json.load(f)
+        choice_id = random.choice(list(data.keys()))
+        filename = index_file = os.path.join("data", choice_id + ".json")
+        with open(filename, "r") as f:
+            data = json.load(f)
+        
+        if type.startswith("i"):
+            await self.identity(ctx, data["name"])
+        else: #type.startswith("p")
+            await self.pronoun(ctx, data["subject"][0])
+
+        return
+ 
+
     class Button(discord.ui.Button):
         def __init__(self, ctx, params):
             super().__init__(label="Run this command again", style=discord.ButtonStyle.primary, emoji="♻️")
@@ -330,7 +357,7 @@ class NBDbCog(commands.Cog):
                 pronouns = "/".join(self.params[1])
             else:
                 pronouns = self.params[1]
-            await NBDb.pronountest(self.ctx, self.params[0], pronouns, None)
+            await NBDbCog.pronountest(self.ctx, self.params[0], pronouns, None)
             return
 
 def setup(bot):
