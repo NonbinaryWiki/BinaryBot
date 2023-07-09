@@ -23,7 +23,9 @@
     "possessive": [
         "e's"
     ],
-    "reflexive": null,
-    "census percentage": null,
+    "reflexive": [
+        "emself"
+    ],
+    "census percentage": 0.0,
     "wiki link": {}
 }

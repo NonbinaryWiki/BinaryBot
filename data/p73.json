@@ -24,6 +24,6 @@
     "reflexive": [
         "ximself"
     ],
-    "census percentage": null,
+    "census percentage": 0.1,
     "wiki link": {}
 }
