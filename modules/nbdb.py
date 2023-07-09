@@ -7,7 +7,7 @@ import re
 import traceback
 import os
 
-footer = "This data is user-contributed. Run /feedback to suggest a new identity, flag, or pronoun set to be added!"
+footer = "This data is based on the 2023 Gender Census. Run /feedback to suggest the addition of a new identity, flag, or pronoun set!"
 notfounderror = ":warning: I couldn't find this in my database—check for typos or try again later (I might not be synced the latest version)."
 
 class NBDbCog(commands.Cog):
