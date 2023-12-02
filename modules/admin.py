@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 from discord.commands import slash_command, Option
 import subprocess
@@ -61,6 +62,23 @@ class AdminCog(commands.Cog):
     async def error(self, ctx):
         raise ValueError("Someone used !error.")
         await ctx.respond("Don't you DARE give me an error you dunce! :(")
+
+    @commands.slash_command(name="botinfo", description="Get bot info!")
+    @commands.is_owner()
+    async def botinfo(self, ctx):
+        amount = 0
+        bot_channels = 0
+        members = 0
+        for i in self.bot.guilds:
+            amount += 1
+            bot_channels += len(i.channels)
+            members += i.member_count
+        embed = discord.Embed(
+            title="Bot Info",
+            description=f"I'm in {amount} servers, with a total of {bot_channels} channels and {members} users that can use my commands.",
+            color=discord.Color.random()
+        )
+        await ctx.respond(embed=embed)
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
