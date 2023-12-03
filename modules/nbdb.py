@@ -201,10 +201,10 @@ class NBDbCog(commands.Cog):
 
             index_file = os.path.join("data", "p-index.json")
             pronoun_ids = utilities.check_index(index_file, pronouns.lower())
-            print(pronoun_ids)
+            #print(pronoun_ids)
             if isinstance(pronoun_ids, list): # This means there are multiple pronouns
                 multiple = True
-                print("Can't find pronoun set. Trying multiple pronouns.")
+                #print("Can't find pronoun set. Trying multiple pronouns.")
                 input_pronouns = pronouns.lower().split("/") # User-inputted pronouns
                 if len(input_pronouns) == 5: # Manual full pronoun set
                     data = []
@@ -218,7 +218,7 @@ class NBDbCog(commands.Cog):
                     if pronoun_ids == []:
                         await ctx.respond(notfounderror)
                         return
-                    print(f"List of pronouns: {pronoun_ids}.")
+                    #print(f"List of pronouns: {pronoun_ids}.")
 
                     all_forms = { # For random selection purposes
                         "subject": "",
@@ -237,7 +237,7 @@ class NBDbCog(commands.Cog):
 
                     for form in all_forms:
                         file = os.path.join("data", f'{all_forms[form]}.json')     
-                        print(file)  
+                        #print(file)  
                         try:             
                             with open(file, "r") as f:
                                 raw_data = json.load(f)
@@ -296,7 +296,7 @@ class NBDbCog(commands.Cog):
 
         final_story = []
         sentences = re.split('(?<=[.!?]) +', story) # split at each sentence, so it can be capitalized (in case of pronouns starting sentences)
-        print(sentences)
+        #print(sentences)
         for i in sentences:
             if i.startswith("**"):
                 new_sentence = i[:2] + i[2].upper() + i[3:]

@@ -3,7 +3,9 @@ from discord.ext import commands
 
 from dotenv import load_dotenv
 
-import logging, sys, traceback, os
+import logging, os
+
+import datetime
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.ERROR)
@@ -51,6 +53,12 @@ async def on_ready():
     # Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='you!'))
     print(f'Successfully logged in and booted...!')
+
+@bot.event
+async def on_application_command(ctx):
+    logfile = "commands.log"
+    with open(logfile, 'a') as f:
+        f.write(f"[{datetime.datetime.now()}] {ctx.command}{' ' + str(ctx.selected_options) if ctx.selected_options != None else ''} in server {ctx.guild} ({ctx.guild_id}).\n")
 
 load_dotenv()
 try:
