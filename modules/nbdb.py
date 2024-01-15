@@ -202,57 +202,60 @@ class NBDbCog(commands.Cog):
             index_file = os.path.join("data", "p-index.json")
             pronoun_ids = utilities.check_index(index_file, pronouns.lower())
             #print(pronoun_ids)
-            if isinstance(pronoun_ids, list): # This means there are multiple pronouns
-                multiple = True
-                #print("Can't find pronoun set. Trying multiple pronouns.")
-                input_pronouns = pronouns.lower().split("/") # User-inputted pronouns
-                if len(input_pronouns) == 5: # Manual full pronoun set
-                    data = []
-                    data.insert(0, "singular") # Manual pronouns are always treated as singular
-                    for p in pronouns.split("/"):
-                        data.append([p])
-                elif len(input_pronouns) > 5:
-                    await ctx.respond(":warning: To many pronouns! Pronoun sets need to have 5 forms or less.")
-                    return
-                else: # Automated multiple pronoun sets
-                    if pronoun_ids == []:
-                        await ctx.respond(notfounderror)
-                        return
-                    #print(f"List of pronouns: {pronoun_ids}.")
 
-                    all_forms = { # For random selection purposes
-                        "subject": "",
-                        "object": "",
-                        "possessive adjective": "",
-                        "possessive": "",
-                        "reflexive": ""
-                        }
+            input_pronouns = pronouns.lower().split("/") # User-inputted pronouns
+            if len(input_pronouns) == 5: # Manual full pronoun set
+                data = []
+                data.insert(0, "singular") # Manual pronouns are always treated as singular
+                for p in pronouns.split("/"):
+                    data.append([p])
+            else: # Non-manual pronoun set
+                if isinstance(pronoun_ids, list): # This means there are multiple pronouns
+                    multiple = True
+                    #print("Can't find pronoun set. Trying multiple pronouns.")
                     
-                    data = ["singular"]
-
-                    for i in all_forms: # Assign a pronoun set ID to each form
-                        choice = random.choice(pronoun_ids)
-                        print(f"{i}: {choice}")
-                        all_forms[i] = choice
-
-                    for form in all_forms:
-                        file = os.path.join("data", f'{all_forms[form]}.json')     
-                        #print(file)  
-                        try:             
-                            with open(file, "r") as f:
-                                raw_data = json.load(f)
-                                full_p_set[form] = raw_data[form]
-                                data.append(raw_data[form])
-                        except FileNotFoundError:
+                    if len(input_pronouns) > 5:
+                        await ctx.respond(":warning: To many pronouns! Pronoun sets need to have 5 forms or less.")
+                        return
+                    else: # Automated multiple pronoun sets
+                        if pronoun_ids == []:
                             await ctx.respond(notfounderror)
                             return
+                        #print(f"List of pronouns: {pronoun_ids}.")
 
-            else: # Single-pronoun set
+                        all_forms = { # For random selection purposes
+                            "subject": "",
+                            "object": "",
+                            "possessive adjective": "",
+                            "possessive": "",
+                            "reflexive": ""
+                            }
+                        
+                        data = ["singular"]
 
-                file = os.path.join("data", f'{pronoun_ids}.json')    
-                with open(file, "r") as f:
-                    raw_data = json.load(f)
-                    data = [raw_data["number"], raw_data["subject"], raw_data["object"], raw_data["possessive adjective"], raw_data["possessive"], raw_data["reflexive"]]
+                        for i in all_forms: # Assign a pronoun set ID to each form
+                            choice = random.choice(pronoun_ids)
+                            print(f"{i}: {choice}")
+                            all_forms[i] = choice
+
+                        for form in all_forms:
+                            file = os.path.join("data", f'{all_forms[form]}.json')     
+                            #print(file)  
+                            try:             
+                                with open(file, "r") as f:
+                                    raw_data = json.load(f)
+                                    full_p_set[form] = raw_data[form]
+                                    data.append(raw_data[form])
+                            except FileNotFoundError:
+                                await ctx.respond(notfounderror)
+                                return
+
+                else: # Single-pronoun set
+
+                    file = os.path.join("data", f'{pronoun_ids}.json')    
+                    with open(file, "r") as f:
+                        raw_data = json.load(f)
+                        data = [raw_data["number"], raw_data["subject"], raw_data["object"], raw_data["possessive adjective"], raw_data["possessive"], raw_data["reflexive"]]
 
         # Set up final pronoun form
         full_p_set["number"] = '/'.join(data[0]) if isinstance(data[0], list) else "[unknown]" # a pronoun set can have multiple grammatical numbers
