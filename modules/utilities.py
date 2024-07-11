@@ -1,7 +1,6 @@
 from typing import final
 import discord
 from discord.ext import commands
-import csv
 import requests
 import json
 import os
