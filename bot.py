@@ -62,7 +62,9 @@ async def on_application_command(ctx):
 
 load_dotenv()
 try:
-    bot.run(os.environ['TOKEN'], reconnect=True)
+    with open('token.cfg', 'r') as f:
+        token = f.read()
+    bot.run(token, reconnect=True)
 except KeyError:
     token = input("I can't find the token. You can enter it manually here: ")
     bot.run(token, reconnect=True)

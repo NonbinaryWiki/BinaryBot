@@ -10,3 +10,5 @@ users.txt
 
 # dotenv file
 .env
+
+token.cfg
