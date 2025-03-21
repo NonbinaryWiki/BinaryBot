@@ -1,0 +1,27 @@
+{
+    "description": "Humanist neopronoun set",
+    "aliases": [
+        "one",
+        "oneself"
+    ],
+    "number": [
+        "singular"
+    ],
+    "subject": [
+        "one"
+    ],
+    "object": [
+        "one"
+    ],
+    "possessive adjective": [
+        "one's"
+    ],
+    "possessive": [
+        "one's"
+    ],
+    "reflexive": [
+        "oneself"
+    ],
+    "census percentage": 0.0,
+    "wiki link": {}
+}
